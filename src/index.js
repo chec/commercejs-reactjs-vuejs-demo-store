@@ -1,5 +1,9 @@
+import './index.scss';
+
+// we use the '#root' selector to query the document for an element with an id of root
+const rootEl = document.querySelector('#root')
+
+// do something with rootEl once DOMContentLoaded event is emitted
 document.addEventListener("DOMContentLoaded", function(event) {
-  const element = document.createElement('h1')
-  element.innerHTML = "Hello World"
-  document.body.appendChild(element)
+  alert("application loaded")
 })
