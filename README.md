@@ -1,4 +1,4 @@
-# Example Checkout Showcasing Real-World Implementation of Commerce.js.
+# Example Checkout Showcasing Real-World Implementation of Commerce.js
 
 ## Branches
   - `Master`
