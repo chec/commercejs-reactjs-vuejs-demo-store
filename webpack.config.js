@@ -2,7 +2,7 @@ module.exports = {
   // entry points for javascript and css
   entry: [
     './src/index.js',
-    './src/index.css'
+    './src/index.scss'
   ],
   output: {
     path: __dirname,
@@ -22,13 +22,19 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.scss$/,
         use: [
           {
             loader: "style-loader"
           },
           {
             loader: "css-loader",
+          },
+          {
+            loader: "postcss-loader"
+          },
+          {
+            loader: "sass-loader"
           }
         ]
       }
