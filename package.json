@@ -1,7 +1,7 @@
 {
   "name": "example_checkout.v2",
   "version": "1.0.0",
-  "description": "Commerce.js Showcase",
+  "description": "Commerce.js Example Showcase",
   "main": "src/index.js",
   "license": "MIT"
 }
