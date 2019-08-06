@@ -6,6 +6,9 @@
     <title>
       Shoebox | Shop Shoes & Socks
     </title>
+    <!-- load webcomponents bundle, which includes all the necessary polyfills -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -21,9 +24,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   </head>
   <body>
-    <div id="root">
-
-    </div>
+    <app-container></app-container>
   </body>
   <script src="/bundle.js"></script>
 </html>
