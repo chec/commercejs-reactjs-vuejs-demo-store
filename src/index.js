@@ -1,9 +1,11 @@
-import './index.scss';
+import './styles/application.scss';
+import AppContainer from './components/App.js';
+import Footer from './components/Footer.js';
 
-// we use the '#root' selector to query the document for an element with an id of root
-const rootEl = document.querySelector('#root')
+// TODO: create util function to DRY up customElementsRegistry.define use
+// register custom element 'app-container', with it's class AppContainer object defining
+// it's behavior
+customElements.define("app-container", AppContainer);
 
-// do something with rootEl once DOMContentLoaded event is emitted
-document.addEventListener("DOMContentLoaded", function(event) {
-  alert("application loaded")
-})
+// register x-footer;Footer
+customElements.define("x-footer", Footer)
