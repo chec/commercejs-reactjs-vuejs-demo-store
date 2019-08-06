@@ -2,7 +2,7 @@ module.exports = {
   // entry points for javascript and css
   entry: [
     './src/index.js',
-    './src/index.scss'
+    './src/styles/application.scss'
   ],
   output: {
     path: __dirname,
