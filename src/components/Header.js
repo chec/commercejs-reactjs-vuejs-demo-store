@@ -19,8 +19,15 @@ class Header extends HTMLElement {
         <div class="logoContainer">
           <img src=${logo} width="100%" height="100%" />
         </div>
-        <div class="cartIconContainer">
-          <img src=${cartIcon} width="100%" height="100%" />
+        <div class="flex">
+          <div class="productFragmentContainer">
+            <p class="medium-text f7 cherry ttu rotate-270 pa2 bg-white nr3">
+              pre-order now
+            </p>
+          </div>
+          <div class="cartIconContainer pointer">
+            <img src=${cartIcon} width="100%" height="100%" />
+          </div>
         </div>
       </header>
     `
