@@ -1,8 +1,11 @@
-export default function(shadowOptions = { mode: 'open' }) {
+export default function(shadowOptions = { mode: 'open' }, useLightDOM = false) {
   if (!(this instanceof HTMLElement)) {
     return;
   }
-  alert('all went well!')
+  if (useLightDOM) {
+    this.innerHTML = this.render()
+    return;
+  }
   this.attachShadow(shadowOptions)
   this.shadowRoot.innerHTML = this.render()
 }
