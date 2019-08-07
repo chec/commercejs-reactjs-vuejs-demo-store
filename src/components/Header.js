@@ -21,9 +21,9 @@ class Header extends HTMLElement {
         </div>
         <div class="flex">
           <div class="productFragmentContainer">
-            <p class="medium-text f7 cherry ttu rotate-270 pa2 bg-white nr3">
+            <button class="medium-text f7 cherry ttu rotate-270 pa2 bg-white nr3 outline-0 pointer">
               pre-order now
-            </p>
+            </button>
           </div>
           <div class="cartIconContainer pointer">
             <img src=${cartIcon} width="100%" height="100%" />
