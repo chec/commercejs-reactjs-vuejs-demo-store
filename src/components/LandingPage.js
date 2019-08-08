@@ -18,10 +18,10 @@ class LandingPage extends HTMLElement {
         <div class="absolute absolute--fill flex flex-column items-center">
           <img src=${shoesHero} width="100%" height="auto" />
         </div>
-        <div class="absolute absolute--fill flex flex-column justify-center items-center nb7">
-          <p class="flex flex-shrink-1 flex-column hero-text white tc">
-            SHOP THE LATEST RELEASE NOW
-            <button class="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer mw4 self-end">
+        <div class="absolute absolute--fill flex flex-column justify-center items-center nb7 ph3">
+          <p class="flex flex-shrink-1 flex-column hero-text white tr">
+            LOREM IPSUM LOREM IPSUM
+            <button class="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer mw4 self-end mr3">
               shop shoe
             </button>
           </p>
