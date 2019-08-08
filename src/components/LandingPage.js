@@ -14,9 +14,17 @@ class LandingPage extends HTMLElement {
 
   render() {
     return `
-      <div class="w-100">
-        <div class="absolute absolute-fill flex flex-column items-center">
+      <div class="relative w-100 mw9 center ph2">
+        <div class="absolute absolute--fill flex flex-column items-center">
           <img src=${shoesHero} width="100%" height="auto" />
+        </div>
+        <div class="absolute absolute--fill flex flex-column justify-center items-center nb7">
+          <p class="flex flex-shrink-1 flex-column hero-text white tc">
+            SHOP THE LATEST RELEASE NOW
+            <button class="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer mw4 self-end">
+              shop shoe
+            </button>
+          </p>
         </div>
         <div class="w-100">
           <img src=${lettersHeroBg} width="100%" height="auto" />
