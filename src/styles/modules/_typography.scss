@@ -1,10 +1,23 @@
 $font-roboto: 'Roboto', 'Indie Flower', sans-serif;
 
-.medium-text {
+.font-roboto {
   font-family: $font-roboto;
+}
+
+.medium-text {
+  @extend .font-roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 0.70rem;
   line-height: 0.80rem;
   letter-spacing: 0.13rem;
+}
+
+.hero-text {
+  @extend .font-roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2.5rem;
+  line-height: 2.8rem;
+  letter-spacing: 1.25rem;
 }
