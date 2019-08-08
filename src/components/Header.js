@@ -16,7 +16,7 @@ class Header extends HTMLElement {
 
   render() {
     return `
-      <header class="absolute w-100 ph5 pv5 flex flex-row justify-between mt3">
+      <header class="absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1">
         <div class="logoContainer">
           <img src=${logo} width="100%" height="100%" />
         </div>
