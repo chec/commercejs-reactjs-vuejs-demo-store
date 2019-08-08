@@ -13,8 +13,8 @@ class App extends HTMLDivElement {
   render() {
     return `
       <x-header></x-header>
-      <main id="main">
-
+      <main id="main" class="flex">
+        <landing-page class="flex flex-grow-1 items-center"></landing-page>
       </main>
       <x-footer></x-footer>
     `;

@@ -16,13 +16,13 @@ class Header extends HTMLElement {
 
   render() {
     return `
-      <header class="absolute w-100 ph4 pv5 flex flex-row justify-between">
+      <header class="absolute w-100 ph5 pv5 flex flex-row justify-between mt3">
         <div class="logoContainer">
           <img src=${logo} width="100%" height="100%" />
         </div>
         <div class="flex">
           <div class="productFragmentContainer mw5 mr2">
-            <button class="absolute right-0 medium-text f7 cherry bg-blossom ttu rotate-270 pv2 ph2 bg-white outline-0 dim pointer mr4">
+            <button class="absolute right-0 medium-text f7 cherry bg-blossom ttu rotate-270 pv2 ph2 bg-white outline-0 dim pointer mr5">
               pre-order now
             </button>
             <div class="w-100">
