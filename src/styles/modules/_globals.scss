@@ -1,6 +1,9 @@
+:host {
+  display: flex;
+}
  #main {
    @extend .bg-cherry;
-   height: calc(100vh - #{$footer-height});
+   min-height: calc(100vh - #{$footer-height});
  }
 
 .logoContainer {
