@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   // entry points for javascript and css
   entry: [
@@ -5,7 +7,7 @@ module.exports = {
     './src/styles/application.scss'
   ],
   output: {
-    path: __dirname,
+    path: path.resolve(__dirname, ""),
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -45,10 +47,14 @@ module.exports = {
            loader: 'file-loader',
            options: {
              limit: 8192,
+             publicPath: __dirname
            },
          },
        ],
      },
     ]
+  },
+  devServer: {
+    historyApiFallback: true,
   }
 };
