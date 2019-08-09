@@ -1,6 +1,6 @@
 import setUpShadowAndRender from '../utils/setUpShadowAndRender'
 
-class App extends HTMLDivElement {
+class App extends HTMLElement {
 
   constructor() {
     super();

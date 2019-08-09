@@ -6,7 +6,7 @@ import LandingPage from './components/LandingPage.js';
 // TODO: create util function to DRY up customElementsRegistry.define use
 
 // register custom elements
-customElements.define("app-container", App, { extends: 'div' });
+customElements.define("app-container", App);
 customElements.define("x-footer", Footer);
 customElements.define("x-header", Header);
 customElements.define("landing-page", LandingPage);
