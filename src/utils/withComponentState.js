@@ -1,5 +1,9 @@
-export default function (SuperClass) {
+export default function _WithComponentState(SuperClass = class extends HTMLElement {}) {
   return class MixedComponent extends SuperClass {
+    constructor() {
+      super()
+      this.state = {}
+    }
     get componentState() {
       return this.state;
     }
@@ -10,5 +14,6 @@ export default function (SuperClass) {
     }
     setState(state) {
       this.componentState = state
+    }
   }
 }
