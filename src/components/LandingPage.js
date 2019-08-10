@@ -14,10 +14,10 @@ class LandingPage extends HTMLElement {
   render() {
     return `
       <div class="relative w-100 mw9 center ph2">
-        <div class="w-100 o-50">
+        <div class="w-90 o-40 center pv2">
           <img src=${lettersHeroBg} width="100%" height="auto" />
         </div>
-        <div class="absolute absolute--fill flex flex-column items-center">
+        <div class="absolute absolute--fill flex flex-column items-center w-90 center mt5">
           <img src=${shoesHero} width="100%" height="auto" />
         </div>
         <div class="absolute absolute--fill flex flex-column justify-center items-center nb7 ph3">
