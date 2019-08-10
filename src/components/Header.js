@@ -39,14 +39,14 @@ class Header extends WithComponentState() {
           <img src=${logo} width="100%" height="100%" />
         </div>
         <div class="flex">
-          <div class="productFragmentContainer mw5 mr2">
+          <div class="productFragmentContainer mw4">
             <button
               name="pre-order-button"
-              class="absolute right-0 medium-text f7 cherry bg-blossom ttu rotate-270 pv2 ph2 bg-white outline-0 dim pointer mr5">
+              class="absolute right-0 medium-text f7 cherry bg-blossom ttu rotate-270 pv2 ph2 bg-white outline-0 dim pointer mr5 mt3">
               pre-order now
             </button>
             <div class="w-100">
-              ${ this.state.hideShoe ? '' : `<img src=${pairShoes} width="100" height="auto" />` }
+              ${ this.state.hideShoe ? '' : `<img src=${pairShoes} width="100%" height="auto" />` }
             </div>
           </div>
           <div class="flex flex-row items-center">
