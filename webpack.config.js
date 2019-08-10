@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   // entry points for javascript and css
@@ -55,5 +56,11 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-  }
+  },
+  plugins: [
+    new Dotenv({
+      path: './.env', // Path to .env file (this is the default)
+      safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
+    })
+  ]
 };
