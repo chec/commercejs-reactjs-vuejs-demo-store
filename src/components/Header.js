@@ -49,8 +49,11 @@ class Header extends WithComponentState() {
               ${ this.state.hideShoe ? '' : `<img src=${pairShoes} width="100" height="auto" />` }
             </div>
           </div>
-          <div class="cartIconContainer pointer">
-            <img src=${cartIcon} width="100%" height="100%" />
+          <div class="flex flex-row items-center">
+            <div class="cartIconContainer pointer">
+              <img src=${cartIcon} width="100%" height="100%" />
+            </div>
+            <p class="medium-text f7 white">${'0'}</p>
           </div>
         </div>
       </header>
