@@ -6,7 +6,12 @@ class App extends WithComponentState() {
   constructor() {
     super();
     this.state = {
+      products: [],
+      cart: null,
+      checkout: null,
+      order: null
     }
+    this.commerce = new window.Commerce(process.env.COMMERCEJS_PUBLIC_KEY, (process.env.NODE_ENV === 'development') ? true : false);
   }
 
   connectedCallback(){
@@ -15,7 +20,7 @@ class App extends WithComponentState() {
 
   render() {
     return `
-      <x-header></x-header>
+      <x-header cart="${JSON.parse(this.state.cart)}"></x-header>
       <main id="main" class="flex">
         <landing-page class="flex flex-grow-1 items-center"></landing-page>
       </main>
