@@ -2,7 +2,6 @@
   display: flex;
 }
  #main {
-   @extend .bg-cherry;
    min-height: calc(100vh - #{$footer-height});
  }
 
