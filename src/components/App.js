@@ -18,6 +18,19 @@ class App extends WithComponentState() {
 
   connectedCallback(){
     if (this.commerce !== undefined && typeof this.commerce !== 'undefined') {
+      this.commerce.Products.list(
+        (resp) => {
+          //Success
+          this.setState({
+            ...this.state,
+            products: resp.data || []
+          })
+        },
+        (error) => {
+          // handle error properly in real-world
+          console.log(error)
+        }
+      );
       window.addEventListener("Commercejs.Cart.Ready", function () {
         // invoke commerce cart method to retrieve cart in session
         this.commerce.Cart.retrieve((cart) => {
@@ -37,7 +50,8 @@ class App extends WithComponentState() {
     return `
       <x-header cart="${JSON.stringify(this.state.cart)}"></x-header>
       <main id="main" class="flex">
-        <landing-page class="flex flex-grow-1 items-center"></landing-page>
+        ${true ? `<landing-page class="flex flex-grow-1 items-center bg-black w-"></landing-page>` : ''}
+        <product-detail></product-detail>
       </main>
       <x-footer></x-footer>
     `;
