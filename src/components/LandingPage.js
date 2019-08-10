@@ -3,7 +3,6 @@ import lettersHeroBg from '../assets/letters-hero-bg.svg';
 import shoesHero from '../assets/shoes-hero.png';
 
 class LandingPage extends HTMLElement {
-
   constructor() {
     super();
   }
@@ -15,6 +14,9 @@ class LandingPage extends HTMLElement {
   render() {
     return `
       <div class="relative w-100 mw9 center ph2">
+        <div class="w-100 o-50">
+          <img src=${lettersHeroBg} width="100%" height="auto" />
+        </div>
         <div class="absolute absolute--fill flex flex-column items-center">
           <img src=${shoesHero} width="100%" height="auto" />
         </div>
@@ -25,9 +27,6 @@ class LandingPage extends HTMLElement {
               shop shoe
             </button>
           </p>
-        </div>
-        <div class="w-100">
-          <img src=${lettersHeroBg} width="100%" height="auto" />
         </div>
       </div>
     `
