@@ -8,5 +8,7 @@ export default function (SuperClass) {
       this.state = value
       this.innerHTML = this.render()
     }
+    setState(state) {
+      this.componentState = state
   }
 }
