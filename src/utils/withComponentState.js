@@ -1,5 +1,5 @@
 export default function _WithComponentState(SuperClass = class extends HTMLElement {}) {
-  return class MixedComponent extends SuperClass {
+  return class Component extends SuperClass {
     constructor() {
       super()
       this.state = {}

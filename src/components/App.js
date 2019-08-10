@@ -1,9 +1,12 @@
 import setUpShadowAndRender from '../utils/setUpShadowAndRender'
+import WithComponentState from '../utils/withComponentState';
 
-class App extends HTMLElement {
+class App extends WithComponentState() {
 
   constructor() {
     super();
+    this.state = {
+    }
   }
 
   connectedCallback(){
