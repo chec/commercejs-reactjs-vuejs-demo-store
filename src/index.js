@@ -12,4 +12,4 @@ customElements.define("app-container", App);
 customElements.define("x-footer", Footer);
 customElements.define("x-header", Header);
 customElements.define("landing-page", LandingPage);
-customElements.define("product-detail", ProductDetail;
+customElements.define("product-detail", ProductDetail);
