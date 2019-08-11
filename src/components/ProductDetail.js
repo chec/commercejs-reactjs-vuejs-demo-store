@@ -3,19 +3,29 @@ import setUpShadowAndRender from '../utils/setUpShadowAndRender'
 // assets
 import imagePlaceholder from '../assets/image-placeholder-no-shadow.png';
 
-function renderButton(props) {
+function renderLabel(props) {
   return `
-    <div>
+    <div class="${props.classes || ''}">
       <p class="medium-text ttu gray f6 tracked-mega-1 pb2">
-        price
+        ${props.labelTitle || '----'}
       </p>
       <p class="large-title-text f1 fw9">
-        $100.00 USD
+        ${props.body || '----'}
       </p>
     </div>
   `;
 }
 
+function renderSelect(props) {
+  return `
+    <div class="">
+      ${renderLabel({
+        labelTitle: 'choose a size',
+        body: ''
+      })}
+    </div>
+  `
+}
 
 class ProductDetail extends HTMLElement {
   constructor() {
@@ -40,13 +50,28 @@ class ProductDetail extends HTMLElement {
                 add to cart
               </button>
             </div>
-            <div class="fl w-50 self-start">
+            <div class="fl w-50 self-start relative">
               <img src=${imagePlaceholder} width="100%" height="auto" />
+              <div class="absolute absolute--fill flex justify-end items-end ml4">
+                <div class="nrotate-90 mb6 nr5">
+                  <p class="medium-text ttu gray f6 tracked-mega-1 pb2 b">
+                    type
+                  </p>
+                  <p class="large-title-text f1 fw9 ttu">
+                    brand
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="productDetail__info-container mw8 center flex flex-row flex-grow-1 pb4">
-          ${renderButton()}
+          ${renderLabel({
+            labelTitle: 'price',
+            body: '$100.00 USD',
+            classes: 'mr5'
+          })}
+          ${renderSelect()}
         </div>
       </div>
     `
