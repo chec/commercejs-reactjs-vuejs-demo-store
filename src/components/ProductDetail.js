@@ -1,7 +1,5 @@
 import setUpShadowAndRender from '../utils/setUpShadowAndRender';
 import WithComponentState from '../utils/withComponentState';
-// assets
-import imagePlaceholder from '../assets/image-placeholder-no-shadow.png';
 
 function renderLabel(props) {
   return `
@@ -98,7 +96,7 @@ class ProductDetail extends WithComponentState() {
               </button>
             </div>
             <div class="fl w-50 self-start relative">
-              <img src=${imagePlaceholder} width="100%" height="auto" />
+              <img src=${this.product.media.source} width="100%" height="auto" />
               <div class="absolute absolute--fill flex justify-end items-end ml4">
                 <div class="nrotate-90 mb6 nr5">
                   <p class="medium-text ttu gray f6 tracked-mega-1 pb2 b">
