@@ -1,5 +1,5 @@
-import setUpShadowAndRender from '../utils/setUpShadowAndRender'
-
+import setUpShadowAndRender from '../utils/setUpShadowAndRender';
+import WithComponentState from '../utils/withComponentState';
 // assets
 import imagePlaceholder from '../assets/image-placeholder-no-shadow.png';
 
@@ -9,7 +9,7 @@ function renderLabel(props) {
       <p class="medium-text ttu gray f6 tracked-mega-1 pb2">
         ${props.labelTitle || '----'}
       </p>
-      <p class="large-title-text f1 fw9">
+      <p class="large-title-text f1 fw9 ttu pl3">
         ${props.body || '----'}
       </p>
     </div>
@@ -17,24 +17,71 @@ function renderLabel(props) {
 }
 
 function renderSelect(props) {
+  const renderOptions = () => props.options.map(option => `
+    <option value="${option.value}" ${(props.selectedValue === option.value) ? 'selected="selected"' : ''}">
+      ${option.description}
+    </option>
+  `).join('')
+
   return `
-    <div class="">
+    <div class="${props.classes || ''} relative">
       ${renderLabel({
-        labelTitle: 'choose a size',
-        body: ''
+        labelTitle: props.labelTitle,
+        body: props.labelBody,
+        classes: props.labelClasses
       })}
+
+      <select class="absolute absolute--fill left-0 o-0 pointer w-100" value="${props.selectedValue || ''}" name="${props.selectName || ''}">
+        <option value="" disabled selected="selected">Choose a size</option>
+        ${renderOptions()}
+      </select>
     </div>
   `
 }
 
-class ProductDetail extends HTMLElement {
+class ProductDetail extends WithComponentState() {
+
   constructor() {
-    super()
+    super();
+    this.state = {
+      selectedSize: ''
+    }
   }
+
+  handleSizeSelect(e) {
+    if (e.target.name === 'sizeSelect') {
+      this.setState({
+        selectedSize: e.target.value
+      })
+    }
+  }
+
+  get product() {
+    return JSON.parse(unescape(this.getAttribute("product")))
+  }
+
   connectedCallback() {
     setUpShadowAndRender.call(this, undefined, true)
+
+    // we want to listen to input evens rather than change events, since change
+    // events only fire when focus leaves the field
+    this.addEventListener('input', this.handleSizeSelect)
   }
+
+  static get observedAttributes() {
+    return ['componentState'];
+  } // must observe componentState in order to receive updates
+
   render() {
+    const sizeOptions = this.product ?
+      this.product.variants[0].options.map(option => ({ value: option.id, description: option.name })) :
+      [];
+    const sizeOptionsById = this.product ?
+      this.product.variants[0].options.reduce((obj, currentOption) => {
+        obj[currentOption.id] = currentOption
+        return obj;
+      }, {}) :
+      {};
     return `
       <div class="productDetail w-100 pb5">
         <div class="mw8 center ph2">
@@ -57,7 +104,7 @@ class ProductDetail extends HTMLElement {
                   <p class="medium-text ttu gray f6 tracked-mega-1 pb2 b">
                     type
                   </p>
-                  <p class="large-title-text f1 fw9 ttu">
+                  <p class="large-title-text f1 fw9 ttu pl3">
                     brand
                   </p>
                 </div>
@@ -71,7 +118,13 @@ class ProductDetail extends HTMLElement {
             body: '$100.00 USD',
             classes: 'mr5'
           })}
-          ${renderSelect()}
+          ${renderSelect({
+            labelTitle: 'choose a size',
+            labelBody: sizeOptionsById[this.state.selectedSize] && sizeOptionsById[this.state.selectedSize].name,
+            selectName: 'sizeSelect',
+            selectedValue: this.state.selectedSize,
+            options: sizeOptions
+          })}
         </div>
       </div>
     `
