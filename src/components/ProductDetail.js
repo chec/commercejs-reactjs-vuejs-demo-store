@@ -80,7 +80,9 @@ class ProductDetail extends WithComponentState() {
         return obj;
       }, {}) :
       {};
-    return `
+
+    return this.product &&
+    `
       <div class="productDetail w-100 pb5">
         <div class="mw8 center ph2">
           <div class="cf flex flex-row items-center">
