@@ -85,7 +85,7 @@ class App extends WithComponentState() {
 
   render() {
     return `
-      <x-header cart="${escape(JSON.stringify(this.state.cart))}"></x-header>
+      ${this.state.pathname !== "/cart-checkout" ? `<x-header cart="${escape(JSON.stringify(this.state.cart))}"></x-header>` : ''}
       <main id="main" class="flex">
         ${(this.state.pathname === "/") ? `<landing-page class="flex flex-grow-1 items-center bg-black w-"></landing-page>` : ''}
         ${(this.state.pathname === "/white-shoe") ? `
@@ -95,6 +95,12 @@ class App extends WithComponentState() {
           ></product-detail>
           `:
           ''
+        }
+        ${(this.state.pathname === "/cart-checkout") ?
+        `<cart-checkout
+          cart="${escape(JSON.stringify(this.state.cart))}"
+          class="flex flex-grow-1 bg-tan-white"></cart-checkout>`
+        : ``
         }
       </main>
       <x-footer class="flex bg-black-90"></x-footer>
