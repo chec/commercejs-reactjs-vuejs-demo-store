@@ -3,6 +3,7 @@ import { Route, Switch, Link, BrowserRouter as Router } from "react-router-dom";
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import ProductDetail from './components/ProductDetail';
+import CartCheckout from './components/CartCheckout';
 
 class App extends Component {
   constructor(props) {
@@ -99,9 +100,13 @@ class App extends Component {
                     product={products.length ? products[0] : null}
                     addProductToCart={this.addProductToCart}
                   />
-                )
-              }}
+                )}}
               />
+              <Route path="/" exact render={(props) => {
+                return (
+                  <CartCheckout {...props} cart={cart} />
+                )
+              }} />
             </Switch>
           </main>
           <footer className="footer flex pa4 bg-black-90">

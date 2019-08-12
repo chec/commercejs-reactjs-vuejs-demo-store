@@ -23,14 +23,14 @@ function Header(props) {
             <img src={pairShoes} width="100%" height="auto" />
           </div>
         </div>
-        <div className="flex flex-row items-center">
+        <Link to="cart-checkout" className="flex flex-row items-center no-underline">
           <div className="cartIconContainer pointer">
             <CartIcon />
           </div>
           <p className="medium-text f7 white">
             {props.cart ? props.cart.total_items : '0'}
           </p>
-        </div>
+        </Link>
       </div>
     </header>
   )
