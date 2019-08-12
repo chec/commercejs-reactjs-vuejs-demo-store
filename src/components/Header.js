@@ -24,7 +24,9 @@ function Header(props) {
           <div className="cartIconContainer pointer">
             <CartIcon />
           </div>
-          <p className="medium-text f7 white">${props.cart ? props.cart.total_items : '0'}</p>
+          <p className="medium-text f7 white">
+            {props.cart ? props.cart.total_items : '0'}
+          </p>
         </div>
       </div>
     </header>

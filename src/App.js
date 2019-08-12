@@ -6,6 +6,7 @@ import ProductDetail from './components/ProductDetail';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.addProductToCart = this.addProductToCart.bind(this);
     this.state = {
       products: [],
       cart: null,
@@ -22,7 +23,21 @@ class App extends Component {
         (resp) => {
           //Success
           this.setState({
-            products: resp.data || []
+            products: [
+              ...resp.data.map(product => ({
+                ...product,
+                variants: product.variants.map(variant => ({
+                  ...variant,
+                  optionsById: variant.options.reduce((obj, currentOption) => {
+                      obj[currentOption.id] = {
+                        ...currentOption,
+                        variantId: variant.id
+                      }
+                      return obj;
+                    }, {})
+                }))
+              }))
+            ] || []
           })
         },
         (error) => {
@@ -42,6 +57,28 @@ class App extends Component {
       }.bind(this))
     }
   }
+
+  // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
+  // https://commercejs.com/docs/api/?javascript#add-item-to-cart
+  addProductToCart(product) {
+    const {
+      productId,
+      variant
+    } = product
+
+    this.props.commerce.Cart.add({
+      id: productId,
+      variant
+    }, (resp) => {
+      // if successful update Cart
+      if (!resp.error) {
+        this.setState({
+          cart: resp.cart
+        })
+      }
+    });
+  }
+
   render() {
     const {
       cart,
@@ -56,6 +93,7 @@ class App extends Component {
           }
           <ProductDetail
             product={products.length ? products[0] : null}
+            addProductToCart={this.addProductToCart}
             />
         </main>
         <footer className="footer flex pa4 bg-black-90">

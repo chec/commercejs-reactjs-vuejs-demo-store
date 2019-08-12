@@ -1,25 +1,61 @@
 import React, { Component } from 'react';
 import Loading from './Loading';
 
+function Label(props) {
+  return (
+    <div className={`${props.classes || ''} `}>
+      <p className="medium-text ttu gray f6 tracked-mega-1 pb2">
+        {props.labelTitle || '----'}
+      </p>
+      <p className="large-title-text f1 fw9 ttu pl3">
+        {props.body || '----'}
+      </p>
+    </div>
+  )
+}
+
+
 class ProductDetail extends Component {
+
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this)
+    this.addProductToCart = this.addProductToCart.bind(this)
     this.state = {
-      selectedSize: ''
+      sizeSelect: ''
     }
   }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  addProductToCart(e) {
+    const product = {
+      productId: this.props.product.id,
+      variant: {
+        [this.props.product.variants[0].id]: this.state.sizeSelect
+      }
+    }
+    this.props.addProductToCart(product)
+  }
+
   render() {
     const {
       product
     } = this.props;
     const {
-      selectedSize
+      sizeSelect
     } = this.state;
+
     if (!product) {
       return (
         <Loading />
       )
     }
+
     return (
       <div className="productDetail w-100 pb5 ph4">
         <div className="mw8 center ph2">
@@ -32,9 +68,10 @@ class ProductDetail extends Component {
                 lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
               </p>
               <button
-                disabled={!!selectedSize}
+                disabled={!!!sizeSelect}
+                onClick={this.addProductToCart}
                 name="addToCartButton"
-                className="button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 ${!!this.state.selectedSize ? 'dim' :'o-30'}">
+                className={`button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 ${!!this.state.sizeSelect ? 'dim' :'o-30'}`}>
                 add to cart
               </button>
             </div>
@@ -54,19 +91,32 @@ class ProductDetail extends Component {
           </div>
         </div>
         <div className="productDetail__info-container mw8 center flex flex-row flex-grow-1 pb4 mt4">
-{/*          ${renderLabel({
-            labelTitle: 'price',
-            body: '$100.00 USD',
-            classes: 'mr5'
-          })}
-          ${renderSelect({
-            labelTitle: 'choose a size',
-            labelBody: sizeOptionsById[this.state.selectedSize] && sizeOptionsById[this.state.selectedSize].name,
-            selectName: 'sizeSelect',
-            selectedValue: this.state.selectedSize,
-            options: sizeOptions
-          })}
-        */}
+          <Label
+            labelTitle='price'
+            body='$100.00 USD'
+            classes='mr5'
+          />
+          <div className="relative">
+            <Label
+              labelTitle='choose a size'
+              body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
+            />
+            <select
+              onChange={this.handleChange}
+              className="absolute absolute--fill left-0 o-0 pointer w-100"
+              value={sizeSelect}
+              name='sizeSelect'>
+              <option value="" disabled>Choose a size</option>
+              <option value="testing">tesint1</option>
+              {
+                product.variants[0].options.map(option =>
+                  <option value={option.id} key={option.id}>
+                    {option.name}
+                  </option>
+                )
+              }
+            </select>
+          </div>
         </div>
       </div>
     )
