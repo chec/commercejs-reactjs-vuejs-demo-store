@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch, Link, BrowserRouter as Router } from "react-router-dom";
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import ProductDetail from './components/ProductDetail';
@@ -85,25 +86,33 @@ class App extends Component {
       products
     } = this.state;
     return (
-      <div>
-        <Header cart={cart}/>
-        <main id="main" className="flex">
-          {
-            false && <LandingPage />
-          }
-          <ProductDetail
-            product={products.length ? products[0] : null}
-            addProductToCart={this.addProductToCart}
-            />
-        </main>
-        <footer className="footer flex pa4 bg-black-90">
-          <div className="self-end w-100">
-            <p className="medium-text tr cherry">
-              © 2019 CHEC PLATFORM/COMMERCEJS
-            </p>
-          </div>
-        </footer>
-      </div>
+        <div>
+          <Router>
+          <Header cart={cart}/>
+          <main id="main" className="flex">
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/white-shoe" exact render={(props) => {
+                return (
+                  <ProductDetail
+                    {...props}
+                    product={products.length ? products[0] : null}
+                    addProductToCart={this.addProductToCart}
+                  />
+                )
+              }}
+              />
+            </Switch>
+          </main>
+          <footer className="footer flex pa4 bg-black-90">
+            <div className="self-end w-100">
+              <p className="medium-text tr cherry">
+                © 2019 CHEC PLATFORM/COMMERCEJS
+              </p>
+            </div>
+          </footer>
+        </Router>
+        </div>
     )
   }
 }
