@@ -13,8 +13,8 @@ src/styles/tachyons
 # production
 /build
 
-# env
-# .env
+env
+.env
 
 # misc
 .DS_Store
