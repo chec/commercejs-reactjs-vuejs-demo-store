@@ -62,7 +62,9 @@ class ProductDetail extends WithComponentState() {
         bubbles: true,
         detail: {
           productId: this.product.id,
-          variantId: this.state.selectedSize
+          variant: {
+            [this.product.variants[0].id]: this.state.selectedSize
+          }
         }
       });
 
@@ -95,7 +97,7 @@ class ProductDetail extends WithComponentState() {
       [];
     const sizeOptionsById = this.product ?
       this.product.variants[0].options.reduce((obj, currentOption) => {
-        obj[currentOption.id] = currentOption
+        obj[currentOption.id] = currentOption;
         return obj;
       }, {}) :
       {};
@@ -113,8 +115,9 @@ class ProductDetail extends WithComponentState() {
                 lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
               </p>
               <button
+                ${!!this.state.selectedSize ? '' : 'disabled'}
                 name="addToCartButton"
-                class="button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3">
+                class="button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 ${!!this.state.selectedSize ? 'dim' :'o-30'}">
                 add to cart
               </button>
             </div>
