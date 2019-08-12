@@ -107,7 +107,6 @@ class ProductDetail extends Component {
               value={sizeSelect}
               name='sizeSelect'>
               <option value="" disabled>Choose a size</option>
-              <option value="testing">tesint1</option>
               {
                 product.variants[0].options.map(option =>
                   <option value={option.id} key={option.id}>
