@@ -9,6 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.addProductToCart = this.addProductToCart.bind(this);
+    this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.state = {
       products: [],
       cart: null,
@@ -81,6 +82,18 @@ class App extends Component {
     });
   }
 
+  // cart methods
+  removeProductFromCart(lineItemId) {
+    this.props.commerce.Cart.remove(lineItemId, (resp) => {
+      // if successful update Cart
+      if (!resp.error) {
+        this.setState({
+          cart: resp.cart
+        })
+      }
+    });
+  }
+
   render() {
     const {
       cart,
@@ -106,14 +119,18 @@ class App extends Component {
               />
             <Route path="/cart-checkout" render={(props) => {
                 return (
-                  <CartCheckout {...props} cart={cart} />
+                  <CartCheckout
+                    {...props}
+                    cart={cart}
+                    removeProductFromCart={this.removeProductFromCart}
+                  />
                 )
               }} />
             </Switch>
           </main>
           <footer className="footer flex pa4 bg-black-90">
             <div className="self-end w-100">
-              <p className="medium-text tr cherry">
+              <p className="medium-text tc cherry">
                 © 2019 CHEC PLATFORM/COMMERCEJS
               </p>
             </div>

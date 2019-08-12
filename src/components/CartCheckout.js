@@ -10,10 +10,12 @@ class CartCheckout extends Component {
     const {
       line_items: lineItems = []
     } = this.props.cart || {};
+
     const allLineItems = lineItems.map((item, key) => {
       return (
         <div className="flex flex-row justify-between items-center ph4 pv3" key={key}>
           <button
+            onClick={() => this.props.removeProductFromCart(item.id)}
             className="cartIconContainer dim pointer pa0 bg-none">
             <RemoveIcon />
           </button>
@@ -37,6 +39,7 @@ class CartCheckout extends Component {
         </div>
       )
     })
+
     return (
       <div className="flex flex-grow-1 bg-tan-white w-100">
         <div className="cf mw9 center w-100 ph3 mt4">
@@ -50,7 +53,7 @@ class CartCheckout extends Component {
                       subtotal
                     </p>
                     <p>
-                      $100.00
+                      ${this.props.cart ? this.props.cart.subtotal.formatted_with_code : '----'}
                     </p>
                   </div>
                 </div>
