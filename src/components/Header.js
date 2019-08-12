@@ -1,8 +1,10 @@
 import setUpShadowAndRender from '../utils/setUpShadowAndRender'
 import WithComponentState from '../utils/withComponentState'
+import parseProp from '../utils/unescapeAndParseAttribute';
 
 // svg
 import logo from '../assets/logo.svg';
+import renderLogoSvg from './LogoSvg';
 import cartIcon from '../assets/cart-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png';
 
@@ -32,11 +34,15 @@ class Header extends WithComponentState() {
     return ['componentState'];
   } // must observe componentState in order to receive updates
 
+  get cart() {
+    return parseProp.call(this, 'cart')
+  }
+
   render() {
     return `
       <header class="absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1">
         <div class="logoContainer dim pointer">
-          <img src=${logo} width="100%" height="100%" />
+          ${renderLogoSvg()}
         </div>
         <div class="flex">
           <div class="productFragmentContainer mw4">
@@ -53,7 +59,7 @@ class Header extends WithComponentState() {
             <div class="cartIconContainer pointer">
               <img src=${cartIcon} width="100%" height="100%" />
             </div>
-            <p class="medium-text f7 white">${'0'}</p>
+            <p class="medium-text f7 white">${this.cart ? this.cart.total_items : '0'}</p>
           </div>
         </div>
       </header>
