@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
+import ProductDetail from './components/ProductDetail';
 
 class App extends Component {
   constructor(props) {
@@ -43,13 +44,19 @@ class App extends Component {
   }
   render() {
     const {
-      cart
+      cart,
+      products
     } = this.state;
     return (
       <div>
         <Header cart={cart}/>
         <main id="main" className="flex">
-          <LandingPage />
+          {
+            false && <LandingPage />
+          }
+          <ProductDetail
+            product={products.length ? products[0] : null}
+            />
         </main>
         <footer className="footer flex pa4 bg-black-90">
           <div className="self-end w-100">
