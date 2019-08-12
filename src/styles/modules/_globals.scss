@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+}
+ #main {
+   min-height: calc(100vh - #{$footer-height});
+ }
+
+.logoContainer {
+  width: 13.5rem;
+  height: 2rem;
+}
+
+.cartIconContainer {
+  width: 1.5rem;;
+  height: 1.5rem;
+}
