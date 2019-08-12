@@ -3,7 +3,7 @@
 .sass-cache/
 *.css.map
 
-styles/tachyons
+src/styles/tachyons
 
 node_modules
 npm-debug.log
