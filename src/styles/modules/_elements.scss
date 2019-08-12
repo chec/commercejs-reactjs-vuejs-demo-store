@@ -6,6 +6,13 @@
     letter-spacing: 0.25rem;
     border-radius: 0.30rem;
   }
+
+  &__checkout {
+    padding: 1.8rem 6rem;
+    font-size: 0.70rem;
+    letter-spacing: 0.25rem;
+    border-radius: 0.30rem;
+  }
 }
 
 .logoContainer {
@@ -24,5 +31,9 @@
 }
 
 .checkoutFormInput {
-  @extend .w-100, .br3, .bg-light-gray, .pa3, .outline-0, .bn, .mb2;
+  @extend .w-100, .br2, .bg-light-gray, .pa3, .outline-0, .bn, .mb4;
+}
+
+.checkoutFormInputLabel {
+  @extend .medium-text, .dark-gray, .f7, .tracked-mega-1, .ttu, .pb2;
 }

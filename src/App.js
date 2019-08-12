@@ -78,6 +78,7 @@ class App extends Component {
         this.setState({
           cart: resp.cart
         })
+        alert("Added to cart!")
       }
     });
   }

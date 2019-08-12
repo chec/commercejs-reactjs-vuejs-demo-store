@@ -3,9 +3,24 @@ import { ReactComponent as RemoveIcon } from '../assets/remove-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
 
 class CartCheckout extends Component {
+
   constructor(props) {
     super(props);
+    this.handleFormChanges = this.handleFormChanges.bind(this);
+    this.state = {
+      fullName: '',
+      email: '',
+      deliveryStreetAddress: '',
+      deliveryCity: ''
+    }
   }
+
+  handleFormChanges(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
   render() {
     const {
       line_items: lineItems = []
@@ -36,7 +51,7 @@ class CartCheckout extends Component {
               {item.variants[0].option_name}
             </span>
             <span className="db f7">
-              x{item.quantity} - ${item.line_total.formatted_with_code}
+              <span class="ttl">x</span>{item.quantity} - ${item.line_total.formatted_with_code}
             </span>
           </p>
         </div>
@@ -62,18 +77,74 @@ class CartCheckout extends Component {
                 </div>
             </div>
             <div className="fl w-60 ph4">
-              <div>
-                <form className="font-roboto">
+              <form onChange={this.handleFormChanges} className="font-roboto mb4">
                   <div>
                     <label>
-                      <p className="flex ">
+                      <p className="checkoutFormInputLabel">
                         full name
                       </p>
                     </label>
-                    <input className="checkoutFormInput" type="text" name="fullName"/>
+                    <input
+                      className="checkoutFormInput"
+                      type="text"
+                      name="fullName"
+                      value={this.state.fullName}
+                    />
+                  </div>
+                  <div>
+                    <label>
+                      <p className="checkoutFormInputLabel">
+                        email
+                      </p>
+                    </label>
+                    <input
+                      className="checkoutFormInput"
+                      type="email"
+                      name="email"
+                      value={this.state.email}
+                    />
+                  </div>
+                  <div>
+                    <label>
+                      <p className="checkoutFormInputLabel">
+                        delivery street address
+                      </p>
+                    </label>
+                    <input className="checkoutFormInput" type="text" name="deliveryStreetAddress"/>
+                  </div>
+                  <div>
+                    <label>
+                      <p className="checkoutFormInputLabel">
+                        city
+                      </p>
+                    </label>
+                    <input className="checkoutFormInput" type="text" name="deliveryCity"/>
+                  </div>
+                  <div className="flex justify-between">
+                    <div class="w-50 pr2 flex flex-column">
+                      <label>
+                        <p className="checkoutFormInputLabel">
+                          country
+                        </p>
+                      </label>
+                      <input className="checkoutFormInput" type="text" name="deliveryCountry"/>
+                    </div>
+                    <div class="w-50 pl2 flex flex-column">
+                      <label>
+                        <p className="checkoutFormInputLabel">
+                          state
+                        </p>
+                      </label>
+                      <div className="checkoutFormInput flex-grow-1">
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-column">
+                    <button className="button__checkout bg-dark-gray white ttu b self-end pointer dim shadow-2 tracked-mega-1">
+                      checkout
+                    </button>
                   </div>
                 </form>
-              </div>
             </div>
         </div>
       </div>
