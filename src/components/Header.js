@@ -41,7 +41,7 @@ class Header extends WithComponentState() {
   render() {
     return `
       <header class="absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1">
-        <div class="logoContainer dim pointer">
+        <div class="logoContainer dim pointer" onClick={pushStateAndTriggerPopStateEvent('/')}>
           ${renderLogoSvg()}
         </div>
         <div class="flex">
