@@ -65,6 +65,7 @@ class App extends WithComponentState() {
   } // must observe componentState in order to receive updates
 
   // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
+  // https://commercejs.com/docs/api/?javascript#add-item-to-cart
   addProductToCart(e) {
     alert(`the event is ${JSON.stringify(e.detail)}`)
     const productId = e.detail.productId;
