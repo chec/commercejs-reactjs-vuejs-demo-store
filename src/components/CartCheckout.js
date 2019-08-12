@@ -6,14 +6,14 @@ class CartCheckout extends Component {
   }
   render() {
     return (
-      <div className="w-100">
-        <div className="cf mw9">
+      <div className="flex flex-grow-1 bg-tan-white w-100">
+        <div className="cf mw9 center w-100 ph2">
             <div className="fl w-40 ph4">
-                <div className="h4 br3 dark-grey w-100">
+                <div className="relative z-1 h5 br3 bg-dark-gray w-100">
 
                 </div>
-                <div className="pt3 pb4 nt4 pb3 br3 bg-cherry">
-                  <div className="flex justify-between w-100 medium-text f7 white ttu">
+                <div className="pt4 pb3 nt3 br3 ph4 bg-cherry">
+                  <div className="flex justify-between items-center w-100 medium-text f7 white ttu">
                     <p className="tracked-mega-1">
                       subtotal
                     </p>
@@ -22,6 +22,9 @@ class CartCheckout extends Component {
                     </p>
                   </div>
                 </div>
+            </div>
+            <div className="fl w-60 ph4">
+
             </div>
         </div>
       </div>

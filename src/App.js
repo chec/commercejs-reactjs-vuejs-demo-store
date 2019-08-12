@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Link, BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch, Link, BrowserRouter as Router, withRouter } from "react-router-dom";
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import ProductDetail from './components/ProductDetail';
@@ -88,12 +88,14 @@ class App extends Component {
     } = this.state;
     return (
         <div>
-          <Router>
-          <Header cart={cart}/>
+          {
+            (this.props.location.pathname !== '/cart-checkout') &&
+            <Header cart={cart}/>
+          }
           <main id="main" className="flex">
             <Switch>
               <Route path="/" exact component={LandingPage} />
-              <Route path="/white-shoe" exact render={(props) => {
+              <Route path="/white-shoe" render={(props) => {
                 return (
                   <ProductDetail
                     {...props}
@@ -102,7 +104,7 @@ class App extends Component {
                   />
                 )}}
               />
-              <Route path="/" exact render={(props) => {
+            <Route path="/cart-checkout" render={(props) => {
                 return (
                   <CartCheckout {...props} cart={cart} />
                 )
@@ -116,10 +118,9 @@ class App extends Component {
               </p>
             </div>
           </footer>
-        </Router>
         </div>
     )
   }
 }
 
-export default App;
+export default withRouter(App);
