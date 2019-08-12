@@ -1,5 +1,5 @@
 .button {
-  @extend .medium-text, .pointer, .dim;
+  @extend .medium-text, .pointer;
   &__add-to-cart {
     padding: 1rem 5rem;
     font-size: 0.70rem;
