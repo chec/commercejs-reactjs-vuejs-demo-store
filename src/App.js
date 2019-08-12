@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import LandingPage from './components/LandingPage';
 
 class App extends Component {
   constructor(props) {
@@ -47,11 +48,12 @@ class App extends Component {
     return (
       <div>
         <Header cart={cart}/>
-        <main id="main" class="flex">
+        <main id="main" className="flex">
+          <LandingPage />
         </main>
-        <footer class="footer flex pa4 bg-black-90">
-          <div class="self-end w-100">
-            <p class="medium-text tr cherry">
+        <footer className="footer flex pa4 bg-black-90">
+          <div className="self-end w-100">
+            <p className="medium-text tr cherry">
               © 2019 CHEC PLATFORM/COMMERCEJS
             </p>
           </div>
