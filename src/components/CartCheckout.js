@@ -110,7 +110,12 @@ class CartCheckout extends Component {
                         delivery street address
                       </p>
                     </label>
-                    <input className="checkoutFormInput" type="text" name="deliveryStreetAddress"/>
+                    <input
+                      className="checkoutFormInput"
+                      type="text"
+                      name="deliveryStreetAddress"
+                      value={this.state.deliveryStreetAddress}
+                    />
                   </div>
                   <div>
                     <label>
@@ -118,7 +123,12 @@ class CartCheckout extends Component {
                         city
                       </p>
                     </label>
-                    <input className="checkoutFormInput" type="text" name="deliveryCity"/>
+                    <input
+                      className="checkoutFormInput"
+                      type="text"
+                      name="deliveryCity"
+                      value={this.state.deliveryCity}
+                    />
                   </div>
                   <div className="flex justify-between">
                     <div class="w-50 pr2 flex flex-column">
@@ -127,7 +137,12 @@ class CartCheckout extends Component {
                           country
                         </p>
                       </label>
-                      <input className="checkoutFormInput" type="text" name="deliveryCountry"/>
+                      <input
+                        className="checkoutFormInput"
+                        type="text"
+                        name="deliveryCountry"
+                        value={this.state.deliveryCountry}
+                      />
                     </div>
                     <div class="w-50 pl2 flex flex-column">
                       <label>
