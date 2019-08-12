@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import {ReactComponent as Logo } from '../assets/logo.svg'
 import {ReactComponent as CartIcon} from '../assets/cart-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
@@ -6,9 +7,11 @@ import pairShoes from '../assets/pair-shoes-small.png'
 function Header(props) {
   return (
     <header className="absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1">
-      <div className="logoContainer dim pointer">
-        <Logo />
-      </div>
+      <Link to="/">
+        <div className="logoContainer dim pointer">
+          <Logo />
+        </div>
+      </Link>
       <div className="flex">
         <div className="productFragmentContainer mw4">
           <button
