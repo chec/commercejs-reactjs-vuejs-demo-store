@@ -23,7 +23,7 @@ function Header(props) {
             <img src={pairShoes} width="100%" height="auto" />
           </div>
         </div>
-        <Link to="cart-checkout" className="flex flex-row items-center no-underline">
+        <Link to="cart-checkout" className="flex flex-row items-center no-underline dim">
           <div className="cartIconContainer pointer">
             <CartIcon />
           </div>
