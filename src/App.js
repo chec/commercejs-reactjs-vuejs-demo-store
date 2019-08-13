@@ -123,6 +123,7 @@ class App extends Component {
                   <CartCheckout
                     {...props}
                     cart={cart}
+                    commerce={this.props.commerce}
                     removeProductFromCart={this.removeProductFromCart}
                   />
                 )
