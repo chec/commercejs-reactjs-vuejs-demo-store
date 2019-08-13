@@ -10,6 +10,7 @@ class CartCheckout extends Component {
     this.getAllCountries = this.getAllCountries.bind(this);
     this.getRegions = this.getRegions.bind(this);
     this.createCheckout = this.createCheckout.bind(this);
+    this.getShippingOptions = this.getShippingOptions.bind(this);
     this.state = {
       fullName: 'John Doe',
       email: 'john@doe.com',
@@ -19,13 +20,34 @@ class CartCheckout extends Component {
       deliveryZip: "94103",
       deliveryCountry: 'US',
       countries: {},
-      subdivisions: {}
+      subdivisions: {},
+      // state below is set after checkout token is generated
+      shippingOption: '',
+      shippingOptions: [],
+      shippingOptionsById: {},
+      cardNumber: '4242 4242 4242 4242',
+      expMonth: '01',
+      expYear: '2021',
+      ccv: '123',
+      billingPostalZipcode: '94103',
     }
   }
 
   componentDidMount() {
     this.getAllCountries()
     this.getRegions(this.state.deliveryCountry)
+  }
+
+  handleFormChanges(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+    if (e.target.name === "deliveryCountry") {
+      this.getRegions(e.target.value)
+      if (this.state.checkout) {
+        this.getShippingOptions(this.state.checkout.id, e.target.value)
+      }
+    }
   }
 
   getAllCountries() {
@@ -55,6 +77,7 @@ class CartCheckout extends Component {
       this.props.commerce.Checkout
         .generateToken(this.props.cart.id, { type: 'cart' },
           (checkout) => {
+            this.getShippingOptions(checkout.id, (this.state.deliveryCountry || 'US'))
             this.setState({
               checkout: checkout
             })
@@ -67,13 +90,23 @@ class CartCheckout extends Component {
     }
   }
 
-  handleFormChanges(e) {
-    this.setState({
-      [e.target.name]: e.target.value
+  getShippingOptions(checkoutId, country) {
+    this.props.commerce.Checkout.getShippingOptions(checkoutId, { country }, (resp) => {
+      if (!resp.error) {
+        this.setState({
+          shippingOptions: resp,
+          shippingOptionsById: resp.reduce((obj, option) => {
+           obj[option.id] = option
+           return obj
+          }, {})
+        })
+      } else {
+        this.setState({
+          shippingOptions: [],
+          shippingOptionsById: {}
+        })
+      }
     })
-    if (e.target.name === "deliveryCountry") {
-      this.getRegions(e.target.value)
-    }
   }
 
   render() {
@@ -125,6 +158,14 @@ class CartCheckout extends Component {
       return (
         <option value={subdivision} key={key}>
           { this.state.subdivisions[subdivision] }
+        </option>
+      )
+    })
+
+    const allShippingOptions = this.state.shippingOptions.map((option, key) => {
+      return (
+        <option value={option.id} key={key}>
+          { `${option.description} - $${option.price.formatted_with_code}` }
         </option>
       )
     })
@@ -265,7 +306,38 @@ class CartCheckout extends Component {
                       </div>
                     </div>
                   </div>
-
+                  {
+                    this.state.checkout &&
+                    (
+                    <div className="w-100 flex flex-column">
+                      <label>
+                        <p className="checkoutFormInputLabel">
+                          delivery method
+                        </p>
+                      </label>
+                      <div class="checkoutFormInput flex-grow-1 relative">
+                        <p>
+                          {
+                            this.state.shippingOption ?
+                            `${
+                              this.state.shippingOptionsById[this.state.shippingOption].description}
+                              - $${this.state.shippingOptionsById[this.state.shippingOption].price.formatted_with_code
+                              }` :
+                            'Select a delivery method'}
+                        </p>
+                        <select
+                          name="shippingOption"
+                          onChange={this.handleFormChanges}
+                          value={this.state.shippingOption}
+                          placeholder="shippingOption"
+                          className="absolute absolute--fill left-0 o-0 pointer w-100">
+                          <option value="" disabled>Select a delivery method</option>
+                          {allShippingOptions}
+                        </select>
+                      </div>
+                    </div>
+                    )
+                  }
                   <div className="flex flex-column">
                     <button
                       onClick={this.createCheckout}
@@ -274,6 +346,7 @@ class CartCheckout extends Component {
                       checkout
                     </button>
                   </div>
+
                 </form>
             </div>
         </div>
