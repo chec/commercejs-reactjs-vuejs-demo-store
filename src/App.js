@@ -10,13 +10,15 @@ class App extends Component {
     super(props);
     this.addProductToCart = this.addProductToCart.bind(this);
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
+    this.captureOrder = this.captureOrder.bind(this);
+    this.refreshCart = this.refreshCart.bind(this);
     this.state = {
       products: [],
       cart: null,
-      checkout: null,
       order: null,
     }
   }
+
   componentDidMount() {
     const {
       commerce
@@ -85,14 +87,37 @@ class App extends Component {
 
   // cart methods
   removeProductFromCart(lineItemId) {
-    this.props.commerce.Cart.remove(lineItemId, (resp) => {
-      // if successful update Cart
-      if (!resp.error) {
+    return new Promise((resolve, reject) => {
+      this.props.commerce.Cart.remove(lineItemId, (resp) => {
+        // if successful update Cart
+        if (!resp.error) {
+          this.setState({
+            cart: resp.cart
+          })
+          return resolve(resp)
+        }
+        reject(resp)
+      });
+    })
+  }
+
+  refreshCart(){
+    this.props.commerce.Cart.refresh((resp) => {
+      // successful
+    }, error => console.log(error))
+  }
+
+  captureOrder(checkoutId, order) {
+    // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
+    this.props.commerce.Checkout
+      .capture(checkoutId, order, (resp) => {
+        this.refreshCart()
         this.setState({
-          cart: resp.cart
+          checkout: null,
+          order: resp
         })
-      }
-    });
+        this.props.history.replace("/thank-you")
+      }, (error) => console.log(error))
   }
 
   render() {
@@ -101,43 +126,54 @@ class App extends Component {
       products
     } = this.state;
     return (
-        <div>
-          {
-            (this.props.location.pathname !== '/cart-checkout') &&
-            <Header cart={cart}/>
-          }
-          <main id="main" className="flex">
-            <Switch>
-              <Route path="/" exact component={LandingPage} />
-              <Route path="/white-shoe" render={(props) => {
+      <div>
+        {
+          (this.props.location.pathname !== '/cart-checkout') &&
+          <Header cart={cart}/>
+        }
+        <main id="main" className="flex">
+          <Switch>
+            <Route path="/" exact component={LandingPage} />
+            <Route
+              path="/white-shoe"
+              render={(props) => {
                 return (
                   <ProductDetail
                     {...props}
                     product={products.length ? products[0] : null}
                     addProductToCart={this.addProductToCart}
-                  />
-                )}}
-              />
-            <Route path="/cart-checkout" render={(props) => {
-                return (
-                  <CartCheckout
-                    {...props}
-                    cart={cart}
-                    commerce={this.props.commerce}
-                    removeProductFromCart={this.removeProductFromCart}
-                  />
-                )
-              }} />
-            </Switch>
-          </main>
-          <footer className="footer flex pa4 bg-black-90">
-            <div className="self-end w-100">
-              <p className="medium-text tc cherry">
-                © 2019 CHEC PLATFORM/COMMERCEJS
-              </p>
+                    />
+                )}}/>
+                <Route
+                  path="/cart-checkout"
+                  render={(props) => {
+                    return (
+                      <CartCheckout
+                        {...props}
+                        cart={cart}
+                        commerce={this.props.commerce}
+                        removeProductFromCart={this.removeProductFromCart}
+                        captureOrder={this.captureOrder}
+                        />
+                    )
+                  }} />
+                <Route path="/thank-you" render={(props) => {
+                    if (!this.state.order) {
+                      return this.history.pushState("/")
+                    }
+                    return
+                  }}/>
+
+                </Switch>
+              </main>
+              <footer className="footer flex pa4 bg-black-90">
+                <div className="self-end w-100">
+                  <p className="medium-text tc cherry">
+                    © 2019 CHEC PLATFORM/COMMERCEJS
+                  </p>
+                </div>
+              </footer>
             </div>
-          </footer>
-        </div>
     )
   }
 }
