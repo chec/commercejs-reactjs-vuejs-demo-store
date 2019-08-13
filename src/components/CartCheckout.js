@@ -11,6 +11,8 @@ class CartCheckout extends Component {
     this.getRegions = this.getRegions.bind(this);
     this.createCheckout = this.createCheckout.bind(this);
     this.getShippingOptions = this.getShippingOptions.bind(this);
+    this.captureOrder = this.captureOrder.bind(this);
+    this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.state = {
       fullName: 'John Doe',
       email: 'john@doe.com',
@@ -21,6 +23,7 @@ class CartCheckout extends Component {
       deliveryCountry: 'US',
       countries: {},
       subdivisions: {},
+      checkout: null,
       // state below is set after checkout token is generated
       shippingOption: '',
       shippingOptions: [],
@@ -28,7 +31,7 @@ class CartCheckout extends Component {
       cardNumber: '4242 4242 4242 4242',
       expMonth: '01',
       expYear: '2021',
-      ccv: '123',
+      cvc: '123',
       billingPostalZipcode: '94103',
     }
   }
@@ -72,7 +75,9 @@ class CartCheckout extends Component {
 
   // checkout methods
   createCheckout(e) {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
     if (this.props.cart.total_items > 0) {
       this.props.commerce.Checkout
         .generateToken(this.props.cart.id, { type: 'cart' },
@@ -109,6 +114,63 @@ class CartCheckout extends Component {
     })
   }
 
+  captureOrder(e) {
+    if (e) {
+      e.preventDefault()
+    }
+    const lineItems = this.state.checkout.live.line_items.reduce((obj, lineItem) => {
+      obj[lineItem.id] = {
+        quantity: lineItem.quantity,
+        variants: {
+          [lineItem.variants[0].variant_id]: lineItem.variants[0].option_id
+        }
+      }
+      return obj
+    }, {})
+    const newOrder = {
+      line_items: lineItems,
+      customer: {
+        firstname: this.state.firstName,
+        lastname: this.state.lastName,
+        email: this.state.email
+      },
+      shipping: {
+        name: `${this.state.firstName} ${this.state.lastName}`,
+        country: this.state.deliveryCountry,
+        street: this.state.deliveryStreetAddress,
+        town_city: this.state.deliveryCity,
+        county_state: this.state.deliveryState,
+        postal_zip_code: this.state.deliveryZip
+      },
+      fulfillment: {
+        shipping_method: this.state.shippingOption
+      },
+      payment: {
+        gateway: "test_gateway",
+        card: {
+          number: this.state.cardNumber,
+          expiry_month: this.state.expMonth,
+          expiry_year: this.state.expYear,
+          cvc: this.state.cvc,
+          postal_zip_code: this.state.billingPostalZipcode
+        }
+      }
+    }
+    console.log('The order constructed', newOrder)
+    this.props.captureOrder(this.state.checkout.id, newOrder)
+  }
+
+  removeProductFromCart(itemId) {
+    this.props.removeProductFromCart(itemId).then(({ cart }) => {
+      if (cart.total_items === 0) {
+        return this.setState({
+          checkout: null
+        }, () => alert("Add items to your cart before to continue checkout."))
+      }
+      this.createCheckout()
+    })
+  }
+
   render() {
     const {
       line_items: lineItems = []
@@ -118,11 +180,11 @@ class CartCheckout extends Component {
       return (
         <div className="flex flex-row justify-between items-center ph4 pv2" key={key}>
           <button
-            onClick={() => this.props.removeProductFromCart(item.id)}
+            onClick={() => this.removeProductFromCart(item.id)}
             className="cartIconContainer dim pointer pa0 bg-none">
             <RemoveIcon />
           </button>
-          <div class="w-25">
+          <div className="w-25">
             <div
                className="aspect-ratio aspect-ratio--1x1"
                style={{
@@ -139,7 +201,7 @@ class CartCheckout extends Component {
               {item.variants[0].option_name}
             </span>
             <span className="db f7">
-              <span class="ttl">x</span>{item.quantity} - ${item.line_total.formatted_with_code}
+              <span className="ttl">x</span>{item.quantity} - ${item.line_total.formatted_with_code}
             </span>
           </p>
         </div>
@@ -190,20 +252,37 @@ class CartCheckout extends Component {
             </div>
             <div className="fl w-60 ph4">
               <form onChange={this.handleFormChanges} className="font-roboto mb4 ttu f6 tracked-mega light-gray">
-                  <div>
-                    <label>
-                      <p className="checkoutFormInputLabel">
-                        full name
-                      </p>
-                    </label>
-                    <input
-                      className="checkoutFormInput"
-                      type="text"
-                      name="fullName"
-                      value={this.state.fullName}
-                      placeholder="Full Name"
-                    />
+                  <div className="flex justify-between">
+                    <div className="w-50 pr2 flex flex-column">
+                      <label>
+                        <p className="checkoutFormInputLabel">
+                          first name
+                        </p>
+                      </label>
+                      <input
+                        className="checkoutFormInput"
+                        type="text"
+                        name="first name"
+                        value={this.state.fullName}
+                        placeholder="first name"
+                      />
+                    </div>
+                    <div className="w-50 pl2 flex flex-column">
+                      <label>
+                        <p className="checkoutFormInputLabel">
+                          first name
+                        </p>
+                      </label>
+                      <input
+                        className="checkoutFormInput"
+                        type="text"
+                        name="first name"
+                        value={this.state.fullName}
+                        placeholder="first name"
+                      />
+                    </div>
                   </div>
+
                   <div>
                     <label>
                       <p className="checkoutFormInputLabel">
@@ -269,7 +348,7 @@ class CartCheckout extends Component {
                           country
                         </p>
                       </label>
-                      <div class="checkoutFormInput flex-grow-1 relative">
+                      <div className="checkoutFormInput flex-grow-1 relative">
                         <p>
                           {this.state.countries[this.state.deliveryCountry] || 'Select your country'}
                         </p>
@@ -316,7 +395,7 @@ class CartCheckout extends Component {
                             delivery method
                           </p>
                         </label>
-                        <div class="checkoutFormInput flex-grow-1 relative">
+                        <div className="checkoutFormInput flex-grow-1 relative">
                           <p>
                             {
                               this.state.shippingOption ?
@@ -338,8 +417,7 @@ class CartCheckout extends Component {
                         </div>
                       </div>
                       <div
-                        className="w-100 flex flex-column"
-                      >
+                        className="w-100 flex flex-column">
                         <label>
                           <p className="checkoutFormInputLabel">
                             card number
@@ -353,12 +431,56 @@ class CartCheckout extends Component {
                           placeholder="Card Number"
                         />
                       </div>
+                      <div className="w-100 flex">
+                        <div className="w-third flex flex-column">
+                          <label>
+                            <p className="checkoutFormInputLabel">
+                              expiry month
+                            </p>
+                          </label>
+                          <input
+                            className="checkoutFormInput"
+                            type="number"
+                            name="expMonth"
+                            value={this.state.expMonth}
+                            placeholder="expiry month"
+                          />
+                        </div>
+                        <div className="w-third flex flex-column ph2">
+                          <label>
+                            <p className="checkoutFormInputLabel">
+                              expiry year
+                            </p>
+                          </label>
+                          <input
+                            className="checkoutFormInput"
+                            type="number"
+                            name="expYear"
+                            value={this.state.expYear}
+                            placeholder="expiry year (yyyy)"
+                          />
+                        </div>
+                        <div className="w-third flex flex-column ph2">
+                          <label>
+                            <p className="checkoutFormInputLabel">
+                              cvc
+                            </p>
+                          </label>
+                          <input
+                            className="checkoutFormInput"
+                            type="number"
+                            name="cvc"
+                            value={this.state.cvc}
+                            placeholder="cvc"
+                          />
+                        </div>
+                      </div>
                     </Fragment>
                     )
                   }
                   <div className="flex flex-column">
                     <button
-                      onClick={this.createCheckout}
+                      onClick={this.state.checkout ? this.captureOrder : this.createCheckout}
                       className="button__checkout bg-dark-gray white ttu b self-end pointer dim shadow-5 tracked-mega-1"
                     >
                       checkout
