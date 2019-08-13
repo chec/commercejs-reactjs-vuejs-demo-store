@@ -5,10 +5,13 @@ import {ReactComponent as CartIcon} from '../assets/cart-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
 
 function Header(props) {
+  const isThankYouPathname = props.location.pathname === '/thank-you';
+  const currentFillColor = isThankYouPathname ? 'fill-cherry' : 'fill-near-white';
+  const currentColor = isThankYouPathname ? 'cherry' : 'white';
   return (
     <header className="absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1">
       <Link to="/">
-        <div className="logoContainer dim pointer">
+        <div className={`logoContainer dim pointer ${currentFillColor}`}>
           <Logo />
         </div>
       </Link>
@@ -24,10 +27,10 @@ function Header(props) {
           </div>
         </div>
         <Link to="cart-checkout" className="flex flex-row items-center no-underline dim">
-          <div className="cartIconContainer pointer">
+          <div className={`cartIconContainer pointer ${currentFillColor}`}>
             <CartIcon />
           </div>
-          <p className="medium-text f7 white">
+          <p className={`medium-text f7 ${currentColor}`}>
             {props.cart ? props.cart.total_items : '0'}
           </p>
         </Link>

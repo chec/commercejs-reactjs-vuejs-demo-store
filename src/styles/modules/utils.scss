@@ -5,3 +5,11 @@
 .bg-none {
   background: none;
 }
+
+.fill-cherry {
+  fill: $color-cherry;
+}
+
+.fill-near-white {
+  fill: var(--near-white);
+}

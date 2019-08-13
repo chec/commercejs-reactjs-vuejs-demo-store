@@ -14,7 +14,8 @@ class CartCheckout extends Component {
     this.captureOrder = this.captureOrder.bind(this);
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.state = {
-      fullName: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'john@doe.com',
       deliveryStreetAddress: '1161 Mission St',
       deliveryCity: 'San Francisco',
@@ -77,6 +78,9 @@ class CartCheckout extends Component {
   createCheckout(e) {
     if (e) {
       e.preventDefault()
+    }
+    if (!this.props.cart) {
+      return;
     }
     if (this.props.cart.total_items > 0) {
       this.props.commerce.Checkout
@@ -262,8 +266,8 @@ class CartCheckout extends Component {
                       <input
                         className="checkoutFormInput"
                         type="text"
-                        name="first name"
-                        value={this.state.fullName}
+                        name="firstName"
+                        value={this.state.firstName}
                         placeholder="first name"
                       />
                     </div>
@@ -276,8 +280,8 @@ class CartCheckout extends Component {
                       <input
                         className="checkoutFormInput"
                         type="text"
-                        name="first name"
-                        value={this.state.fullName}
+                        name="lastName"
+                        value={this.state.lastName}
                         placeholder="first name"
                       />
                     </div>
