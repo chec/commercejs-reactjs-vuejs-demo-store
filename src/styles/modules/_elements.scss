@@ -30,6 +30,11 @@
   height: 1.87rem;
 }
 
+.arrowIconContainer {
+  width: 1rem;
+  height: 1.8rem;
+}
+
 .checkoutFormInput {
   @extend .w-100, .br2, .bg-dark-gray, .pa3, .outline-0, .bn, .mb4, .light-gray, .medium-text, .tracked-mega-1;
   &::-webkit-input-placeholder { /* Chrome/Opera/Safari */

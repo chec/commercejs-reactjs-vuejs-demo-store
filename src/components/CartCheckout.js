@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from "react-router-dom";
 import { ReactComponent as RemoveIcon } from '../assets/remove-icon.svg';
+import { ReactComponent as ArrowIcon } from '../assets/arrow-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
 
 class CartCheckout extends Component {
@@ -237,7 +239,20 @@ class CartCheckout extends Component {
     })
 
     return (
-      <div className="flex flex-grow-1 bg-tan-white w-100">
+      <div className="flex flex-grow-1 flex-column bg-tan-white w-100 pb4">
+        <div className="flex justify-between mw9 w-100 center mt5 ph4">
+          <Link to="/white-shoe" className="flex items-center medium-text f6 tracked-mega ttu no-underline dark-gray dim">
+            <div className="arrowIconContainer fill-cherry pr4">
+              <ArrowIcon />
+            </div>
+            continue shopping
+          </Link>
+
+          <p class="medium-text f6 tracked-mega ttu dark-gray tracked-mega">
+            {this.props.cart ? this.props.cart.total_items : '0'}
+            <span className="f7">{this.props.cart ? (this.props.cart.total_items === 1 ? 'item' : 'items') : 'items'}</span>
+          </p>
+        </div>
         <div className="cf mw9 center w-100 ph3 mt5">
             <div className="fl w-40 ph3">
                 <div className="relative z-1 h5 br3 bg-dark-gray w-100 shadow-3 pt2 overflow-scroll">
