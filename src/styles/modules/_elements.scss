@@ -31,9 +31,12 @@
 }
 
 .checkoutFormInput {
-  @extend .w-100, .br2, .bg-light-gray, .pa3, .outline-0, .bn, .mb4;
+  @extend .w-100, .br2, .bg-dark-gray, .pa3, .outline-0, .bn, .mb4, .light-gray, .medium-text, .tracked-mega-1;
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    @extend .light-gray, .ttu;
+  }
 }
 
 .checkoutFormInputLabel {
-  @extend .medium-text, .dark-gray, .f7, .tracked-mega-1, .ttu, .pb2;
+  @extend .medium-text, .dark-gray, .f7, .tracked-mega-1, .ttu, .pb2, .nowrap, .overflow-scroll;
 }
