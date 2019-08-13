@@ -8,7 +8,7 @@ function Label(props) {
         {props.labelTitle || '----'}
       </p>
       <p className="large-title-text f1 fw9 ttu pl3">
-        {props.body || '----'}
+        {props.body || (props.placeholder || '----')}
       </p>
     </div>
   )
@@ -98,7 +98,8 @@ class ProductDetail extends Component {
           />
           <div className="relative">
             <Label
-              labelTitle='choose a size'
+              labelTitle='size'
+              placeholder="choose a size"
               body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
             />
             <select
