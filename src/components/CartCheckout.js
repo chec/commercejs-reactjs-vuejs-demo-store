@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { ReactComponent as RemoveIcon } from '../assets/remove-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
 
@@ -309,33 +309,51 @@ class CartCheckout extends Component {
                   {
                     this.state.checkout &&
                     (
-                    <div className="w-100 flex flex-column">
-                      <label>
-                        <p className="checkoutFormInputLabel">
-                          delivery method
-                        </p>
-                      </label>
-                      <div class="checkoutFormInput flex-grow-1 relative">
-                        <p>
-                          {
-                            this.state.shippingOption ?
-                            `${
-                              this.state.shippingOptionsById[this.state.shippingOption].description}
-                              - $${this.state.shippingOptionsById[this.state.shippingOption].price.formatted_with_code
-                              }` :
-                            'Select a delivery method'}
-                        </p>
-                        <select
-                          name="shippingOption"
-                          onChange={this.handleFormChanges}
-                          value={this.state.shippingOption}
-                          placeholder="shippingOption"
-                          className="absolute absolute--fill left-0 o-0 pointer w-100">
-                          <option value="" disabled>Select a delivery method</option>
-                          {allShippingOptions}
-                        </select>
+                    <Fragment>
+                      <div className="w-100 flex flex-column mt4">
+                        <label>
+                          <p className="checkoutFormInputLabel">
+                            delivery method
+                          </p>
+                        </label>
+                        <div class="checkoutFormInput flex-grow-1 relative">
+                          <p>
+                            {
+                              this.state.shippingOption ?
+                              `${
+                                this.state.shippingOptionsById[this.state.shippingOption].description}
+                                - $${this.state.shippingOptionsById[this.state.shippingOption].price.formatted_with_code
+                                }` :
+                              'Select a delivery method'}
+                          </p>
+                          <select
+                            name="shippingOption"
+                            onChange={this.handleFormChanges}
+                            value={this.state.shippingOption}
+                            placeholder="shippingOption"
+                            className="absolute absolute--fill left-0 o-0 pointer w-100">
+                            <option value="" disabled>Select a delivery method</option>
+                            {allShippingOptions}
+                          </select>
+                        </div>
                       </div>
-                    </div>
+                      <div
+                        className="w-100 flex flex-column"
+                      >
+                        <label>
+                          <p className="checkoutFormInputLabel">
+                            card number
+                          </p>
+                        </label>
+                        <input
+                          className="checkoutFormInput"
+                          type="number"
+                          name="cardNumber"
+                          value={this.state.cardNumber}
+                          placeholder="Card Number"
+                        />
+                      </div>
+                    </Fragment>
                     )
                   }
                   <div className="flex flex-column">
