@@ -90,11 +90,11 @@ class ProductDetail extends Component {
             </div>
           </div>
         </div>
-        <div className="productDetail__info-container mw8 center flex flex-row flex-grow-1 pb4 mt4">
+        <div className="productDetail__info-container mw8 justify-start flex flex-row flex-grow-1 flex-wrap pb4 mt4">
           <Label
             labelTitle='price'
             body='$100.00 USD'
-            classes='mr5'
+            classes='mr5-l mb4'
           />
           <div className="relative">
             <Label
