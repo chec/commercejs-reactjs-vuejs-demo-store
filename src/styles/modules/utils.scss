@@ -22,6 +22,15 @@
   background-color: $color-cherry;
 }
 
+.bg-tan-white {
+  background-color: $color-tan-white;
+}
+
+.input-error {
+  outline: $color-cherry auto 0.3rem;
+  box-shadow: 0 0 0.3rem $color-cherry;
+}
+
 @media (--breakpoint-medium) {
   .rotate-lift-m {
     transform: translate(2rem, -5rem) rotate(-90deg);
@@ -45,5 +54,9 @@
 
   .bg-cherry-m {
     background-color: $color-cherry;
+  }
+
+  .bg-tan-white-m {
+    background-color: $color-tan-white;
   }
 }

@@ -5,7 +5,7 @@ import shoesHero from '../assets/shoes-hero.png';
 
 function LandingPage(props) {
   return (
-    <div className="flex flex-grow-1 items-center bg-black pb5">
+    <div className="flex flex-grow-1 items-center bg-black pv5 pv4-m pv3-l">
       <div className="relative w-100 mw9 center ph2">
         <div className="w-90 o-40 center pv2">
           <LettersHeroBg />
