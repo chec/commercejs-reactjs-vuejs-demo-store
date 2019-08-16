@@ -75,7 +75,7 @@ class ProductDetail extends Component {
                 add to cart
               </button>
             </div>
-            <div className="fl w-90 w-50-l self-start-l relative">
+            <div className="fl w-90 w-50-l self-start-l relative pb5 pa0-l">
               <img src={product.media.source} width="100%" height="auto" />
               <div className="absolute absolute--fill flex justify-end items-end ml4">
                 <div className="rotate-lift pr2">
