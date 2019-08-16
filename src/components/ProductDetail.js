@@ -75,7 +75,7 @@ class ProductDetail extends Component {
                 add to cart
               </button>
             </div>
-            <div className="fl w-80 w-50-l self-start-l relative">
+            <div className="fl w-90 w-50-l self-start-l relative">
               <img src={product.media.source} width="100%" height="auto" />
               <div className="absolute absolute--fill flex justify-end items-end ml4">
                 <div className="rotate-lift pr2">
@@ -90,7 +90,7 @@ class ProductDetail extends Component {
             </div>
           </div>
         </div>
-        <div className="productDetail__info-container mw8 justify-start flex flex-row flex-grow-1 flex-wrap pb4 mt4">
+        <div className="productDetail__info-container center mw8 justify-start flex flex-row flex-grow-1 flex-wrap pb4 mt4">
           <Label
             labelTitle='price'
             body='$100.00 USD'

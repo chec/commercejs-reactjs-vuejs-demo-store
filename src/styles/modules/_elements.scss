@@ -38,6 +38,7 @@
 
 .checkoutFormInput {
   @extend .w-100 !optional;
+  @extend .br3 !optional;
   @extend.bg-dark-gray !optional;
   @extend .pa3 !optional;
   @extend .outline-0 !optional;

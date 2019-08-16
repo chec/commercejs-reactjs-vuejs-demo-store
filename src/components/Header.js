@@ -9,9 +9,9 @@ function Header(props) {
   const currentFillColor = isThankYouPathname ? 'fill-cherry' : 'fill-near-white';
   const currentColor = isThankYouPathname ? 'cherry' : 'white';
   return (
-    <header className="absolute w-100 ph2 ph5-l pv3 pv5-l flex flex-row justify-between items-center mt3 z-1">
+    <header className="absolute w-100 ph2 ph5-l pv3 pv5-ns flex flex-row justify-between items-center items-start-ns mt3 z-1">
       <Link to="/">
-        <div className={`logoContainer dim pointer ${currentFillColor}`}>
+        <div className={`logoContainer dim pointer w-70 center w-85-l ${currentFillColor}`}>
           <Logo />
         </div>
       </Link>
