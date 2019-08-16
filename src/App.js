@@ -109,19 +109,23 @@ class App extends Component {
   }
 
   captureOrder(checkoutId, order) {
-    // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
-    this.props.commerce.Checkout
-      .capture(checkoutId, order, (resp) => {
-        this.refreshCart()
-        this.setState({
-          checkout: null,
-          order: resp
+    return new Promise((resolve, reject) => {
+      // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
+      this.props.commerce.Checkout
+        .capture(checkoutId, order, (resp) => {
+          this.refreshCart()
+          this.setState({
+            checkout: null,
+            order: resp
+          })
+          this.props.history.replace("/thank-you")
+          return resolve(resp);
+        }, (error) => {
+          alert(`${(error.error.message && error.error.message[0].error ) || 'There seems to be an error. Please try again.'}`)
+          console.log(error)
+          return reject(error)
         })
-        this.props.history.replace("/thank-you")
-      }, (error) => {
-        alert(`${(error.error.message && error.error.message[0].error ) || 'There seems to be an error. Please try again.'}`)
-        console.log(error)
-      })
+    })
   }
 
   render() {
