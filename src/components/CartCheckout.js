@@ -254,7 +254,7 @@ class CartCheckout extends Component {
           </p>
         </div>
         <div className="cf mw9 center w-100 ph3 mt5">
-            <div className="fl w-100 w-40-l ph3 mb4">
+            <div className="fl w-100 w-40-l ph2 ph4-l mb4">
                 <div className="relative z-1 h5 br3 bg-dark-gray w-100 shadow-3 pt2 overflow-scroll">
                   {allLineItems}
                 </div>
@@ -269,7 +269,7 @@ class CartCheckout extends Component {
                   </div>
                 </div>
             </div>
-            <div className="fl w-100 w-60-l ph4">
+            <div className="fl w-100 w-60-l ph2 ph4-l">
               <form onChange={this.handleFormChanges} className="font-roboto mb4 ttu f6 tracked-mega light-gray">
                   <div className="flex justify-between">
                     <div className="w-50 pr2 flex flex-column">
