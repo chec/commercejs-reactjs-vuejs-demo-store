@@ -31,14 +31,15 @@ class CartCheckout extends Component {
       "fulfillment[shipping_method]": '',
       shippingOptions: [],
       shippingOptionsById: {},
-      cardNumber: '4242 4242 4242 4242',
+      cardNumber: '',
       expMonth: '01',
       expYear: '2021',
       cvc: '123',
       billingPostalZipcode: '94103',
 
       errors: {
-        "fulfillment[shipping_method]": null
+        "fulfillment[shipping_method]": null,
+        gateway_error: null,
       }
     }
   }
@@ -186,6 +187,14 @@ class CartCheckout extends Component {
               }
             })
             console.log(`error number ${i}`, {param, error});
+          })
+        }
+        if (error.type === 'gateway_error') {
+          this.setState({
+            errors: {
+              ...this.state.errors,
+              [error.type]: error.message
+            }
           })
         }
       })
@@ -446,7 +455,7 @@ class CartCheckout extends Component {
                               `${
                                 this.state.shippingOptionsById[this.state["fulfillment[shipping_method]"]].description}
                                 - $${this.state.shippingOptionsById[this.state["fulfillment[shipping_method]"]].price.formatted_with_code
-                                }` :
+                              }` :
                               'Select a delivery method'}
                           </p>
                           <select
@@ -468,7 +477,7 @@ class CartCheckout extends Component {
                           </p>
                         </label>
                         <input
-                          className="checkoutFormInput"
+                          className={`checkoutFormInput ${this.state.errors.gateway_error && 'input-error'}`}
                           type="number"
                           name="cardNumber"
                           value={this.state.cardNumber}
