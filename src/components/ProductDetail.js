@@ -94,7 +94,7 @@ class ProductDetail extends Component {
           <Label
             labelTitle='price'
             body='$100.00 USD'
-            classes='mr5-l mb4'
+            classes='mr5-ns mb4'
           />
           <div className="relative">
             <Label
