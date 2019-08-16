@@ -1,5 +1,5 @@
 .button {
-  @extend .medium-text, .pointer;
+  @extend .medium-text, .pointer !optional;
   &__add-to-cart {
     padding: 1rem 5rem;
     font-size: 0.70rem;
@@ -35,13 +35,30 @@
   height: 1.8rem;
 }
 
+
 .checkoutFormInput {
-  @extend .w-100, .br2, .bg-dark-gray, .pa3, .outline-0, .bn, .mb4, .light-gray, .medium-text, .tracked-mega-1;
+  @extend .w-100 !optional;
+  @extend.bg-dark-gray !optional;
+  @extend .pa3 !optional;
+  @extend .outline-0 !optional;
+  @extend .bn !optional;
+  @extend .mb4 !optional;
+  @extend .light-gray !optional;
+  @extend .medium-text !optional;
+  @extend .tracked-mega-1 !optional;
   &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    @extend .light-gray, .ttu;
+    @extend .light-gray !optional;
+    @extend .ttu !optional;
   }
 }
 
 .checkoutFormInputLabel {
-  @extend .medium-text, .dark-gray, .f7, .tracked-mega-1, .ttu, .pb2, .nowrap, .overflow-scroll;
+  @extend .medium-text !optional;
+  @extend .dark-gray !optional;
+  @extend .f7 !optional;
+  @extend .tracked-mega-1 !optional;
+  @extend .ttu !optional;
+  @extend .pb2 !optional;
+  @extend .nowrap !optional;
+  @extend .overflow-scroll !optional;
 }

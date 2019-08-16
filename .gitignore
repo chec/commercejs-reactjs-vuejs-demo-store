@@ -8,11 +8,14 @@
 # testing
 /coverage
 
-#src/styles/tachyons
+src/styles/tachyons/css
+
+src/styles/tachyons/node_modules
 
 
 # production
 /build
+bundle.js
 
 env
 .env

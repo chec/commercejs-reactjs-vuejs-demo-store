@@ -11,5 +11,17 @@
 }
 
 .fill-near-white {
-  fill: var(--near-white);
+  fill: $near-white;
+}
+
+.cherry {
+  color: $color-cherry;
+}
+
+.bg-cherry {
+  background-color: $color-cherry;
+}
+
+@media (--breakpoint-medium) {
+
 }
