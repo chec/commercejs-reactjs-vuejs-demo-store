@@ -59,8 +59,8 @@ class ProductDetail extends Component {
     return (
       <div className="productDetail w-100 pb5 ph4">
         <div className="mw8 center ph2">
-          <div className="cf flex flex-row items-center">
-            <div className="fl flex flex-column flex-grow-1 items-center justify-center mw6 mt6">
+          <div className="cf flex flex-column flex-row-m items-center">
+            <div className="fl flex flex-column flex-grow-1 items-center justify-center mw6 mt6-m order-0 order-1">
               <p className="large-title-text dark-gray w-100 ttl tc">
                 {product.name}
               </p>
@@ -75,7 +75,7 @@ class ProductDetail extends Component {
                 add to cart
               </button>
             </div>
-            <div className="fl w-50 self-start relative">
+            <div className="fl w-100 w-50-m self-start relative">
               <img src={product.media.source} width="100%" height="auto" />
               <div className="absolute absolute--fill flex justify-end items-end ml4">
                 <div className="rotate-lift pr2">
