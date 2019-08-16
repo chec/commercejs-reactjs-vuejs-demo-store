@@ -35,9 +35,9 @@ class ThankYou extends Component {
       )
     })
     return (
-      <div className="flex flex-grow-1 bg-tan-white w-100 pt6 mt3">
-        <div className="cf mw9 center w-100 ph3 mt5">
-          <div className="fl w-40 ph3">
+      <div className="flex flex-grow-1 bg-tan-white w-100 pt6 pb5 mt5 mt3-l">
+        <div className="cf flex flex-column flex-row-l mw9 center w-100 ph3 mt5">
+          <div className="fl w-100 w-40-l ph3">
               <div className="relative z-1 h5 br3 bg-dark-gray w-100 shadow-3 pt2 overflow-scroll">
                 {allLineItems}
               </div>
@@ -52,16 +52,16 @@ class ThankYou extends Component {
                 </div>
               </div>
           </div>
-          <div className="fl w-60 ph3">
+          <div className="fl w-100 w-60-l ph3 mt4 mt0-l">
             <div className="flex flex-column items-center justify-center">
               <p className="large-title-text dark-gray tc tracked">
                 Thank you for your order!
               </p>
               <div className="w-100 flex items-center mt4">
-                <p className="medium-text f6 cherry ttu tracked tl br b--moon-gray pr3 pv4">
+                <p className="flex-grow-1 medium-text f6 cherry ttu tracked tl br b--moon-gray pr3 pv4 lh-title">
                   a full receipt will be emailed to {this.props.order.customer.email}.
                 </p>
-                <div className="flex flex-grow-1 flex-column">
+                <div className="flex flex-column pl5">
                   <p className="medium-text f6 black ttu tracked tr mb3">
                     your details
                     <span className="db pt1 f7 mid-gray">{this.props.order.customer.email}</span>
