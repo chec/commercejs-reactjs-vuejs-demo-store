@@ -28,7 +28,7 @@ class CartCheckout extends Component {
       subdivisions: {},
       checkout: null,
       // state below is set after checkout token is generated
-      shippingOption: '',
+      "fulfillment[shipping_method]": '',
       shippingOptions: [],
       shippingOptionsById: {},
       cardNumber: '4242 4242 4242 4242',
@@ -36,6 +36,10 @@ class CartCheckout extends Component {
       expYear: '2021',
       cvc: '123',
       billingPostalZipcode: '94103',
+
+      errors: {
+        "fulfillment[shipping_method]": null
+      }
     }
   }
 
@@ -121,6 +125,11 @@ class CartCheckout extends Component {
   }
 
   captureOrder(e) {
+    this.setState({
+      errors: {
+        "fulfillment[shipping_method]": null
+      }
+    })
     if (e) {
       e.preventDefault()
     }
@@ -149,7 +158,7 @@ class CartCheckout extends Component {
         postal_zip_code: this.state.deliveryZip
       },
       fulfillment: {
-        shipping_method: this.state.shippingOption
+        shipping_method: this.state["fulfillment[shipping_method]"]
       },
       payment: {
         gateway: "test_gateway",
@@ -162,8 +171,24 @@ class CartCheckout extends Component {
         }
       }
     }
-    console.log('The order constructed', newOrder)
+    console.log('The order constructed:', newOrder)
     this.props.captureOrder(this.state.checkout.id, newOrder)
+      .then((resp) => {
+        console.log('testing')
+      }).catch(({error}) => {
+        if (error.type === 'validation') {
+          console.log('the error messages:', error.message)
+          error.message.map(({param, error}, i) => {
+            this.setState({
+              errors: {
+                ...this.state.errors,
+                [param]: error
+              }
+            })
+            console.log(`error number ${i}`, {param, error});
+          })
+        }
+      })
   }
 
   removeProductFromCart(itemId) {
@@ -414,21 +439,21 @@ class CartCheckout extends Component {
                             delivery method
                           </p>
                         </label>
-                        <div className="checkoutFormInput flex-grow-1 relative">
+                        <div className={`checkoutFormInput flex-grow-1 relative ${this.state.errors["fulfillment[shipping_method]"] && 'input-error'}`}>
                           <p>
                             {
-                              this.state.shippingOption ?
+                              this.state["fulfillment[shipping_method]"] ?
                               `${
-                                this.state.shippingOptionsById[this.state.shippingOption].description}
-                                - $${this.state.shippingOptionsById[this.state.shippingOption].price.formatted_with_code
+                                this.state.shippingOptionsById[this.state["fulfillment[shipping_method]"]].description}
+                                - $${this.state.shippingOptionsById[this.state["fulfillment[shipping_method]"]].price.formatted_with_code
                                 }` :
                               'Select a delivery method'}
                           </p>
                           <select
-                            name="shippingOption"
+                            name="fulfillment[shipping_method]"
                             onChange={this.handleFormChanges}
-                            value={this.state.shippingOption}
-                            placeholder="shippingOption"
+                            value={this.state["fulfillment[shipping_method]"]}
+                            placeholder="Shipping Option"
                             className="absolute absolute--fill left-0 o-0 pointer w-100">
                             <option value="" disabled>Select a delivery method</option>
                             {allShippingOptions}
