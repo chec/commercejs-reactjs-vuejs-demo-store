@@ -18,11 +18,12 @@ class CartCheckout extends Component {
     this.state = {
       firstName: 'John',
       lastName: 'Doe',
-      email: 'john@doe.com',
-      deliveryStreetAddress: '1161 Mission St',
-      deliveryCity: 'San Francisco',
+      "customer[email]": 'john@doe.com',
+      "shipping[name]": 'John Doe',
+      "shipping[street]": '1161 Mission St',
+      "shipping[town_city]": 'San Francisco',
       deliveryState: 'CA',
-      deliveryZip: "94103",
+      "shipping[postal_zip_code]": "94103",
       deliveryCountry: 'US',
       countries: {},
       subdivisions: {},
@@ -40,6 +41,11 @@ class CartCheckout extends Component {
       errors: {
         "fulfillment[shipping_method]": null,
         gateway_error: null,
+        "customer[email]": null,
+        "shipping[name]": null,
+        "shipping[street]": null,
+        "shipping[town_city]": null,
+        "shipping[postal_zip_code]": null
       }
     }
   }
@@ -128,7 +134,10 @@ class CartCheckout extends Component {
   captureOrder(e) {
     this.setState({
       errors: {
-        "fulfillment[shipping_method]": null
+        "fulfillment[shipping_method]": null,
+        gateway_error: null,
+        "shipping[name]": null,
+        "shipping[street]": null,
       }
     })
     if (e) {
@@ -148,15 +157,15 @@ class CartCheckout extends Component {
       customer: {
         firstname: this.state.firstName,
         lastname: this.state.lastName,
-        email: this.state.email
+        email: this.state["customer[email]"]
       },
       shipping: {
-        name: `${this.state.firstName} ${this.state.lastName}`,
+        name: this.state["shipping[name]"],
         country: this.state.deliveryCountry,
-        street: this.state.deliveryStreetAddress,
-        town_city: this.state.deliveryCity,
+        street: this.state["shipping[street]"],
+        town_city: this.state["shipping[town_city]"],
         county_state: this.state.deliveryState,
-        postal_zip_code: this.state.deliveryZip
+        postal_zip_code: this.state["shipping[postal_zip_code]"]
       },
       fulfillment: {
         shipping_method: this.state["fulfillment[shipping_method]"]
@@ -343,11 +352,25 @@ class CartCheckout extends Component {
                       </p>
                     </label>
                     <input
-                      className="checkoutFormInput"
+                      className={`checkoutFormInput ${this.state.errors["customer[email]"] && 'input-error'}`}
                       type="email"
-                      name="email"
-                      value={this.state.email}
+                      name="customer[email]"
+                      value={this.state["customer[email]"]}
                       placeholder="Email Address"
+                    />
+                  </div>
+                  <div>
+                    <label>
+                      <p className="checkoutFormInputLabel">
+                        Delivery Name
+                      </p>
+                    </label>
+                    <input
+                      className={`checkoutFormInput ${this.state.errors["shipping[name]"] && 'input-error'}`}
+                      type="text"
+                      name="shipping[name]"
+                      value={this.state["shipping[name]"]}
+                      placeholder="Delivery Name"
                     />
                   </div>
                   <div>
@@ -357,10 +380,10 @@ class CartCheckout extends Component {
                       </p>
                     </label>
                     <input
-                      className="checkoutFormInput"
+                      className={`checkoutFormInput ${this.state.errors["shipping[street]"] && 'input-error'}`}
                       type="text"
-                      name="deliveryStreetAddress"
-                      value={this.state.deliveryStreetAddress}
+                      name="shipping[street]"
+                      value={this.state["shipping[street]"]}
                       placeholder="Delivery Street Address"
                     />
                   </div>
@@ -372,10 +395,10 @@ class CartCheckout extends Component {
                         </p>
                       </label>
                       <input
-                        className="checkoutFormInput"
+                        className={`checkoutFormInput ${this.state.errors["shipping[town_city]"] && 'input-error'}`}
                         type="text"
-                        name="deliveryCity"
-                        value={this.state.deliveryCity}
+                        name="shipping[town_city]"
+                        value={this.state["shipping[town_city]"]}
                         placeholder="City"
                       />
                     </div>
@@ -386,10 +409,10 @@ class CartCheckout extends Component {
                         </p>
                       </label>
                       <input
-                        className="checkoutFormInput"
+                        className={`checkoutFormInput ${this.state.errors["shipping[postal_zip_code]"] && 'input-error'}`}
                         type="number"
-                        name="deliveryZip"
-                        value={this.state.deliveryZip}
+                        name="shipping[postal_zip_code]"
+                        value={this.state["shipping[postal_zip_code]"]}
                         placeholder="post/zip code"
                       />
                     </div>
