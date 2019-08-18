@@ -32,6 +32,13 @@ function CartLineItem(props) {
           <span className="db f7">
             <span className="ttl">x</span>{props.item.quantity} - ${props.item.line_total.formatted_with_code}
           </span>
+          <span className="db">
+            <div className="flex flex-row items-center justify-end">
+              <button className="bg-none white f4 pointer grow dim ph2" onClick={() => props.updateQuantity(props.item.id, props.item.quantity - 1)}>-</button>
+              <span className="ttl">x</span>{props.item.quantity}
+              <button className="bg-none white f5 pointer grow dim ph2" onClick={() => props.updateQuantity(props.item.id, props.item.quantity + 1)}>+</button>
+            </div>
+          </span>
         </p>
       </div>
     </div>
@@ -50,6 +57,7 @@ class CartCheckout extends Component {
     this.getShippingOptions = this.getShippingOptions.bind(this);
     this.captureOrder = this.captureOrder.bind(this);
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
     this.state = {
       firstName: 'John',
       lastName: 'Doe',
@@ -277,6 +285,12 @@ class CartCheckout extends Component {
     })
   }
 
+  updateQuantity(lineItemId, quantity) {
+    this.props.updateQuantity(lineItemId, quantity).then(() => {
+      return this.createCheckout()
+    })
+  }
+
 
   render() {
     const {
@@ -289,7 +303,8 @@ class CartCheckout extends Component {
           removeProductFromCart={this.removeProductFromCart}
           item={item}
           key={key}
-          />
+          updateQuantity={this.updateQuantity}
+        />
       )
     })
 

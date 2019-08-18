@@ -13,6 +13,7 @@ class App extends Component {
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.captureOrder = this.captureOrder.bind(this);
     this.refreshCart = this.refreshCart.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
     this.state = {
       products: [],
       cart: null,
@@ -127,6 +128,23 @@ class App extends Component {
     })
   }
 
+  updateQuantity(lineItemId, quantity) {
+    return new Promise((resolve, reject) => {
+      this.props.commerce.Cart.update(lineItemId, { quantity },
+        function(resp){
+          // if (resp.cart.total_items === 0) {
+          //   this.setState({
+          //     checkout: null
+          //   }, () => alert("Add items to your cart before to continue checkout."))
+          // } we won't need something like this, since when given quantity 0, Commercejs does
+          // not make line-item 0 but rather leaves it at 1
+          return this.setState({
+            cart: resp.cart
+          })
+        }.bind(this));
+    })
+  }
+
   render() {
     const {
       cart,
@@ -161,7 +179,8 @@ class App extends Component {
                         commerce={this.props.commerce}
                         removeProductFromCart={this.removeProductFromCart}
                         captureOrder={this.captureOrder}
-                        />
+                        updateQuantity={this.updateQuantity}
+                      />
                     )
                   }} />
                 <Route path="/thank-you" render={(props) => {
