@@ -63,6 +63,9 @@
   .f6-ns { font-size: .875rem; }
   .f7-ns { font-size: .75rem; }
   .f8-ns { font-size: .65rem; }
+  .font-3-rem-ns {
+    font-size: 3rem;
+  }
 }
 
 @media (--breakpoint-medium) {
@@ -77,6 +80,9 @@
   .f5-m { font-size: 1rem; }
   .f6-m { font-size: .875rem; }
   .f8-m { font-size: .65rem; }
+  .font-3-rem-m {
+    font-size: 3rem;
+  }
 }
 
 @media (--breakpoint-large) {
@@ -96,4 +102,7 @@
   .f6-l { font-size: .875rem; }
   .f7-l { font-size: .75rem; }
   .f8-l { font-size: .65rem; }
+  .font-3-rem-l {
+    font-size: 3rem;
+  }
 }

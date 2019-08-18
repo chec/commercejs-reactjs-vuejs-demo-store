@@ -94,8 +94,10 @@ class CartCheckout extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+
     if (e.target.name === "deliveryCountry") {
       this.getRegions(e.target.value)
+
       if (this.state.checkout) {
         this.getShippingOptions(this.state.checkout.id, e.target.value)
       }
@@ -103,6 +105,7 @@ class CartCheckout extends Component {
   }
 
   getAllCountries() {
+
     this.props.commerce.Services.localeListCountries((resp) => {
       this.setState({
         countries: resp.countries
@@ -113,6 +116,7 @@ class CartCheckout extends Component {
   }
 
   getRegions(countryCode) {
+
     this.props.commerce.Services.localeListSubdivisions(countryCode, (resp) => {
       this.setState({
         subdivisions: resp.subdivisions
@@ -124,31 +128,39 @@ class CartCheckout extends Component {
 
   // checkout methods
   createCheckout(e) {
+
     if (e) {
       e.preventDefault()
     }
+
     if (!this.props.cart) {
       return;
     }
+
     if (this.props.cart.total_items > 0) {
       this.props.commerce.Checkout
         .generateToken(this.props.cart.id, { type: 'cart' },
+
           (checkout) => {
             this.getShippingOptions(checkout.id, (this.state.deliveryCountry || 'US'))
             this.setState({
               checkout: checkout
             })
           },
+
           function(error) {
             console.log('Error:', error)
           })
+
     } else {
       alert("Your cart is empty")
     }
   }
 
   getShippingOptions(checkoutId, country) {
+
     this.props.commerce.Checkout.getShippingOptions(checkoutId, { country }, (resp) => {
+
       if (!resp.error) {
         this.setState({
           shippingOptions: resp,
@@ -158,6 +170,7 @@ class CartCheckout extends Component {
           }, {})
         })
       } else {
+
         this.setState({
           shippingOptions: [],
           shippingOptionsById: {}
@@ -175,8 +188,10 @@ class CartCheckout extends Component {
         "shipping[street]": null,
       }
     })
+
     if (e) {
       e.preventDefault()
+
     }
     const lineItems = this.state.checkout.live.line_items.reduce((obj, lineItem) => {
       obj[lineItem.id] = {
@@ -219,8 +234,10 @@ class CartCheckout extends Component {
     console.log('The order constructed:', newOrder)
     this.props.captureOrder(this.state.checkout.id, newOrder)
       .catch(({error}) => {
+
         if (error.type === 'validation') {
           console.log('the error messages:', error.message)
+
           error.message.forEach(({param, error}, i) => {
             this.setState({
               errors: {
@@ -229,7 +246,13 @@ class CartCheckout extends Component {
               }
             })
           })
+
+          const allErrors = error.message.reduce((string, error) => {
+            return `${string} ${error.error}`
+          }, '')
+          alert(allErrors)
         }
+
         if (error.type === 'gateway_error') {
           this.setState({
             errors: {
@@ -237,7 +260,9 @@ class CartCheckout extends Component {
               [error.type]: error.message
             }
           })
+          alert(error.message)
         }
+
       })
   }
 

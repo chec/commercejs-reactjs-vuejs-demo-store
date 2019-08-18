@@ -121,7 +121,6 @@ class App extends Component {
           this.props.history.replace("/thank-you")
           return resolve(resp);
         }, (error) => {
-          alert(`${(error.error.message && error.error.message[0].error ) || 'There seems to be an error. Please try again.'}`)
           console.log(error)
           return reject(error)
         })

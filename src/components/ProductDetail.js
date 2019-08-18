@@ -7,7 +7,7 @@ function Label(props) {
       <p className="medium-text ttu gray f6 tracked-mega-1 pb2">
         {props.labelTitle || '----'}
       </p>
-      <p className="large-title-text f2 f1-m fw9 ttu pl3">
+      <p className="large-title-text f2 font-3-rem-ns fw9 ttu pl3">
         {props.body || (props.placeholder || '----')}
       </p>
     </div>
