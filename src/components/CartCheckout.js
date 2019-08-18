@@ -559,7 +559,7 @@ class CartCheckout extends Component {
                       onClick={this.state.checkout ? this.captureOrder : this.createCheckout}
                       className="button__checkout bg-dark-gray white ttu b self-end pointer dim shadow-5 tracked-mega-1"
                     >
-                      checkout
+                      {`${this.state.checkout ? 'complete checkout' : 'checkout'}`}
                     </button>
                   </div>
 
