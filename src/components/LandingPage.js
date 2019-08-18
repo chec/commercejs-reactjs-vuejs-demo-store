@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import {ReactComponent as LettersHeroBg } from '../assets/letters-hero-big.svg'
 import shoesHero from '../assets/shoes-hero.png';
@@ -11,7 +11,7 @@ function LandingPage(props) {
           <LettersHeroBg />
         </div>
         <div className="absolute absolute--fill flex flex-column items-center w-90 center mt5">
-          <img src={shoesHero} width="100%" height="auto" />
+          <img src={shoesHero} alt="Pair of Shoes" width="100%" height="auto" />
         </div>
         <div className="absolute absolute--fill flex flex-column justify-center items-center nb7 ph3">
           <p className="flex flex-shrink-1 flex-column hero-text f3 f2-m f1-l white tr">

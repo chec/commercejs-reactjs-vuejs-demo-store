@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import pairShoes from '../assets/pair-shoes-small.png'
 
 class ThankYou extends Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const allLineItems = this.props.order.order.line_items.map((item, key) => {
       return (

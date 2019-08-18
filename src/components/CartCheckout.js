@@ -4,6 +4,41 @@ import { ReactComponent as RemoveIcon } from '../assets/remove-icon.svg';
 import { ReactComponent as ArrowIcon } from '../assets/arrow-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
 
+function CartLineItem(props) {
+  return (
+    <div className="">
+      <div className="flex flex-row justify-between items-center ph4 pv2">
+        <button
+          onClick={() => props.removeProductFromCart(props.item.id)}
+          className="cartIconContainer dim pointer pa0 bg-none">
+          <RemoveIcon />
+        </button>
+        <div className="w-25">
+          <div
+             className="aspect-ratio aspect-ratio--1x1"
+             style={{
+               backgroundRepeat: "no-repeat",
+               backgroundPosition: "center",
+               backgroundSize: "contain",
+               backgroundImage: `url(${pairShoes})`
+             }}
+           />
+        </div>
+        <p className="medium-text f6 white tr ttu mw4">
+          {props.item.name}
+          <span className="db f7 pv1">
+            {props.item.variants[0].option_name}
+          </span>
+          <span className="db f7">
+            <span className="ttl">x</span>{props.item.quantity} - ${props.item.line_total.formatted_with_code}
+          </span>
+        </p>
+      </div>
+    </div>
+  )
+}
+
+
 class CartCheckout extends Component {
 
   constructor(props) {
@@ -183,19 +218,16 @@ class CartCheckout extends Component {
     }
     console.log('The order constructed:', newOrder)
     this.props.captureOrder(this.state.checkout.id, newOrder)
-      .then((resp) => {
-        console.log('testing')
-      }).catch(({error}) => {
+      .catch(({error}) => {
         if (error.type === 'validation') {
           console.log('the error messages:', error.message)
-          error.message.map(({param, error}, i) => {
+          error.message.forEach(({param, error}, i) => {
             this.setState({
               errors: {
                 ...this.state.errors,
                 [param]: error
               }
             })
-            console.log(`error number ${i}`, {param, error});
           })
         }
         if (error.type === 'gateway_error') {
@@ -220,6 +252,7 @@ class CartCheckout extends Component {
     })
   }
 
+
   render() {
     const {
       line_items: lineItems = []
@@ -227,33 +260,11 @@ class CartCheckout extends Component {
 
     const allLineItems = lineItems.map((item, key) => {
       return (
-        <div className="flex flex-row justify-between items-center ph4 pv2" key={key}>
-          <button
-            onClick={() => this.removeProductFromCart(item.id)}
-            className="cartIconContainer dim pointer pa0 bg-none">
-            <RemoveIcon />
-          </button>
-          <div className="w-25">
-            <div
-               className="aspect-ratio aspect-ratio--1x1"
-               style={{
-                 backgroundRepeat: "no-repeat",
-                 backgroundPosition: "center",
-                 backgroundSize: "contain",
-                 backgroundImage: `url(${pairShoes})`
-               }}
-             />
-          </div>
-          <p className="medium-text f6 white tr ttu mw4">
-            {item.name}
-            <span className="db f7 pv1">
-              {item.variants[0].option_name}
-            </span>
-            <span className="db f7">
-              <span className="ttl">x</span>{item.quantity} - ${item.line_total.formatted_with_code}
-            </span>
-          </p>
-        </div>
+        <CartLineItem
+          removeProductFromCart={this.removeProductFromCart}
+          item={item}
+          key={key}
+          />
       )
     })
 
@@ -291,7 +302,7 @@ class CartCheckout extends Component {
             continue shopping
           </Link>
 
-          <p class="medium-text f6 tracked-mega ttu dark-gray tracked-mega">
+          <p className="medium-text f6 tracked-mega ttu dark-gray tracked-mega">
             {this.props.cart ? this.props.cart.total_items : '0'}
             <span className="f7">{this.props.cart ? (this.props.cart.total_items === 1 ? 'item' : 'items') : 'items'}</span>
           </p>

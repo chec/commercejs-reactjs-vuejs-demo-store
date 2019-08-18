@@ -23,7 +23,7 @@ function Header(props) {
             pre-order now
           </button>
           <div className="w-100">
-            <img src={pairShoes} width="100%" height="auto" />
+            <img src={pairShoes} alt="Pair of Shoes" width="100%" height="auto" />
           </div>
         </div>
         <Link to="cart-checkout" className="flex flex-row items-center no-underline dim">
