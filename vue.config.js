@@ -1,5 +1,4 @@
 module.exports = {
-  runtimeCompiler: true,
   chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');
 
