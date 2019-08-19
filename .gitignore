@@ -1,21 +1,13 @@
-.DS_Store
+#.gitignore
+
+.sass-cache/
+*.css.map
+
+src/styles/tachyons
+
 node_modules
-/dist
+npm-debug.log
 
-# local env files
-.env.local
-.env.*.local
+bundle.js
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+.env
