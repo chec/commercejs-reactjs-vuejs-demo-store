@@ -3,9 +3,9 @@
     <router-link to="/">
       <div
         class="logoContainer dim pointer w-70 w-85-l"
-        :class="[isThankYouPathname() ? 'fill-cherry' : 'fill-near-white']"
+        :class="[isThankYouPathname ? 'fill-cherry' : 'fill-near-white']"
       >
-        <Logo />
+        <LogoSvg width="100%" height="auto"/>
       </div>
     </router-link>
     <div class="flex">
@@ -16,18 +16,18 @@
           pre-order now
         </button>
         <div class="w-100">
-          <img src={pairShoes} alt="Pair of Shoes" width="100%" height="auto" />
+          <img src="../assets/pair-shoes-small.png" alt="Pair of Shoes" width="100%" height="auto" />
         </div>
       </div>
       <router-link to="cart-checkout" class="flex flex-row items-center no-underline dim">
         <div
           class="cartIconContainer pointer"
-          :class="[isThankYouPathname() ? 'fill-cherry' : 'fill-near-white']"
+          :class="[isThankYouPathname ? 'fill-cherry' : 'fill-near-white']"
         >
-          <CartIcon />
+          <CartIconSvg  width="100%" height="auto"/>
         </div>
         <p class="medium-text f7"
-          :class="[isThankYouPathname() ? 'cherry' : 'white']"
+          :class="[isThankYouPathname ? 'cherry' : 'white']"
         >
           {{ cart ? cart.total_items : '0'}}
         </p>
@@ -37,6 +37,9 @@
 </template>
 
 <script>
+import LogoSvg from '../assets/logo.svg'
+import CartIconSvg from '../assets/cart-icon.svg'
+
 export default {
   name: 'Header',
   props: {
@@ -44,6 +47,10 @@ export default {
       required: true,
       type: Object
     }
+  },
+  components: {
+    LogoSvg,
+    CartIconSvg
   },
   computed: {
     isThankYouPathname() {
