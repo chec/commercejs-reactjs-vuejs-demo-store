@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<div>
+    <Header :cart={cart} location={this.props.location} />
+    <main id="main" class="flex">
+      <router-view />
+    </main>
+    <footer class="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
+        <div class="self-end w-100">
+          <p class="medium-text tc cherry">
+            © 2019 CHEC PLATFORM/COMMERCEJS
+          </p>
+        </div>
+    </footer>
+</div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header'
+import './styles/application.scss'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Header
+  },
+  props: {
+    commerce: {
+      required: true,
+      type: Object
+    }
+  },
+  data: function() {
+    return {
+      products: [],
+      cart: null,
+      checkout: null,
+      order: null
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

@@ -1,3 +1,62 @@
 .rotate-lift {
   transform: translate(2rem, -5rem) rotate(-90deg);
 }
+
+.bg-none {
+  background: none;
+}
+
+.fill-cherry {
+  fill: $color-cherry;
+}
+
+.fill-near-white {
+  fill: $near-white;
+}
+
+.cherry {
+  color: $color-cherry;
+}
+
+.bg-cherry {
+  background-color: $color-cherry;
+}
+
+.bg-tan-white {
+  background-color: $color-tan-white;
+}
+
+.input-error {
+  outline: $color-cherry auto 0.3rem;
+  box-shadow: 0 0 0.5rem $color-cherry;
+}
+
+@media (--breakpoint-medium) {
+  .rotate-lift-m {
+    transform: translate(2rem, -5rem) rotate(-90deg);
+  }
+
+  .bg-none-m {
+    background: none;
+  }
+
+  .fill-cherry-m {
+    fill: $color-cherry;
+  }
+
+  .fill-near-white-m {
+    fill: $near-white;
+  }
+
+  .cherry-m {
+    color: $color-cherry;
+  }
+
+  .bg-cherry-m {
+    background-color: $color-cherry;
+  }
+
+  .bg-tan-white-m {
+    background-color: $color-tan-white;
+  }
+}
