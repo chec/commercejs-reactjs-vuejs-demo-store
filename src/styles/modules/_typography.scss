@@ -5,7 +5,7 @@ $font-roboto: 'Roboto', 'Indie Flower', sans-serif;
 }
 
 .medium-text {
-  @extend .font-roboto !optional;
+  @extend .font-roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 0.70rem;
@@ -14,7 +14,7 @@ $font-roboto: 'Roboto', 'Indie Flower', sans-serif;
 }
 
 .hero-text {
-  @extend .font-roboto !optional;
+  @extend .font-roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 3rem;
@@ -23,7 +23,7 @@ $font-roboto: 'Roboto', 'Indie Flower', sans-serif;
 }
 
 .large-title-text {
-  @extend .font-roboto, .tracked-tight !optional;
+  @extend .font-roboto, .tracked-tight;
   font-style: normal;
   font-weight: 900;
   font-size: 5.5rem;
@@ -31,7 +31,7 @@ $font-roboto: 'Roboto', 'Indie Flower', sans-serif;
 }
 
 .medium-body-text {
-  @extend .font-roboto, .tracked-tight !optional;
+  @extend .font-roboto, .tracked-tight;
   font-style: normal;
   font-weight: bold;
   font-size: 1.5rem;

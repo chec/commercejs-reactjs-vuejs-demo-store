@@ -1,10 +1,29 @@
-# Example Checkout Showcasing Real-World Implementation of Commerce.js
+# example_checkout.v2
 
-## Branches
-  - `Master`
-    - Contains a plain HTML/CSS/SASS/Vanilla JS implemenation.
-  - `React.js`
-    - Contains an abstracted version of the Master branch using React.js, Redux, CSS/SASS, JSX
-  - `Vue.js`
-    - Contains an abstracted version of the Master branch using Vue.js CSS/SASS, templating syntax.
-    
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
+
+### Compiles and minifies for production
+```
+yarn run build
+```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -22,7 +22,11 @@
     }
   }
 
-
+  @media (--breakpoint-large) {
+    .large-and-larger-screen-specific-style {
+      background-color: red;
+    }
+  }
 
 */
 

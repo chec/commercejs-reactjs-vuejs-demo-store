@@ -1,64 +1,9 @@
 .button {
-  @extend .medium-text, .pointer !optional;
+  @extend .medium-text, .pointer;
   &__add-to-cart {
     padding: 1rem 5rem;
     font-size: 0.70rem;
     letter-spacing: 0.25rem;
     border-radius: 0.30rem;
   }
-
-  &__checkout {
-    padding: 1.8rem 6rem;
-    font-size: 0.70rem;
-    letter-spacing: 0.25rem;
-    border-radius: 0.30rem;
-  }
-}
-
-.logoContainer {
-  width: 13.5rem;
-  height: 2rem;
-}
-
-.cartIconContainer {
-  width: 1.5rem;;
-  height: 1.5rem;
-}
-
-.cartIconContainer {
-  width: 1.87rem;;
-  height: 1.87rem;
-}
-
-.arrowIconContainer {
-  width: 1rem;
-  height: 1.8rem;
-}
-
-
-.checkoutFormInput {
-  @extend .w-100 !optional;
-  @extend .br3 !optional;
-  @extend.bg-dark-gray !optional;
-  @extend .pa3 !optional;
-  @extend .bn !optional;
-  @extend .mb4 !optional;
-  @extend .light-gray !optional;
-  @extend .medium-text !optional;
-  @extend .tracked-mega-1 !optional;
-  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    @extend .light-gray !optional;
-    @extend .ttu !optional;
-  }
-}
-
-.checkoutFormInputLabel {
-  @extend .medium-text !optional;
-  @extend .dark-gray !optional;
-  @extend .f7 !optional;
-  @extend .tracked-mega-1 !optional;
-  @extend .ttu !optional;
-  @extend .pb2 !optional;
-  @extend .nowrap !optional;
-  @extend .overflow-scroll !optional;
 }

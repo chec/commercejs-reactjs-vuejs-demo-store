@@ -1,4 +1,4 @@
 .footer {
-  @extend .w-100 !optional;
+  @extend .w-100;
   min-height: $footer-height;
 }

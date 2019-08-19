@@ -47,8 +47,6 @@
 .f5 { font-size: 1rem; }
 .f6 { font-size: .875rem; }
 .f7 { font-size: .75rem; } /* Small and hard to read for many people so use with extreme caution */
-.f8 { font-size: .65rem; } /* Small and hard to read for many people so use with extreme caution */
-
 
 @media (--breakpoint-not-small){
   .f-6-ns,
@@ -62,10 +60,6 @@
   .f5-ns { font-size: 1rem; }
   .f6-ns { font-size: .875rem; }
   .f7-ns { font-size: .75rem; }
-  .f8-ns { font-size: .65rem; }
-  .font-3-rem-ns {
-    font-size: 3rem;
-  }
 }
 
 @media (--breakpoint-medium) {
@@ -79,10 +73,7 @@
   .f4-m { font-size: 1.25rem; }
   .f5-m { font-size: 1rem; }
   .f6-m { font-size: .875rem; }
-  .f8-m { font-size: .65rem; }
-  .font-3-rem-m {
-    font-size: 3rem;
-  }
+  .f7-m { font-size: .75rem; }
 }
 
 @media (--breakpoint-large) {
@@ -101,8 +92,4 @@
   .f5-l { font-size: 1rem; }
   .f6-l { font-size: .875rem; }
   .f7-l { font-size: .75rem; }
-  .f8-l { font-size: .65rem; }
-  .font-3-rem-l {
-    font-size: 3rem;
-  }
 }
