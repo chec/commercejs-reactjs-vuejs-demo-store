@@ -10,7 +10,7 @@ export default new Router({
     {
       path: "/",
       name: 'landing-page',
-      component: {template: '<div>landing</div>'} // () => import("@/components/LandingPage")
+      component: () => import("@/components/LandingPage")
     }
   ]
 })
