@@ -44,7 +44,7 @@
         <Label
           labelTitle='size'
           placeholder="choose a size"
-          :body="product.variants[0].optionsById[this.sizeSelect] &&  product.variants[0].optionsById[this.sizeSelect].name"
+          :body="product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name"
         />
         <select
           class="absolute absolute--fill left-0 o-0 pointer w-100"
@@ -52,7 +52,7 @@
           name='sizeSelect'
         >
           <option value="" disabled>Choose a size</option>
-          <option v-for="option in product.variants[0]" :value="option.id" :key="option.id">
+          <option v-for="option of product.variants[0].options" :value="option.id" :key="option.id">
             {{option.name}}
           </option>
         </select>
