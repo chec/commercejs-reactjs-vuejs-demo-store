@@ -8,7 +8,7 @@
         <img src="../assets/shoes-hero.png" alt="Shoes Hero" width="100%" height="auto" />
       </div>
       <div class="absolute absolute--fill flex flex-column justify-center items-center nb7 ph3">
-        <p class="flex flex-shrink-1 flex-column hero-text f3 f2-m f1-l white tr">
+        <p class="flex flex-shrink-1 flex-column hero-text f3 f2-m f1-l white tr lh-title">
           LOREM IPSUM LOREM IPSUM
           <router-link to="/white-shoe" class="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer mw4 self-end mr3 no-underline">
             shop shoe
