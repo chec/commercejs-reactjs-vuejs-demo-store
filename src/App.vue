@@ -4,6 +4,7 @@
     <main id="main" class="flex">
       <router-view
         @add-product-to-cart="addProductToCart"
+        @remove-product-from-cart="removeProductFromCart"
         :product="products.length ? products[0] : null"
         :cart="cart"
         :commerce="commerce"
@@ -80,6 +81,21 @@ export default {
           alert("Added to cart!")
         }
       });
+    },
+
+    // removes product from cart by invoking Commerce.js's Cart method 'Cart.remove'
+    // https://commercejs.com/docs/api/?javascript#remove-item-from-cart
+    removeProductFromCart(lineItemId) {
+      return new Promise((resolve, reject) => {
+        this.commerce.Cart.remove(lineItemId, (resp) => {
+          // if successful update Cart
+          if (!resp.error) {
+            this.cart = resp.cart
+            return resolve(resp)
+          }
+          reject(resp)
+        });
+      })
     }
 
   },
