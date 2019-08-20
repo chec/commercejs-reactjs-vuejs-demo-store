@@ -287,7 +287,7 @@
                 </div>
                 <div class="flex flex-column">
                   <button
-                    @click="(checkout ? captureOrder : createCheckout)"
+                    @click.prevent="() => checkout ? captureOrder() : createCheckout()"
                     class="button__checkout bg-dark-gray white ttu b self-end pointer dim shadow-5 tracked-mega-1"
                   >
                     {{`${checkout ? 'complete checkout' : 'checkout'}`}}
@@ -310,6 +310,10 @@ export default {
   components: {
     ArrowIconSvg,
     CartLineItem
+  },
+  created() {
+    this.getAllCountries()
+    this.getRegions(this.deliveryCountry)
   },
   data() {
     return {
@@ -346,12 +350,73 @@ export default {
       }
     }
   },
+  watch: {
+    cart(newCart, oldCart) {
+      if (newCart !== oldCart) {
+        if (newCart.total_items === 0) {
+          this.checkout = null
+          alert("You must add items to your cart to contiue checkout")
+          return;
+        }
+        this.createCheckout()
+      }
+    },
+    deliveryCountry(newVal, oldVal) {
+      this.getRegions(newVal)
+
+      if (this.checkout) {
+        this.getShippingOptions(this.checkout.id, newVal)
+      }
+    }
+  },
   methods: {
     updateQuantity() {
 
     },
-    removeProductFromCart() {
+    getAllCountries() {
+      this.commerce.Services.localeListCountries((resp) => {
+        this.countries = resp.countries
+      },
+      error => console.log(error)
+      )
+    },
+    removeProductFromCart(itemId) {
+      this.$emit('remove-product-from-cart', itemId)
+    },
+    captureOrder() {
+      alert('capture order')
+    },
+    getRegions(countryCode) {
+      this.commerce.Services.localeListSubdivisions(countryCode, (resp) => {
+        this.subdivisions = resp.subdivisions
+      },
+      error => console.log(error)
+      )
+    },
+    // generate checkout token, receive checkout object
+    createCheckout(e) {
+      alert(
+        'create checkout'
+      )
+      return;
+      if (!this.cart) {
+        return;
+      }
 
+      if (this.cart.total_items > 0) {
+        this.commerce.Checkout
+          .generateToken(this.cart.id, { type: 'cart' },
+            (checkout) => {
+              this.getShippingOptions(checkout.id, (this.deliveryCountry || 'US'))
+              this.checkout = checkout
+            },
+            function(error) {
+              console.log('Error:', error)
+            })
+
+      } else {
+        alert("Your cart is empty")
+      }
     }
   }
 }
