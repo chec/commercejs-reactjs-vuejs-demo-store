@@ -49,6 +49,7 @@ export default {
         },
         (error) => {
           // handle error properly in real-world
+          // eslint-disable-next-line
           console.log(error)
         }
       );
@@ -66,7 +67,7 @@ export default {
     // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
     // https://commercejs.com/docs/api/?javascript#add-item-to-cart
     addProductToCart({ productId, variant}) {
-      this.props.commerce.Cart.add({
+      this.commerce.Cart.add({
         id: productId,
         variant
       }, (resp) => {
