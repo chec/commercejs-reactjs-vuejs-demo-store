@@ -10,7 +10,7 @@
 </template>
 <script>
 export default {
-  name: "label",
+  name: "Label",
   props: ['labelTitle', 'body', 'placeholder', 'classes'],
 }
 </script>
