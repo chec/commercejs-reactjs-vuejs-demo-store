@@ -2,7 +2,9 @@
 <div>
     <Header :cart={cart} location={this.props.location} />
     <main id="main" class="flex">
-      <router-view />
+      <router-view
+        @add-product-to-cart="addProductToCart"
+        :product="products.length ? products[0] : null" />
     </main>
     <footer class="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
         <div class="self-end w-100">
@@ -24,6 +26,59 @@ export default {
   components: {
     Header
   },
+  created() {
+    if (this.commerce !== undefined && typeof this.commerce !== 'undefined') {
+      this.commerce.Products.list(
+        (resp) => {
+          //Success
+          this.products = [
+              ...resp.data.map(product => ({
+                ...product,
+                variants: product.variants.map(variant => ({
+                  ...variant,
+                  optionsById: variant.options.reduce((obj, currentOption) => {
+                      obj[currentOption.id] = {
+                        ...currentOption,
+                        variantId: variant.id
+                      }
+                      return obj;
+                    }, {})
+                }))
+              }))
+            ]
+        },
+        (error) => {
+          // handle error properly in real-world
+          console.log(error)
+        }
+      );
+      window.addEventListener("Commercejs.Cart.Ready", function () {
+        // invoke commerce cart method to retrieve cart in session
+        this.commerce.Cart.retrieve((cart) => {
+          if (!cart.error) {
+            this.cart = cart;
+          }
+        });
+      }.bind(this))
+    }
+  },
+  methods: {
+    // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
+    // https://commercejs.com/docs/api/?javascript#add-item-to-cart
+    addProductToCart({ productId, variant}) {
+      this.props.commerce.Cart.add({
+        id: productId,
+        variant
+      }, (resp) => {
+        // if successful update Cart
+        if (!resp.error) {
+          this.cart = resp.cart
+          alert("Added to cart!")
+        }
+      });
+    }
+
+  },
   props: {
     commerce: {
       required: true,
@@ -34,7 +89,6 @@ export default {
     return {
       products: [],
       cart: null,
-      checkout: null,
       order: null
     }
   }
