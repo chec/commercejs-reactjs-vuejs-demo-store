@@ -1,10 +1,13 @@
 <template>
 <div>
-    <Header :cart={cart} location={this.props.location} />
+    <Header v-if="$route.name !== 'cart-checkout'" :cart="cart" />
     <main id="main" class="flex">
       <router-view
         @add-product-to-cart="addProductToCart"
-        :product="products.length ? products[0] : null" />
+        :product="products.length ? products[0] : null"
+        :cart="cart"
+        :commerce="commerce"
+      />
     </main>
     <footer class="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
         <div class="self-end w-100">
