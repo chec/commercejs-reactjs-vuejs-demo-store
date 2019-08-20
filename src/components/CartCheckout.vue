@@ -21,6 +21,7 @@
                   v-for="item in cart.line_items"
                   @remove-product-from-cart="removeProductFromCart"
                   :item="item"
+                  :key="item.id"
                   @update-quantity="updateQuantity"
                 />
               </div>
@@ -79,7 +80,7 @@
                     :class="[errors['customer[email]'] && 'input-error']"
                     type="email"
                     name="customer[email]"
-                    v-model="this['customer[email]']"
+                    v-model="$data['customer[email]']"
                     placeholder="Email Address"
                   />
                 </div>
@@ -94,7 +95,7 @@
                     :class="[errors['shipping[name]'] && 'input-error']"
                     type="text"
                     name="shipping[name]"
-                    v-model="this['shipping[name]']"
+                    v-model="$data['shipping[name]']"
                     placeholder="Delivery Name"
                   />
                 </div>
@@ -109,7 +110,7 @@
                     :class="[errors['shipping[street]'] && 'input-error']"
                     type="text"
                     name="shipping[street]"
-                    v-model="this['shipping[street]']"
+                    v-model="$data['shipping[street]']"
                     placeholder="Delivery Street Address"
                   />
                 </div>
@@ -125,7 +126,7 @@
                       :class="[errors['shipping[town_city]'] && 'input-error']"
                       type="text"
                       name="shipping[town_city]"
-                      v-model="this['shipping[town_city]']"
+                      v-model="$data['shipping[town_city]']"
                       placeholder="City"
                     />
                   </div>
@@ -140,7 +141,7 @@
                       :class="[errors['shipping[postal_zip_code]'] && 'input-error']"
                       type="number"
                       name="shipping[postal_zip_code]"
-                      v-model="this['shipping[postal_zip_code']"
+                      v-model="$data['shipping[postal_zip_code']"
                       placeholder="post/zip code"
                     />
                   </div>
@@ -162,7 +163,7 @@
                         placeholder="Delivery"
                         class="absolute absolute--fill left-0 o-0 pointer w-100">
                         <option value="" disabled>Select your country</option>
-                        <option v-for="(countryValue, countryKey) in countries" :value="countryKey">
+                        <option v-for="(countryValue, countryKey) in countries" :value="countryKey" :key="countryKey">
                           {{ countryValue }}
                         </option>
                       </select>
@@ -184,7 +185,7 @@
                         v-model="deliveryState"
                         class="absolute absolute--fill left-0 o-0 pointer w-100">
                         <option value="" disabled>Select your state</option>
-                        <option v-for="(subdivisionValue, subdivisionKey) in subdivisions" :value="subdivisionKey">
+                        <option v-for="(subdivisionValue, subdivisionKey) in subdivisions" :value="subdivisionKey" :key="subdivisionKey">
                           {{ subdivisions[subdivisionKey] }}
                         </option>
                       </select>
@@ -203,7 +204,7 @@
                       :class="[errors['fulfillment[shipping_method]'] && 'input-error']">
                       <p>
                         {{
-                          this['fulfillment[shipping_method]'] ?
+                          $data['fulfillment[shipping_method]'] ?
                           `${
                             shippingOptionsById[this["fulfillment[shipping_method]"]].description}
                             - $${shippingOptionsById[this["fulfillment[shipping_method]"]].price.formatted_with_code
@@ -213,11 +214,11 @@
                       </p>
                       <select
                         name="fulfillment[shipping_method]"
-                        v-model="this['fulfillment[shipping_method]']"
+                        v-model="$data['fulfillment[shipping_method]']"
                         placeholder="Shipping Option"
                         class="absolute absolute--fill left-0 o-0 pointer w-100">
                         <option value="" disabled>Select a delivery method</option>
-                        <option v-for="option in shippingOptions" :value="option.id">
+                        <option v-for="option in shippingOptions" :value="option.id" :key="option.id">
                           {{ `${option.description} - $${option.price.formatted_with_code}` }}
                         </option>
                       </select>
@@ -347,6 +348,9 @@ export default {
   },
   methods: {
     updateQuantity() {
+
+    },
+    removeProductFromCart() {
 
     }
   }

@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     removeProductFromCart() {
-      this.$emit('remove-product-from-cart', product)
+      this.$emit('remove-product-from-cart', this.item.id)
     },
     updateQuantity(quantity) {
       this.$emit('update-quantity', this.item.id, quantity)
