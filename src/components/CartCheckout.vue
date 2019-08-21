@@ -368,8 +368,17 @@ export default {
     }
   },
   methods: {
-    updateQuantity() {
-
+    updateQuantity(lineItemId, quantity) {
+      this.commerce.Cart.update(lineItemId, { quantity },
+        function(resp){
+          // if (resp.cart.total_items === 0) {
+          //   this.checkout = null
+          //   alert("Add items to your cart before to continue checkout.")
+          // }
+          // we won't need something like this, since when given quantity 0, Commercejs does
+          // not make line-item 0 but rather leaves it at 1
+          return this.$emit('update-cart', resp.cart)
+        }.bind(this));
     },
     getAllCountries() {
       this.commerce.Services.localeListCountries((resp) => {

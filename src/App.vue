@@ -8,6 +8,7 @@
         :product="products.length ? products[0] : null"
         :cart="cart"
         :commerce="commerce"
+        @update-cart="updateCart"
       />
     </main>
     <footer class="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
@@ -96,8 +97,10 @@ export default {
           reject(resp)
         });
       })
+    },
+    updateCart(cart) {
+      this.cart = cart
     }
-
   },
   props: {
     commerce: {
