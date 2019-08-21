@@ -441,14 +441,17 @@ export default {
         // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
         this.commerce.Checkout
           .capture(this.checkout.id, newOrder, (resp) => {
-            // this.refreshCart() emit event cause to refresh cart in app container
             this.checkout = null
-            // emit event sending order to app container to update state and redirect to order page
             return resolve(resp);
           }, (error) => {
             console.log(error)
             return reject(error)
           })
+        })
+        .then(resp => {
+          // emit refresh-cart event cause to refresh cart in app container
+          this.$emit('refresh-cart')
+          this.$emit('new-order', resp)
         })
         .catch(({error}) => {
 

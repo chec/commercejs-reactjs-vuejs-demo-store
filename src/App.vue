@@ -8,7 +8,10 @@
         :product="products.length ? products[0] : null"
         :cart="cart"
         :commerce="commerce"
+        :order="order"
         @update-cart="updateCart"
+        @refresh-cart="refreshCart"
+        @new-order="handleNewOrder"
       />
     </main>
     <footer class="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
@@ -100,6 +103,15 @@ export default {
     },
     updateCart(cart) {
       this.cart = cart
+    },
+    refreshCart() {
+      this.commerce.Cart.refresh((resp) => {
+        // successful
+      }, error => console.log(error))
+    },
+    handleNewOrder(order) {
+      this.order = order
+      this.$router.replace("/thank-you")
     }
   },
   props: {

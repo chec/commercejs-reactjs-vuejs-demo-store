@@ -22,6 +22,12 @@ export default new Router({
       name: 'cart-checkout',
       component: () => import("@/components/CartCheckout"),
       props: true,
+    },
+    {
+      path: "/thank-you",
+      name: 'order-detail',
+      component: () => import("@/components/ThankYou"),
+      props: true,
     }
   ]
 })
