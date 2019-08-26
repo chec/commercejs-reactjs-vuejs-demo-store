@@ -27,7 +27,7 @@ function CartLineItem(props) {
         <p className="medium-text f6 white tr ttu mw4">
           {props.item.name}
           <span className="db f7 pv1">
-            {props.item.variants[0].option_name}
+            {props.item.variants[0] && props.item.variants[0].option_name}
           </span>
           <span className="db f7">
             ${props.item.line_total.formatted_with_code}
