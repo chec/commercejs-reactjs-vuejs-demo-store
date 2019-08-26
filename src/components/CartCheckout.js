@@ -287,7 +287,9 @@ class CartCheckout extends Component {
 
   updateQuantity(lineItemId, quantity) {
     this.props.updateQuantity(lineItemId, quantity).then(() => {
-      return this.createCheckout()
+      if (this.state.checkout !== null) {
+        this.createCheckout()
+      }
     })
   }
 
