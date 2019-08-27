@@ -14,6 +14,15 @@
 
 .nrotate-90 { transform: rotate(-90deg); }
 
+.rotate-lift {
+  transform: translate(2rem, -5rem) rotate(-90deg);
+}
+
+.rotate-lift-less {
+  transform: translate(2rem, -4rem) rotate(-90deg);
+}
+
+
 
 @media (--breakpoint-not-small){
   .rotate-45-ns { transform: rotate(45deg); }
@@ -25,6 +34,15 @@
   .rotate-315-ns { transform: rotate(315deg); }
 
   .nrotate-90-ns { transform: rotate(-90deg); }
+
+  .rotate-lift-ns {
+    transform: translate(2rem, -5rem) rotate(-90deg);
+  }
+
+  .rotate-lift-less-ns {
+    transform: translate(2rem, -4rem) rotate(-90deg);
+  }
+
 }
 
 @media (--breakpoint-medium){
@@ -37,6 +55,15 @@
   .rotate-315-m { transform: rotate(315deg); }
 
   .nrotate-90-m { transform: rotate(-90deg); }
+
+  .rotate-lift-m {
+    transform: translate(2rem, -5rem) rotate(-90deg);
+  }
+
+  .rotate-lift-less-m {
+    transform: translate(2rem, -4rem) rotate(-90deg);
+  }
+
 }
 
 @media (--breakpoint-large){
@@ -49,4 +76,12 @@
   .rotate-315-l { transform: rotate(315deg); }
 
   .nrotate-90-l { transform: rotate(-90deg); }
+
+  .rotate-lift-l {
+    transform: translate(2rem, -5rem) rotate(-90deg);
+  }
+
+  .rotate-lift-less-l {
+    transform: translate(2rem, -4rem) rotate(-90deg);
+  }
 }

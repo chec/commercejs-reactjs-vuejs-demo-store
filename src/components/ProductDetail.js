@@ -78,7 +78,7 @@ class ProductDetail extends Component {
             <div className="fl w-90 w-50-l self-start-l relative pb5 pa0-l">
               <img src={product.media.source} alt="Product" width="100%" height="auto" />
               <div className="absolute absolute--fill flex justify-end items-end ml4">
-                <div className="rotate-lift pr2">
+                <div className="rotate-lift-less rotate-lift-ns pr2">
                   <p className="medium-text ttu gray f6 tracked-mega-1 pb2 b">
                     type
                   </p>
