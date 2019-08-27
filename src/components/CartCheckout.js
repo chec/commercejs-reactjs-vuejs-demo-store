@@ -477,7 +477,7 @@ class CartCheckout extends Component {
                           country
                         </p>
                       </label>
-                      <div className="checkoutFormInput flex-grow-1 relative">
+                      <div className="checkoutFormInput flex-grow-1 relative tc lh-title">
                         <p>
                           {this.state.countries[this.state.deliveryCountry] || 'Select your country'}
                         </p>
@@ -498,7 +498,7 @@ class CartCheckout extends Component {
                           state/province/region
                         </p>
                       </label>
-                      <div className="checkoutFormInput flex-grow-1 relative">
+                      <div className="checkoutFormInput flex-grow-1 relative flex items-center tc">
                         <p>
                           {this.state.deliveryCountry ? this.state.subdivisions[this.state.deliveryState] || 'Select your state' : 'Select a country first'}
                         </p>
