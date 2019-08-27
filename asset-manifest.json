@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/example.checkout.v2/static/css/main.c623d524.chunk.css",
-    "main.js": "/example.checkout.v2/static/js/main.ac5d2d58.chunk.js",
-    "main.js.map": "/example.checkout.v2/static/js/main.ac5d2d58.chunk.js.map",
+    "main.js": "/example.checkout.v2/static/js/main.4b1b65b3.chunk.js",
+    "main.js.map": "/example.checkout.v2/static/js/main.4b1b65b3.chunk.js.map",
     "runtime~main.js": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js",
     "runtime~main.js.map": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js.map",
     "static/js/2.ba8f505f.chunk.js": "/example.checkout.v2/static/js/2.ba8f505f.chunk.js",
     "static/js/2.ba8f505f.chunk.js.map": "/example.checkout.v2/static/js/2.ba8f505f.chunk.js.map",
     "index.html": "/example.checkout.v2/index.html",
-    "precache-manifest.64b4182a6bbabff05672b2faaf8b28a0.js": "/example.checkout.v2/precache-manifest.64b4182a6bbabff05672b2faaf8b28a0.js",
+    "precache-manifest.119bd9339b40a41e9bc8c224db0870a3.js": "/example.checkout.v2/precache-manifest.119bd9339b40a41e9bc8c224db0870a3.js",
     "service-worker.js": "/example.checkout.v2/service-worker.js",
     "static/css/main.c623d524.chunk.css.map": "/example.checkout.v2/static/css/main.c623d524.chunk.css.map",
     "static/media/arrow-icon.3a5e09cc.svg": "/example.checkout.v2/static/media/arrow-icon.3a5e09cc.svg",
