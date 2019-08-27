@@ -17,7 +17,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
+<<<<<<< HEAD
     "deploy": "gh-pages -b react.js -d build"
+=======
+    "deploy": "gh-pages -d build"
+>>>>>>> parent of cb6bd40... Updates
   },
   "eslintConfig": {
     "extends": "react-app"
