@@ -355,7 +355,7 @@ class CartCheckout extends Component {
                   {allLineItems}
                 </div>
                 <div className="pt4 pb3 nt3 br3 ph4 bg-cherry">
-                  <div className="flex pb1 justify-between items-center w-100 medium-text f6 white ttu b tracked-mega-1">
+                  <div className="flex pb1 justify-between items-center w-100 medium-text f6 white ttu b tracked-mega-1 lh-title">
                     <p>
                       subtotal
                     </p>
