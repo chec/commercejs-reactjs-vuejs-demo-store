@@ -57,7 +57,7 @@ class ProductDetail extends Component {
     }
 
     return (
-      <div className="productDetail w-100 pb5 ph4">
+      <div className="productDetail w-100 pb5 ph2 ph4-ns">
         <div className="mw8 center ph2">
           <div className="cf flex flex-column flex-row-l items-center">
             <div className="fl flex flex-column flex-grow-1 items-center justify-center mw6 mt6-l order-1 order-0-l">
