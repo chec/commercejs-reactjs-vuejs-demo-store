@@ -82,7 +82,7 @@ class ProductDetail extends Component {
                   <p className="medium-text ttu gray f6 tracked-mega-1 pb2 b">
                     type
                   </p>
-                  <p className="large-title-text f1 fw9 ttu pl3">
+                  <p className="large-title-text f2 f1-ns fw9 ttu pl3">
                     brand
                   </p>
                 </div>
