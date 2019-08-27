@@ -24,7 +24,7 @@ function CartLineItem(props) {
              }}
            />
         </div>
-        <p className="medium-text f6 white tr ttu mw4">
+        <div className="medium-text f6 white tr ttu mw4">
           {props.item.name}
           <span className="db f7 pv1">
             {props.item.variants[0] && props.item.variants[0].option_name}
@@ -39,7 +39,7 @@ function CartLineItem(props) {
               <button className="bg-none white f5 pointer grow dim ph2" onClick={() => props.updateQuantity(props.item.id, props.item.quantity + 1)}>+</button>
             </div>
           </span>
-        </p>
+        </div>
       </div>
     </div>
   )
