@@ -11,11 +11,7 @@ import cartIcon from '../assets/cart-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png';
 
 class Header extends Component {
-
-  constructor() {
-    super();
-  }
-
+  
   get config() {
     return {
       template: props => {
