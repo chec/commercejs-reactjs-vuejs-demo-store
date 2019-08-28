@@ -1,69 +1,45 @@
+import { Component, h } from 'panel';
+
 import setUpShadowAndRender from '../utils/setUpShadowAndRender'
 import WithComponentState from '../utils/withComponentState'
 import parseProp from '../utils/unescapeAndParseAttribute';
 
 // svg
 import logo from '../assets/logo.svg';
-import renderLogoSvg from './LogoSvg';
+import LogoSvg from '../assets/LogoSvg';
 import cartIcon from '../assets/cart-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png';
 
+class Header extends Component {
 
-class Header extends WithComponentState() {
   constructor() {
     super();
   }
 
-  connectedCallback() {
-    setUpShadowAndRender.call(this, undefined, true);
-    this.addEventListener('click', this) // add addEventListener to root to avoid inline scripting
-  }
-
-  handleEvent(e) {
-    console.log('The event is:', e)
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    console.log(name, oldValue, newValue);
-    if (oldValue !== newValue) {
-      this[name] = newValue // update all changed value, if this isn't done then setter this.componentState connected to observed attribute componentState won't get updated
+  get config() {
+    return {
+      template: props => {
+        return h('header', { attrs: { class: 'absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1' }}, [
+          h('div', { attrs: { class: 'logoContainer dim pointer'}}, LogoSvg()),
+          h('div', { attrs: { class: 'flex'}}, [
+            h('div', { attrs: { class: 'productFragmentContainer mw4'}}, [
+              h('button', { attrs: { class: 'absolute right-0 medium-text f7 cherry bg-blossom ttu rotate-270 pv2 ph2 bg-white outline-0 dim pointer mr5 mt3', name: ''}}, [
+                'pre-order now'
+              ]),
+              h('div', { attrs: { class: 'w-100'}}, [
+                h('img', { attrs: { src: pairShoes, width: "100%", height: "auto" }})
+              ])
+            ]),
+            h('div', { attrs: { class: 'flex flex-row items-center'}}, [
+              h('div', { attrs: { class: 'cartIconContainer pointer'}}, [
+                h('img', { attrs: { src: cartIcon, width: "100%", height: "100%"}})
+              ]),
+              h('p', { attrs: { class: "medium-text f7 white"}}, [props.cart ? props.cart.total_items : '0'])
+            ])
+          ])
+        ])
+      }
     }
-  }
-
-  static get observedAttributes() {
-    return ['componentState'];
-  } // must observe componentState in order to receive updates
-
-  get cart() {
-    return parseProp.call(this, 'cart')
-  }
-
-  render() {
-    return `
-      <header class="absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1">
-        <div class="logoContainer dim pointer" onClick={pushStateAndTriggerPopStateEvent('/')}>
-          ${renderLogoSvg()}
-        </div>
-        <div class="flex">
-          <div class="productFragmentContainer mw4">
-            <button
-              name="pre-order-button"
-              class="absolute right-0 medium-text f7 cherry bg-blossom ttu rotate-270 pv2 ph2 bg-white outline-0 dim pointer mr5 mt3">
-              pre-order now
-            </button>
-            <div class="w-100">
-              ${ this.state.hideShoe ? '' : `<img src=${pairShoes} width="100%" height="auto" />` }
-            </div>
-          </div>
-          <div class="flex flex-row items-center">
-            <div class="cartIconContainer pointer">
-              <img src=${cartIcon} width="100%" height="100%" />
-            </div>
-            <p class="medium-text f7 white">${this.cart ? this.cart.total_items : '0'}</p>
-          </div>
-        </div>
-      </header>
-    `
   }
 }
 
