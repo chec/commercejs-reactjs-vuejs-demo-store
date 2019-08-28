@@ -2,9 +2,9 @@
 
 ## Branches
   - `Master`
-    - Contains a plain HTML/CSS/SASS/Vanilla JS implemenation.
+    - Contains a plain implementation with Web Components (using [Panel](https://github.com/mixpanel/panel)), and SASS.
   - `React.js`
-    - Contains an abstracted version of the Master branch using React.js, Redux, CSS/SASS, JSX
+    - Contains an abstracted version of the Master branch using React.js, Redux, SASS, JSX
   - `Vue.js`
-    - Contains an abstracted version of the Master branch using Vue.js CSS/SASS, templating syntax.
+    - Contains an abstracted version of the Master branch using Vue.js SASS, templating syntax.
     
