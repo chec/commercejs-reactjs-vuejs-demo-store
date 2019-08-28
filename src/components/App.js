@@ -1,3 +1,5 @@
+import { Component, h } from 'panel';
+
 import setUpShadowAndRender from '../utils/setUpShadowAndRender'
 import WithComponentState from '../utils/withComponentState';
 
@@ -7,7 +9,88 @@ window.pushStateAndTriggerPopStateEvent = (pathname) => {
   window.dispatchEvent(popStateEvent);
 }
 
-class App extends WithComponentState() {
+class App extends Component {
+  constructor() {
+    super();
+    this.commerce = new window.Commerce(process.env.COMMERCEJS_PUBLIC_KEY, (process.env.NODE_ENV === 'development') ? true : false);
+    this._init()
+  }
+
+  _init() {
+    console.log('this instance looks like so', this.state)
+    if (this.commerce !== undefined && typeof this.commerce !== 'undefined') {
+      this.commerce.Products.list(
+        (resp) => {
+          //Success
+          this.update({
+            products: resp.data || []
+          })
+        },
+        (error) => {
+          // handle error properly in real-world
+          console.log(error)
+        }
+      );
+      window.addEventListener("Commercejs.Cart.Ready", function () {
+        // invoke commerce cart method to retrieve cart in session
+        this.commerce.Cart.retrieve((cart) => {
+          if (!cart.error) {
+            this.update({
+              cart: cart
+            })
+          }
+        });
+      }.bind(this))
+    }
+  }
+
+  addProductToCart(productId) {
+    this.commerce.Cart.add({
+      id: productId,
+    }, (resp) => {
+      // if successful update Cart
+      if (!resp.error) {
+        this.update({
+          cart: resp.cart
+        })
+      }
+    });
+  }
+
+  get config() {
+    return {
+      defaultState: {
+        products: [],
+        cart: null,
+        checkout: null,
+        order: null,
+        $view: "" // default view /# or /
+      },
+
+      helpers: {
+        commerce: this.commerce,
+        addProductToCart: this.addProductToCart
+      },
+
+      routes: {
+        '': () => ({ $view: 'landing-page', classes: 'flex flex-grow-1 items-center bg-black' }),
+        'white-shoe': () => ({ $view: 'product-detail', classes: 'flex flex-grow-1'}),
+      },
+
+      template: state => {
+        console.log('App component state updated:', state)
+        return h('div', [
+          (state.$view !== 'cart-checkout') ? this.child('x-header') : '',
+          h('main#main.flex', {}, this.child(state.$view, { attrs: { class: state.classes }})),
+          h('x-footer', { attrs: { class: "flex bg-black-90" } })
+        ])
+      }
+    }
+  }
+}
+
+
+/* class App extends WithComponentState() {
 
   constructor() {
     super();
@@ -106,6 +189,6 @@ class App extends WithComponentState() {
       <x-footer class="flex bg-black-90"></x-footer>
     `;
   }
-}
+} */
 
 export default App;
