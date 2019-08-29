@@ -70,6 +70,7 @@ class App extends Component {
       routes: {
         '': () => ({ $view: 'landing-page', classes: 'flex flex-grow-1 items-center bg-black' }),
         'white-shoe': () => ({ $view: 'product-detail', classes: 'flex flex-grow-1'}),
+        'cart-checkout': () => ({ $view: 'cart-checkout', classes: 'flex flex-grow-1 bg-tan-white'})
       },
 
       template: state => {
