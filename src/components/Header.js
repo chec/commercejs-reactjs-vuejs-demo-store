@@ -27,7 +27,7 @@ class Header extends Component {
                 h('img', { attrs: { src: pairShoes, width: "100%", height: "auto" }})
               ])
             ]),
-            h('div', { attrs: { class: 'flex flex-row items-center'}}, [
+            h('a', { attrs: { href: "#cart-checkout", class: 'flex flex-row items-center no-underline dim'}}, [
               h('div', { attrs: { class: 'cartIconContainer pointer'}}, [
                 h('img', { attrs: { src: cartIcon, width: "100%", height: "100%"}})
               ]),
