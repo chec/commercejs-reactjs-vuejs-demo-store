@@ -144,7 +144,7 @@ class CartCheckout extends Component {
 
         return h('div', { attrs: { class: 'flex flex-grow-1 flex-column bg-tan-white w-100 pb4'}}, [
           h('div', { attrs: { class: 'flex justify-between mw9 w-100 items-center center pt4 ph4'}}, [
-            h('a', { attrs: { href: '#white-white', class: 'flex items-center medium-text f7 f6-ns tracked-mega ttu no-underline dark-gray dim'}}, [
+            h('a', { attrs: { href: '#white-shoe', class: 'flex items-center medium-text f7 f6-ns tracked-mega ttu no-underline dark-gray dim'}}, [
               h('div', { attrs: { class: 'arrowIconContainer fill-cherry pr4'}}, [
                 ArrowIconSvg()
               ]),
