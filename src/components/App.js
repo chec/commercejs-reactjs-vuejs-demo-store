@@ -64,12 +64,7 @@ class App extends Component {
         cart: null,
         checkout: null,
         order: null,
-        $view: "" // default view /# or /
-      },
-
-      helpers: {
-        commerce: this.commerce,
-        addProductToCart: this.addProductToCart
+        $view: "", // default view /# or /,
       },
 
       routes: {
@@ -78,11 +73,13 @@ class App extends Component {
       },
 
       template: state => {
-        console.log('App component state updated:', state)
+        console.log('App component state updated:', this.commerce)
         return h('div', [
           (state.$view !== 'cart-checkout') ? this.child('x-header') : '',
-          h('main#main.flex', {}, this.child(state.$view, { attrs: { class: state.classes }})),
-          h('x-footer', { attrs: { class: "flex bg-black-90" } })
+          h('main#main.flex', {}, [
+            this.child(state.$view, { attrs: { class: state.classes }})
+          ]),
+          h('x-footer', { attrs: { class: "flex bg-black-90" }})
         ])
       }
     }
