@@ -35,10 +35,25 @@ function renderSelect(props) {
 
 class ProductDetail extends Component {
 
+  constructor() {
+    super();
+    this.addProductToCart = this.addProductToCart.bind(this)
+  }
+
   handleSizeSelect(e) {
     this.update({
       selectedSize: e.target.value
     })
+  }
+
+  addProductToCart(e) {
+    const product = {
+      productId: this.product.id,
+      variant: {
+        [this.product.variants[0].id]: this.state.selectedSize
+      }
+    }
+    this.$panelRoot.addProductToCart(product)
   }
 
   get config() {
@@ -71,7 +86,7 @@ class ProductDetail extends Component {
                 ]),
                 h('button', {
                   on: {
-                    click: () => this.$panelRoot.addProductToCart(this.product.id)
+                    click: this.addProductToCart
                   },
                   class: {
                     'dim': !!this.state.selectedSize,
@@ -108,7 +123,7 @@ class ProductDetail extends Component {
             renderSelect({
               labelTitle: 'choose a size',
               labelBody: sizeOptionsById[this.state.selectedSize] ? sizeOptionsById[this.state.selectedSize].name : 'choose a size',
-              selectName: 'sizeSelect',
+              selectName: 'selectedSize',
               selectedValue: this.state.selectedSize,
               options: sizeOptions,
               onInput: this.handleSizeSelect.bind(this)
