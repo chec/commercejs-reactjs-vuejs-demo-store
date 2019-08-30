@@ -13,6 +13,7 @@ class App extends Component {
   constructor() {
     super();
     this.commerce = new window.Commerce(process.env.COMMERCEJS_PUBLIC_KEY, (process.env.NODE_ENV === 'development') ? true : false);
+    this.removeProductFromCart = this.removeProductFromCart.bind(this)
     this._init()
   }
 
@@ -44,17 +45,78 @@ class App extends Component {
     }
   }
 
-  addProductToCart(productId) {
+  captureOrder(checkoutId, order) {
+    return new Promise((resolve, reject) => {
+      // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
+      this.commerce.Checkout
+        .capture(checkoutId, order, (resp) => {
+          this.refreshCart()
+          this.update({
+            checkout: null,
+            order: resp
+          })
+          this.navigate("thank-you")
+          return resolve(resp);
+        }, (error) => {
+          console.log(error)
+          return reject(error)
+        })
+    })
+  }
+
+  // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
+  // https://commercejs.com/docs/api/?javascript#add-item-to-cart
+  addProductToCart(product) {
+    const {
+      productId,
+      variant
+    } = product
+
     this.commerce.Cart.add({
       id: productId,
+      variant
     }, (resp) => {
       // if successful update Cart
       if (!resp.error) {
         this.update({
           cart: resp.cart
         })
+        alert("Added to cart!")
       }
     });
+  }
+
+  updateQuantity(lineItemId, quantity) {
+    return new Promise((resolve, reject) => {
+      this.commerce.Cart.update(lineItemId, { quantity },
+        function(resp){
+          // if (resp.cart.total_items === 0) {
+          //   this.setState({
+          //     checkout: null
+          //   }, () => alert("Add items to your cart before to continue checkout."))
+          // } we won't need something like this, since when given quantity 0, Commercejs does
+          // not make line-item 0 but rather leaves it at 1
+          return this.update({
+            cart: resp.cart
+          })
+        }.bind(this));
+    })
+  }
+
+  // cart methods
+  removeProductFromCart(lineItemId) {
+    return new Promise((resolve, reject) => {
+      this.commerce.Cart.remove(lineItemId, (resp) => {
+        // if successful update Cart
+        if (!resp.error) {
+          this.update({
+            cart: resp.cart
+          })
+          return resolve(resp)
+        }
+        reject(resp)
+      });
+    })
   }
 
   get config() {
