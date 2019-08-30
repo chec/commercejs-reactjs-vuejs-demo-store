@@ -507,7 +507,7 @@ class CartCheckout extends Component {
                         this.state.countries[this.state.deliveryCountry] || 'Select your country'
                       ]),
                       h('select', {
-                        on: { click: this.handleFormChanges.bind(this) },
+                        on: { input: this.handleFormChanges.bind(this) },
                         attrs: {
                           name: "deliveryCountry",
                           value: this.state.deliveryCountry,
