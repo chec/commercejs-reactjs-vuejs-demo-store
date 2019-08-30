@@ -67,12 +67,219 @@ function CartLineItem(props) {
 }
 
 class CartCheckout extends Component {
-  updateQuantity() {
-    //this.$panelRoot.updateQuantity()
+  constructor() {
+    super();
+    this.mounted = false;
+    this.handleFormChanges = this.handleFormChanges.bind(this)
+    this.getAllCountries = this.getAllCountries.bind(this);
+    this.getRegions = this.getRegions.bind(this);
+    this.createCheckout = this.createCheckout.bind(this);
+    this.getShippingOptions = this.getShippingOptions.bind(this);
+    this.captureOrder = this.captureOrder.bind(this);
+    this.removeProductFromCart = this.removeProductFromCart.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
   }
 
-  handleFormChanges() {
-    alert('form change')
+  _init() {
+    this.mounted = true;
+    this.getAllCountries()
+    this.getRegions(this.state.deliveryCountry)
+  }
+
+  updateQuantity(lineItemId, quantity) {
+    this.$panelRoot.updateQuantity(lineItemId, quantity).then(() => {
+      if (this.state.checkout !== null) {
+        this.createCheckout()
+      }
+    })
+  }
+
+  handleFormChanges(e) {
+    this.update({
+      [e.target.name]: e.target.value
+    })
+
+    if (e.target.name === "deliveryCountry") {
+      this.getRegions(e.target.value)
+
+      if (this.state.checkout) {
+        this.getShippingOptions(this.state.checkout.id, e.target.value)
+      }
+    }
+  }
+
+  getAllCountries() {
+    console.log("this is it", this.$panelRoot)
+    this.$panelRoot.commerce.Services.localeListCountries((resp) => {
+      this.update({
+        countries: resp.countries
+      })
+    },
+    error => console.log(error)
+    )
+  }
+
+  getRegions(countryCode) {
+    this.$panelRoot.commerce.Services.localeListSubdivisions(countryCode, (resp) => {
+      this.update({
+        subdivisions: resp.subdivisions
+      })
+    },
+    error => console.log(error)
+    )
+  }
+
+  // checkout methods
+  createCheckout(e) {
+
+    if (e) {
+      e.preventDefault()
+    }
+
+    if (!this.state.cart) {
+      return;
+    }
+
+    if (this.state.cart.total_items > 0) {
+      this.$panelRoot.commerce.Checkout
+        .generateToken(this.state.cart.id, { type: 'cart' },
+
+          (checkout) => {
+            this.getShippingOptions(checkout.id, (this.state.deliveryCountry || 'US'))
+            this.update({
+              checkout: checkout
+            })
+          },
+
+          function(error) {
+            console.log('Error:', error)
+          })
+
+    } else {
+      alert("Your cart is empty")
+    }
+  }
+
+  getShippingOptions(checkoutId, country) {
+
+    this.$panelRoot.commerce.Checkout.getShippingOptions(checkoutId, { country }, (resp) => {
+
+      if (!resp.error) {
+        this.update({
+          shippingOptions: resp,
+          shippingOptionsById: resp.reduce((obj, option) => {
+           obj[option.id] = option
+           return obj
+          }, {})
+        })
+      } else {
+
+        this.update({
+          shippingOptions: [],
+          shippingOptionsById: {}
+        })
+      }
+    })
+  }
+
+  captureOrder(e) {
+    this.update({
+      errors: {
+        "fulfillment[shipping_method]": null,
+        gateway_error: null,
+        "shipping[name]": null,
+        "shipping[street]": null,
+      }
+    })
+
+    if (e) {
+      e.preventDefault()
+    }
+
+    const lineItems = this.state.checkout.live.line_items.reduce((obj, lineItem) => {
+      obj[lineItem.id] = {
+        quantity: lineItem.quantity,
+        variants: {
+          [lineItem.variants[0].variant_id]: lineItem.variants[0].option_id
+        }
+      }
+      return obj
+    }, {})
+    const newOrder = {
+      line_items: lineItems,
+      customer: {
+        firstname: this.state.firstName,
+        lastname: this.state.lastName,
+        email: this.state["customer[email]"]
+      },
+      shipping: {
+        name: this.state["shipping[name]"],
+        country: this.state.deliveryCountry,
+        street: this.state["shipping[street]"],
+        town_city: this.state["shipping[town_city]"],
+        county_state: this.state.deliveryState,
+        postal_zip_code: this.state["shipping[postal_zip_code]"]
+      },
+      fulfillment: {
+        shipping_method: this.state["fulfillment[shipping_method]"]
+      },
+      payment: {
+        gateway: "test_gateway",
+        card: {
+          number: this.state.cardNumber,
+          expiry_month: this.state.expMonth,
+          expiry_year: this.state.expYear,
+          cvc: this.state.cvc,
+          postal_zip_code: this.state.billingPostalZipcode
+        }
+      }
+    }
+    console.log('The order constructed:', newOrder)
+    this.$panelRoot.captureOrder(this.state.checkout.id, newOrder)
+      .catch(({error}) => {
+
+        if (error.type === 'validation') {
+          console.log('the error messages:', error.message)
+
+          error.message.forEach(({param, error}, i) => {
+            this.update({
+              errors: {
+                ...this.state.errors,
+                [param]: error
+              }
+            })
+          })
+
+          const allErrors = error.message.reduce((string, error) => {
+            return `${string} ${error.error}`
+          }, '')
+          alert(allErrors)
+        }
+
+        if (error.type === 'gateway_error') {
+          this.update({
+            errors: {
+              ...this.state.errors,
+              [error.type]: error.message
+            }
+          })
+          alert(error.message)
+        }
+
+      })
+  }
+
+  removeProductFromCart(itemId) {
+    this.$panelRoot.removeProductFromCart(itemId).then(({ cart }) => {
+      if (cart.total_items === 0) {
+        this.update({
+          checkout: null
+        })
+        alert("Add items to your cart before to continue checkout.")
+        return;
+      }
+      this.createCheckout()
+    })
   }
 
   get config() {
@@ -110,6 +317,13 @@ class CartCheckout extends Component {
           "shipping[postal_zip_code]": null
         }
       },
+
+      hooks: {
+        postUpdate: (stateUpdate) => {
+          if (!this.mounted) this._init();
+        }
+      },
+
       template: props => {
         const {
           line_items: lineItems = []
@@ -125,7 +339,7 @@ class CartCheckout extends Component {
         })
 
         const allCountryOptions = Object.keys(this.state.countries).map((country, key) => {
-          return h('option', { key, attrs: { value: county }}, [
+          return h('option', { key, attrs: { value: country }}, [
             this.state.countries[country]
           ])
         })
