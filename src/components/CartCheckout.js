@@ -69,7 +69,7 @@ function CartLineItem(props) {
 class CartCheckout extends Component {
   constructor() {
     super();
-    this.mounted = false;
+    this._mounted = false;
     this.handleFormChanges = this.handleFormChanges.bind(this)
     this.getAllCountries = this.getAllCountries.bind(this);
     this.getRegions = this.getRegions.bind(this);
@@ -81,7 +81,7 @@ class CartCheckout extends Component {
   }
 
   _init() {
-    this.mounted = true;
+    this._mounted = true;
     this.getAllCountries()
     this.getRegions(this.state.deliveryCountry)
   }
@@ -320,7 +320,7 @@ class CartCheckout extends Component {
 
       hooks: {
         postUpdate: (stateUpdate) => {
-          if (!this.mounted) this._init();
+          if (!this._mounted) this._init();
         }
       },
 
