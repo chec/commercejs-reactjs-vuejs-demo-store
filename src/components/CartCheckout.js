@@ -109,7 +109,7 @@ class CartCheckout extends Component {
   }
 
   getAllCountries() {
-    console.log("this is it", this.$panelRoot)
+    console.log("getAllCountries INVOKED", this.$panelRoot)
     this.$panelRoot.commerce.Services.localeListCountries((resp) => {
       this.update({
         countries: resp.countries
@@ -131,7 +131,6 @@ class CartCheckout extends Component {
 
   // checkout methods
   createCheckout(e) {
-
     if (e) {
       e.preventDefault()
     }
@@ -319,7 +318,7 @@ class CartCheckout extends Component {
       },
 
       hooks: {
-        postUpdate: (stateUpdate) => {
+        preUpdate: (stateUpdate) => {
           if (!this._mounted) this._init();
         }
       },
@@ -355,6 +354,7 @@ class CartCheckout extends Component {
             `${option.description} - $${option.price.formatted_with_code}`
           ])
         })
+
 
         return h('div', { attrs: { class: 'flex flex-grow-1 flex-column bg-tan-white w-100 pb4'}}, [
           h('div', { attrs: { class: 'flex justify-between mw9 w-100 items-center center pt4 ph4'}}, [
@@ -562,7 +562,7 @@ class CartCheckout extends Component {
                       ])
                     ]),
                     h('div', {
-                      class: { 'input-error': this.state.errors["fulfillment[shipping_method]"] },
+                      class: { 'input-error': (this.state.errors["fulfillment[shipping_method]"] ? true : false) },
                       attrs: {
                         class: 'checkoutFormInput flex-grow-1 relative'
                       }
@@ -586,7 +586,12 @@ class CartCheckout extends Component {
                           class: "absolute absolute--fill left-0 o-0 pointer w-100"
                         }
                       }, [
-                        h('option', { attrs: { value: '', disabled: true}}, [
+                        h('option', {
+                          attrs: {
+                            value: '',
+                            disabled: true,
+                            selected: 'selected'
+                          }}, [
                           'Select a delivery method'
                         ]),
                         ...allShippingOptions,
