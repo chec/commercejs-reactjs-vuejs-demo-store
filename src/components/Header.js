@@ -14,8 +14,20 @@ class Header extends Component {
   get config() {
     return {
       template: props => {
+        const isThankYouPathname = props.$view === 'thank-you';
         return h('header', { attrs: { class: 'absolute w-100 ph5 pv5 flex flex-row justify-between mt3 z-1' }}, [
-          h('a', { attrs: { href: "#", class: 'logoContainer dim pointer'}}, [
+          h('a', {
+            class: {
+              'fill-cherry': isThankYouPathname,
+              'fill-near-white': !isThankYouPathname,
+              'cherry': isThankYouPathname,
+              'white': !isThankYouPathname
+            },
+            attrs: {
+              href: "#",
+              class: 'logoContainer dim pointer'
+            }
+          }, [
             LogoSvg()
           ]),
           h('div', { attrs: { class: 'flex'}}, [
@@ -28,10 +40,20 @@ class Header extends Component {
               ])
             ]),
             h('a', { attrs: { href: "#cart-checkout", class: 'flex flex-row items-center no-underline dim'}}, [
-              h('div', { attrs: { class: 'cartIconContainer pointer'}}, [
+              h('div', {
+                class: {
+                  'fill-cherry': isThankYouPathname,
+                  'fill-near-white': !isThankYouPathname,
+                },
+                attrs: {
+                  class: 'cartIconContainer pointer'
+                }}, [
                 h('img', { attrs: { src: cartIcon, width: "100%", height: "100%"}})
               ]),
-              h('p', { attrs: { class: "medium-text f7 white"}}, [props.cart ? props.cart.total_items : '0'])
+              h('p', { class: {
+                'cherry': isThankYouPathname,
+                'white': !isThankYouPathname
+              }, attrs: { class: "medium-text f7 white"}}, [props.cart ? props.cart.total_items : '0'])
             ])
           ])
         ])
