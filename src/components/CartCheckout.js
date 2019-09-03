@@ -70,6 +70,7 @@ class CartCheckout extends Component {
   constructor() {
     super();
     this._mounted = false;
+    this._count = 0;
     this.handleFormChanges = this.handleFormChanges.bind(this)
     this.getAllCountries = this.getAllCountries.bind(this);
     this.getRegions = this.getRegions.bind(this);
@@ -82,6 +83,8 @@ class CartCheckout extends Component {
 
   _init() {
     this._mounted = true;
+    this._count = this._count + 1;
+    console.log('CURRENT COUNT:', this._count)
     this.getAllCountries()
     this.getRegions(this.state.deliveryCountry)
   }
@@ -268,6 +271,7 @@ class CartCheckout extends Component {
       })
   }
 
+
   removeProductFromCart(itemId) {
     this.$panelRoot.removeProductFromCart(itemId).then(({ cart }) => {
       if (cart.total_items === 0) {
@@ -279,6 +283,13 @@ class CartCheckout extends Component {
       }
       this.createCheckout()
     })
+  }
+
+   connectedCallback() {
+    super.connectedCallback(...arguments)
+    if (!this._mounted && this.initialized) {
+      this._init();
+    }
   }
 
   get config() {
@@ -314,12 +325,6 @@ class CartCheckout extends Component {
           "shipping[street]": null,
           "shipping[town_city]": null,
           "shipping[postal_zip_code]": null
-        }
-      },
-
-      hooks: {
-        preUpdate: (stateUpdate) => {
-          if (!this._mounted) this._init();
         }
       },
 

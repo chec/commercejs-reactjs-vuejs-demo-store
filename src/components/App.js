@@ -13,7 +13,7 @@ class App extends Component {
   constructor() {
     super();
     this.commerce = new window.Commerce(process.env.COMMERCEJS_PUBLIC_KEY, (process.env.NODE_ENV === 'development') ? true : false);
-    this.removeProductFromCart = this.removeProductFromCart.bind(this)
+    this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this._init()
   }
 
@@ -131,8 +131,14 @@ class App extends Component {
 
       routes: {
         '': () => ({ $view: 'landing-page', classes: 'flex flex-grow-1 items-center bg-black' }),
-        'white-shoe': () => ({ $view: 'product-detail', classes: 'flex flex-grow-1'}),
-        'cart-checkout': () => ({ $view: 'cart-checkout', classes: 'flex flex-grow-1 bg-tan-white'})
+        'white-shoe': () => ({ $view: 'product-detail', classes: 'flex flex-grow-1', }),
+        'cart-checkout': () => ({
+          $view: 'cart-checkout',
+          classes: 'flex flex-grow-1 bg-tan-white',
+          props: {
+            commerce: this.commerce 
+          }
+        })
       },
 
       template: state => {
