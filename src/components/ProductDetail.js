@@ -67,13 +67,6 @@ class ProductDetail extends Component {
               <p className="medium-body-text gray w-90 tc">
                 lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
               </p>
-              <button
-                disabled={!!!sizeSelect}
-                onClick={this.addProductToCart}
-                name="addToCartButton"
-                className={`button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 ${!!this.state.sizeSelect ? 'dim' :'o-30'}`}>
-                add to cart
-              </button>
             </div>
             <div className="fl w-90 w-50-l self-start-l relative pb5 pa0-l">
               <img src={product.media.source} alt="Product" width="100%" height="auto" />
@@ -90,32 +83,43 @@ class ProductDetail extends Component {
             </div>
           </div>
         </div>
-        <div className="productDetail__info-container center mw8 justify-start flex flex-row flex-grow-1 flex-wrap pb4 mt4 ph3 ph1-ns">
-          <Label
-            labelTitle='price'
-            body='$100.00 USD'
-            classes='mr5-ns mb4'
-          />
-          <div className="relative">
+        <div className="productDetail__info-container center justify-start mw8 pb4 mt4 ph3 ph1-ns">
+          <div className="flex flex-row flex-grow-1 flex-wrap">
             <Label
-              labelTitle='size'
-              placeholder="choose a size"
-              body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
+              labelTitle='price'
+              body='$100.00 USD'
+              classes='mr5-ns mb4'
             />
-            <select
-              onChange={this.handleChange}
-              className="absolute absolute--fill left-0 o-0 pointer w-100"
-              value={sizeSelect}
-              name='sizeSelect'>
-              <option value="" disabled>Choose a size</option>
-              {
-                product.variants[0].options.map(option =>
-                  <option value={option.id} key={option.id}>
-                    {option.name}
-                  </option>
-                )
-              }
-            </select>
+            <div className="relative">
+              <Label
+                labelTitle='size'
+                placeholder="choose a size"
+                body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
+              />
+              <select
+                onChange={this.handleChange}
+                className="absolute absolute--fill left-0 o-0 pointer w-100"
+                value={sizeSelect}
+                name='sizeSelect'>
+                <option value="" disabled>Choose a size</option>
+                {
+                  product.variants[0].options.map(option =>
+                    <option value={option.id} key={option.id}>
+                      {option.name}
+                    </option>
+                  )
+                }
+              </select>
+            </div>
+          </div>
+          <div className="w-50">
+            <button
+              disabled={!!!sizeSelect}
+              onClick={this.addProductToCart}
+              name="addToCartButton"
+              className={`button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 ${!!this.state.sizeSelect ? 'dim' :'o-30'}`}>
+              add to cart
+            </button>
           </div>
         </div>
       </div>
