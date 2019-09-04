@@ -14,10 +14,10 @@ function LandingPage(props) {
           <img src={shoesHero} alt="Pair of Shoes" width="100%" height="auto" />
         </div>
         <div className="absolute absolute--fill flex flex-column justify-center items-center nb7 ph3">
-          <p className="flex flex-shrink-1 flex-column hero-text f3 f2-m f1-l white tr pb5 lh-title">
+          <p className="flex flex-shrink-1 flex-column hero-text f3 f2-m f1-l white tc pb5 lh-title">
             LOREM IPSUM LOREM IPSUM
-            <Link to="/white-shoe" className="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer mw4 self-end mr3 no-underline">
-              shop shoe
+            <Link to="/white-shoe" className="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer mw4 self-center mr3 no-underline">
+              shop products
             </Link>
           </p>
         </div>
