@@ -83,7 +83,7 @@ class ProductDetail extends Component {
             </div>
           </div>
         </div>
-        <div className="productDetail__info-container center justify-start mw8 pb4 mt4 ph3 ph1-ns">
+        <div className="productDetail__info-container center justify-start mw8 pb4 mt2 ph3 ph1-ns">
           <div className="flex flex-row flex-grow-1 flex-wrap">
             <Label
               labelTitle='price'
