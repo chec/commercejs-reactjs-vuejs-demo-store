@@ -8,24 +8,16 @@ function Header(props) {
   const isThankYouPathname = props.location.pathname === '/thank-you';
   const currentFillColor = isThankYouPathname ? 'fill-cherry' : 'fill-near-white';
   const currentColor = isThankYouPathname ? 'cherry' : 'white';
+  const productPageClass = props.location.pathname === '/white-shoe' ? 'headerContainer--thank-you' : '';
+
   return (
-    <header className="absolute w-100 ph4 ph5-l pv5 pv5-l flex flex-row justify-between items-center items-start-l z-1">
+    <header className={`headerContainer absolute w-100 ph4 ph5-l pv5 pv5-l flex flex-row justify-between items-center z-1 ${productPageClass}`}>
       <Link to="/">
         <div className={`logoContainer dim pointer w-70 w-85-l ${currentFillColor}`}>
           <Logo />
         </div>
       </Link>
       <div className="flex">
-        <div className="productFragmentContainer mw4">
-          <button
-            name="pre-order-button"
-            className="absolute right-0 medium-text f7 cherry bg-blossom ttu rotate-270 pv2 ph2 bg-white outline-0 dim pointer mr4 mr5-l mt3">
-            pre-order now
-          </button>
-          <div className="w-100">
-            <img src={pairShoes} alt="Pair of Shoes" width="100%" height="auto" />
-          </div>
-        </div>
         <Link to="cart-checkout" className="flex flex-row items-center no-underline dim">
           <div className={`cartIconContainer pointer ${currentFillColor}`}>
             <CartIcon />
