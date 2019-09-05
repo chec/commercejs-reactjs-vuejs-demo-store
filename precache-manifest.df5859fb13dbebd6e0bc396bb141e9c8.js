@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cf383800d0886e41bc2cb38111e58521",
+    "revision": "660bff435d21f511b27d13216a8b34f7",
     "url": "/example.checkout.v2/index.html"
   },
   {
-    "revision": "fb6bdf4bacd7f436c75f",
-    "url": "/example.checkout.v2/static/css/main.764de2fd.chunk.css"
+    "revision": "881775c963630870cbe0",
+    "url": "/example.checkout.v2/static/css/main.5e0162be.chunk.css"
   },
   {
     "revision": "8d9d5844fe56453af821",
     "url": "/example.checkout.v2/static/js/2.8c821b07.chunk.js"
   },
   {
-    "revision": "fb6bdf4bacd7f436c75f",
-    "url": "/example.checkout.v2/static/js/main.fc37006a.chunk.js"
+    "revision": "881775c963630870cbe0",
+    "url": "/example.checkout.v2/static/js/main.1d90bd97.chunk.js"
   },
   {
     "revision": "933908964377c0edb90c",
@@ -26,6 +26,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "d744b1f3c150e1e1cfc16ab893991e41",
     "url": "/example.checkout.v2/static/media/cart-icon.d744b1f3.svg"
+  },
+  {
+    "revision": "c8c4c385c2f94c302f2fcb810ade05c4",
+    "url": "/example.checkout.v2/static/media/down-arrow.c8c4c385.svg"
   },
   {
     "revision": "763a8d77f190ed48786f300e4e8b503f",
