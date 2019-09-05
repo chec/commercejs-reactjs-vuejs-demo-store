@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
+import Products from './components/Products';
 import ProductDetail from './components/ProductDetail';
 import CartCheckout from './components/CartCheckout';
 import ThankYou from './components/ThankYou';
@@ -33,7 +34,7 @@ class App extends Component {
             products: [
               ...resp.data.map(product => ({
                 ...product,
-                variants: product.variants.map(variant => ({
+                variants: product.variants ? product.variants.map(variant => ({
                   ...variant,
                   optionsById: variant.options.reduce((obj, currentOption) => {
                       obj[currentOption.id] = {
@@ -42,7 +43,7 @@ class App extends Component {
                       }
                       return obj;
                     }, {})
-                }))
+                })) : []
               }))
             ] || []
           })
@@ -160,16 +161,29 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={LandingPage} />
             <Route
+              path="/products"
+              render={(props) => {
+                return (
+                  <Products
+                    {...props}
+                    products={products}
+                    addProductToCart={this.addProductToCart}
+                  />
+                )
+              }}
+            />
+            <Route
               path="/white-shoe"
               render={(props) => {
                 return (
                   <ProductDetail
                     {...props}
-                    product={products.length ? products[0] : null}
+                    product={products.length ? products[1] : null}
                     addProductToCart={this.addProductToCart}
                     />
-                )}}/>
-                <Route
+                )}}
+              />
+              <Route
                   path="/cart-checkout"
                   render={(props) => {
                     return (
