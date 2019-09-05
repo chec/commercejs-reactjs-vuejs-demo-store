@@ -172,17 +172,6 @@ class App extends Component {
                 )
               }}
             />
-            <Route
-              path="/white-shoe"
-              render={(props) => {
-                return (
-                  <ProductDetail
-                    {...props}
-                    product={products.length ? products[1] : null}
-                    addProductToCart={this.addProductToCart}
-                    />
-                )}}
-              />
               <Route
                   path="/cart-checkout"
                   render={(props) => {
