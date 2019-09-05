@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Loading from './Loading';
+import { ReactComponent as ArrowIcon } from '../assets/down-arrow.svg'
 
 function Label(props) {
   return (
     <div className={`${props.classes || ''} `}>
       <p className="medium-text ttu gray f6 tracked-mega-1 pb2">
-        {props.labelTitle || '----'}
+        {props.labelTitle || ''}
       </p>
       <p className="large-title-text f2 font-3-rem-ns fw9 ttu pl3">
-        {props.body || (props.placeholder || '----')}
+        {props.body || (props.placeholder || '')}
       </p>
+      {props.children}
     </div>
   )
 }
@@ -60,11 +62,11 @@ class ProductDetail extends Component {
       <div className="productDetail w-100 pb5 ph2 ph4-ns">
         <div className="mw8 center ph2">
           <div className="cf flex flex-column flex-row-l items-center">
-            <div className="fl flex flex-column flex-grow-1 items-center justify-center mw6 mt6-l order-1 order-0-l">
-              <p className="large-title-text dark-gray w-100 ttl tc">
+            <div className="fl flex flex-column flex-grow-1 items-center justify-center w-50 w-100-m mt6-l order-1 order-0-l">
+              <p className="large-title-text dark-gray w-100 ttl tl">
                 {product.name}
               </p>
-              <p className="medium-body-text gray w-90 tc">
+              <p className="medium-body-text gray w-100 tl">
                 lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
               </p>
             </div>
@@ -83,19 +85,23 @@ class ProductDetail extends Component {
             </div>
           </div>
         </div>
-        <div className="productDetail__info-container center justify-start mw8 pb4 mt2 ph3 ph1-ns">
-          <div className="flex flex-row flex-grow-1 flex-wrap">
+        <div className="productDetail__info-container center justify-start mw8 pb4 mt4 mt2-l ph3 ph1-ns">
+          <div className="flex flex-row flex-grow-1 flex-wrap items-center">
             <Label
               labelTitle='price'
               body='$100.00 USD'
-              classes='mr5-ns mb4'
+              classes='mr4 mb3'
             />
             <div className="relative">
               <Label
-                labelTitle='size'
                 placeholder="choose a size"
                 body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
-              />
+                classes='chooseASize'>
+                <div className="arrowDownContainer ml2">
+                  <ArrowIcon />
+                </div>
+              </Label>
+
               <select
                 onChange={this.handleChange}
                 className="absolute absolute--fill left-0 o-0 pointer w-100"
@@ -112,7 +118,7 @@ class ProductDetail extends Component {
               </select>
             </div>
           </div>
-          <div className="w-50">
+          <div className="w-100 w-50-l mt4 mt0-l">
             <button
               disabled={!!!sizeSelect}
               onClick={this.addProductToCart}

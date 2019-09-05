@@ -35,6 +35,11 @@
   height: 1.8rem;
 }
 
+.arrowDownContainer {
+  width: 1rem;
+  height: 1rem;
+}
+
 
 .checkoutFormInput {
   @extend .w-100 !optional;
@@ -61,4 +66,16 @@
   @extend .pb2 !optional;
   @extend .nowrap !optional;
   @extend .overflow-scroll !optional;
+}
+
+.chooseASize {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 0.75rem 1rem;
+  background: black;
+  p {
+    padding: 0px;
+    font-size: 2.5rem;
+  }
 }
