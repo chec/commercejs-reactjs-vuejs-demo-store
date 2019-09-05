@@ -52,12 +52,6 @@ class ProductDetail extends Component {
       sizeSelect
     } = this.state;
 
-    if (!product) {
-      return (
-        <Loading />
-      )
-    }
-
     return (
       <div className="productDetail w-100 pb5 ph2 ph4-ns">
         <div className="mw8 center ph2">
