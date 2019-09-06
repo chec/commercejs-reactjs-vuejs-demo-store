@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { ReactComponent as RemoveIcon } from '../assets/remove-icon.svg';
 import { ReactComponent as ArrowIcon } from '../assets/arrow-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
+import sockImage from '../assets/updated-sock-image.png'
 
 function CartLineItem(props) {
+  console.log('props is', props.item)
   return (
     <div className="">
       <div className="flex flex-row justify-between items-center ph4 pv2">
@@ -20,7 +22,7 @@ function CartLineItem(props) {
                backgroundRepeat: "no-repeat",
                backgroundPosition: "center",
                backgroundSize: "contain",
-               backgroundImage: `url(${pairShoes})`
+               backgroundImage: `url(${props.item.name.trim('').toLowerCase() === 'sock' ? sockImage : pairShoes})`
              }}
            />
         </div>
