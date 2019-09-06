@@ -53,16 +53,17 @@ class ProductDetail extends Component {
     } = this.state;
 
     return (
-      <div className="productDetail w-100 pb5 ph2 ph4-ns">
+      <div className="productDetail w-100 pb2 ph2 ph4-ns">
         <div className="mw8 center ph2">
           <div className="cf flex flex-column flex-row-l items-center">
             <div className="fl flex flex-column flex-grow-1 items-center justify-center w-100 w-50-l mt6-l order-1 order-0-l">
               <p className="large-title-text dark-gray w-100 ttl tl">
                 {product.name}
               </p>
-              <p className="medium-body-text gray w-100 tl">
-                lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-              </p>
+              <div
+                className="medium-body-text gray w-100 tl"
+                dangerouslySetInnerHTML={{__html: product.description}}
+                ></div>
             </div>
             <div className="fl w-90 w-50-l self-start-l relative pb5 pa0-l">
               <img src={product.media.source} alt="Product" width="100%" height="auto" />
@@ -91,7 +92,7 @@ class ProductDetail extends Component {
                 placeholder="choose a size"
                 body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
                 classes='chooseASize'>
-                <div className="arrowDownContainer ml2">
+                <div className="arrowDownContainer ml2 pr3">
                   <ArrowIcon />
                 </div>
               </Label>
