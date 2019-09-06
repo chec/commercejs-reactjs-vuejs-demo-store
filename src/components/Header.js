@@ -8,7 +8,7 @@ function Header(props) {
   const isThankYouPathname = props.location.pathname === '/thank-you';
   const currentFillColor = isThankYouPathname ? 'fill-cherry' : 'fill-near-white';
   const currentColor = isThankYouPathname ? 'cherry' : 'white';
-  const productPageClass = props.location.pathname === '/white-shoe' ? 'headerContainer--thank-you' : '';
+  const productPageClass = props.location.pathname === '/products' ? 'headerContainer--thank-you' : '';
 
   return (
     <header className={`headerContainer absolute w-100 ph4 ph5-l pv5 pv5-l flex flex-row justify-between items-center z-1 ${productPageClass}`}>
