@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/example.checkout.v2/static/css/main.264ae889.chunk.css",
-    "main.js": "/example.checkout.v2/static/js/main.1d90bd97.chunk.js",
-    "main.js.map": "/example.checkout.v2/static/js/main.1d90bd97.chunk.js.map",
+    "main.css": "/example.checkout.v2/static/css/main.ca0e4f47.chunk.css",
+    "main.js": "/example.checkout.v2/static/js/main.a350643f.chunk.js",
+    "main.js.map": "/example.checkout.v2/static/js/main.a350643f.chunk.js.map",
     "runtime~main.js": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js",
     "runtime~main.js.map": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js.map",
-    "static/js/2.8c821b07.chunk.js": "/example.checkout.v2/static/js/2.8c821b07.chunk.js",
-    "static/js/2.8c821b07.chunk.js.map": "/example.checkout.v2/static/js/2.8c821b07.chunk.js.map",
+    "static/js/2.356e47ee.chunk.js": "/example.checkout.v2/static/js/2.356e47ee.chunk.js",
+    "static/js/2.356e47ee.chunk.js.map": "/example.checkout.v2/static/js/2.356e47ee.chunk.js.map",
     "index.html": "/example.checkout.v2/index.html",
-    "precache-manifest.4360817af430a2ffd5923b8991df671b.js": "/example.checkout.v2/precache-manifest.4360817af430a2ffd5923b8991df671b.js",
+    "precache-manifest.286552807a7d93c6a3190bbe37d8444d.js": "/example.checkout.v2/precache-manifest.286552807a7d93c6a3190bbe37d8444d.js",
     "service-worker.js": "/example.checkout.v2/service-worker.js",
-    "static/css/main.264ae889.chunk.css.map": "/example.checkout.v2/static/css/main.264ae889.chunk.css.map",
+    "static/css/main.ca0e4f47.chunk.css.map": "/example.checkout.v2/static/css/main.ca0e4f47.chunk.css.map",
     "static/media/arrow-icon.3a5e09cc.svg": "/example.checkout.v2/static/media/arrow-icon.3a5e09cc.svg",
     "static/media/cart-icon.d744b1f3.svg": "/example.checkout.v2/static/media/cart-icon.d744b1f3.svg",
     "static/media/down-arrow.c8c4c385.svg": "/example.checkout.v2/static/media/down-arrow.c8c4c385.svg",
@@ -18,6 +18,7 @@
     "static/media/logo.6607ab50.svg": "/example.checkout.v2/static/media/logo.6607ab50.svg",
     "static/media/pair-shoes-small.png": "/example.checkout.v2/static/media/pair-shoes-small.1655d836.png",
     "static/media/remove-icon.2d319ad9.svg": "/example.checkout.v2/static/media/remove-icon.2d319ad9.svg",
-    "static/media/shoes-hero.png": "/example.checkout.v2/static/media/shoes-hero.a1632b77.png"
+    "static/media/shoes-hero.png": "/example.checkout.v2/static/media/shoes-hero.a1632b77.png",
+    "static/media/updated-sock-image.png": "/example.checkout.v2/static/media/updated-sock-image.a990c345.png"
   }
 }
