@@ -387,7 +387,7 @@ class CartCheckout extends Component {
                     <div className="w-50 pl2 flex flex-column">
                       <label>
                         <p className="checkoutFormInputLabel">
-                          first name
+                          last name
                         </p>
                       </label>
                       <input
@@ -395,7 +395,7 @@ class CartCheckout extends Component {
                         type="text"
                         name="lastName"
                         value={this.state.lastName}
-                        placeholder="first name"
+                        placeholder="last name"
                       />
                     </div>
                   </div>
@@ -612,7 +612,7 @@ class CartCheckout extends Component {
                   <div className="flex flex-column">
                     <button
                       onClick={this.state.checkout ? this.captureOrder : this.createCheckout}
-                      className="button__checkout bg-dark-gray white ttu b self-end pointer dim shadow-5 tracked-mega-1"
+                      className="button__checkout bg-cherry white ttu b self-end pointer dim shadow-5 tracked-mega-1"
                     >
                       {`${this.state.checkout ? 'complete checkout' : 'checkout'}`}
                     </button>
