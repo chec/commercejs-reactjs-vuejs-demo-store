@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/example.checkout.v2/static/css/main.ca0e4f47.chunk.css",
-    "main.js": "/example.checkout.v2/static/js/main.c8a65d03.chunk.js",
-    "main.js.map": "/example.checkout.v2/static/js/main.c8a65d03.chunk.js.map",
+    "main.js": "/example.checkout.v2/static/js/main.a22160c8.chunk.js",
+    "main.js.map": "/example.checkout.v2/static/js/main.a22160c8.chunk.js.map",
     "runtime~main.js": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js",
     "runtime~main.js.map": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js.map",
-    "static/js/2.b5a353b7.chunk.js": "/example.checkout.v2/static/js/2.b5a353b7.chunk.js",
-    "static/js/2.b5a353b7.chunk.js.map": "/example.checkout.v2/static/js/2.b5a353b7.chunk.js.map",
+    "static/js/2.a9fbffba.chunk.js": "/example.checkout.v2/static/js/2.a9fbffba.chunk.js",
+    "static/js/2.a9fbffba.chunk.js.map": "/example.checkout.v2/static/js/2.a9fbffba.chunk.js.map",
     "index.html": "/example.checkout.v2/index.html",
-    "precache-manifest.74898827504fd9e4d855634aca9b620a.js": "/example.checkout.v2/precache-manifest.74898827504fd9e4d855634aca9b620a.js",
+    "precache-manifest.46437d0da7977df3d967f4faf556687d.js": "/example.checkout.v2/precache-manifest.46437d0da7977df3d967f4faf556687d.js",
     "service-worker.js": "/example.checkout.v2/service-worker.js",
     "static/css/main.ca0e4f47.chunk.css.map": "/example.checkout.v2/static/css/main.ca0e4f47.chunk.css.map",
     "static/media/arrow-icon.3a5e09cc.svg": "/example.checkout.v2/static/media/arrow-icon.3a5e09cc.svg",
@@ -19,6 +19,6 @@
     "static/media/pair-shoes-small.png": "/example.checkout.v2/static/media/pair-shoes-small.1655d836.png",
     "static/media/remove-icon.2d319ad9.svg": "/example.checkout.v2/static/media/remove-icon.2d319ad9.svg",
     "static/media/shoes-hero.png": "/example.checkout.v2/static/media/shoes-hero.a1632b77.png",
-    "static/media/updated-sock-image.png": "/example.checkout.v2/static/media/updated-sock-image.a990c345.png"
+    "static/media/updated-sock-image.png": "/example.checkout.v2/static/media/updated-sock-image.695d5b53.png"
   }
 }
