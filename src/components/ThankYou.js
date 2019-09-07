@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import pairShoes from '../assets/pair-shoes-small.png'
+import sockImage from '../assets/updated-sock-image.png'
 
 class ThankYou extends Component {
   render() {
@@ -13,7 +14,7 @@ class ThankYou extends Component {
                  backgroundRepeat: "no-repeat",
                  backgroundPosition: "center",
                  backgroundSize: "contain",
-                 backgroundImage: `url(${pairShoes})`
+                 backgroundImage: `url(${item.name.trim('').toLowerCase() === 'sock' ? sockImage : pairShoes})`
                }}
              />
           </div>
