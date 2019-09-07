@@ -1,9 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
+
+// util libs
+import ccFormat from '../utils/ccFormat';
+
+// assets
 import { ReactComponent as RemoveIcon } from '../assets/remove-icon.svg';
 import { ReactComponent as ArrowIcon } from '../assets/arrow-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
 import sockImage from '../assets/updated-sock-image.png'
+
 
 function CartLineItem(props) {
   console.log('props is', props.item)
@@ -101,8 +107,14 @@ class CartCheckout extends Component {
   }
 
   handleFormChanges(e) {
+    let value = e.target.value;
+
+    if (e.target.name === "cardNumber") {
+      value = ccFormat(value)
+    }
+
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     })
 
     if (e.target.name === "deliveryCountry") {
