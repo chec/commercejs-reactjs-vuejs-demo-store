@@ -36,9 +36,9 @@ function CartLineItem(props) {
           </span>
           <span className="db">
             <div className="flex flex-row items-center justify-end">
-              <button className="bg-none white f4 pointer grow dim ph2" onClick={() => props.updateQuantity(props.item.id, props.item.quantity - 1)}>-</button>
+              <button className="bg-none white f4 pointer grow dim ph2 cherry" onClick={() => props.updateQuantity(props.item.id, props.item.quantity - 1)}>-</button>
               <span className="ttl">x</span>{props.item.quantity}
-              <button className="bg-none white f5 pointer grow dim ph2" onClick={() => props.updateQuantity(props.item.id, props.item.quantity + 1)}>+</button>
+              <button className="bg-none white f5 pointer grow dim ph2 cherry" onClick={() => props.updateQuantity(props.item.id, props.item.quantity + 1)}>+</button>
             </div>
           </span>
         </div>
@@ -556,8 +556,9 @@ class CartCheckout extends Component {
                         </label>
                         <input
                           className={`checkoutFormInput ${this.state.errors.gateway_error && 'input-error'}`}
-                          type="number"
+                          type="text"
                           name="cardNumber"
+                          pattern="[0-9.]+"
                           value={this.state.cardNumber}
                           placeholder="Card Number"
                         />
