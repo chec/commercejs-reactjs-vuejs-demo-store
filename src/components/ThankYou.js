@@ -14,7 +14,7 @@ class ThankYou extends Component {
                  backgroundRepeat: "no-repeat",
                  backgroundPosition: "center",
                  backgroundSize: "contain",
-                 backgroundImage: `url(${item.name.trim('').toLowerCase() === 'sock' ? sockImage : pairShoes})`
+                 backgroundImage: `url(${item.product_name.trim('').toLowerCase() === 'sock' ? sockImage : pairShoes})`
                }}
              />
           </div>
@@ -31,7 +31,7 @@ class ThankYou extends Component {
       )
     })
     return (
-      <div className="flex flex-grow-1 bg-tan-white w-100 pt6 pb5 mt5 mt3-l">
+      <div className="flex flex-grow-1 bg-tan-white w-100 pt6 pb5">
         <div className="cf flex flex-column flex-row-l mw9 center w-100 ph3 mt5">
           <div className="fl w-100 w-40-l ph3">
               <div className="relative z-1 h5 br3 bg-dark-gray w-100 shadow-3 pt2 overflow-scroll">
