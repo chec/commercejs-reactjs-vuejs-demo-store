@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from "react-router-dom";
+import { FootPrintsLoading as Loading } from './Loaders';
 
 // util libs
 import ccFormat from '../utils/ccFormat';
@@ -97,6 +98,11 @@ class CartCheckout extends Component {
         "shipping[street]": null,
         "shipping[town_city]": null,
         "shipping[postal_zip_code]": null
+      },
+
+      loading: {
+        checkout: false,
+        order: false
       }
     }
   }
@@ -160,13 +166,23 @@ class CartCheckout extends Component {
     }
 
     if (this.props.cart.total_items > 0) {
+      this.setState({
+        loading: {
+          ...this.state.loading,
+          checkout: true,
+        }
+      })
       this.props.commerce.Checkout
         .generateToken(this.props.cart.id, { type: 'cart' },
 
           (checkout) => {
             this.getShippingOptions(checkout.id, (this.state.deliveryCountry || 'US'))
             this.setState({
-              checkout: checkout
+              checkout: checkout,
+              loading: {
+                ...this.state.loading,
+                checkout: false
+              }
             })
           },
 
@@ -208,6 +224,10 @@ class CartCheckout extends Component {
         gateway_error: null,
         "shipping[name]": null,
         "shipping[street]": null,
+      },
+      loading: {
+        ...this.state.loading,
+        order: true,
       }
     })
 
@@ -215,6 +235,7 @@ class CartCheckout extends Component {
       e.preventDefault()
 
     }
+
     const lineItems = this.state.checkout.live.line_items.reduce((obj, lineItem) => {
       obj[lineItem.id] = {
         quantity: lineItem.quantity,
@@ -285,6 +306,13 @@ class CartCheckout extends Component {
           alert(error.message)
         }
 
+      }).finally(() => {
+        this.setState({
+          loading: {
+            ...this.state.loading,
+            order: false,
+          }
+        })
       })
   }
 
@@ -312,6 +340,10 @@ class CartCheckout extends Component {
     const {
       line_items: lineItems = []
     } = this.props.cart || {};
+
+    const {
+      loading
+    } = this.state;
 
     const allLineItems = lineItems.map((item, key) => {
       return (
@@ -349,7 +381,18 @@ class CartCheckout extends Component {
     })
 
     return (
-      <div className="flex flex-grow-1 flex-column bg-tan-white w-100 pb4">
+      <Fragment>
+        {
+          (loading.checkout || loading.order) && (
+            <Loading>
+              {
+                loading.checkout &&
+                'Loading...'
+              }
+            </Loading>
+          )
+        }
+        <div className="flex flex-grow-1 flex-column bg-tan-white w-100 pb4">
         <div className="flex justify-between mw9 w-100 items-center center pt4 ph4">
           <Link to="/products" className="flex items-center medium-text f7 f6-ns tracked-mega ttu no-underline dark-gray dim">
             <div className="arrowIconContainer fill-cherry pr4">
@@ -635,6 +678,7 @@ class CartCheckout extends Component {
             </div>
         </div>
       </div>
+      </Fragment>
     )
   }
 }
