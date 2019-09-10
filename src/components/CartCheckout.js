@@ -29,7 +29,7 @@ function CartLineItem(props) {
                backgroundRepeat: "no-repeat",
                backgroundPosition: "center",
                backgroundSize: "contain",
-               backgroundImage: `url(${props.item.name.trim('').toLowerCase() === 'sock' ? sockImage : pairShoes})`
+               backgroundImage: `url(${props.item.name.trim('').toLowerCase() === 'pink sock' ? sockImage : pairShoes})`
              }}
            />
         </div>

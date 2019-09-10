@@ -14,7 +14,7 @@ class ThankYou extends Component {
                  backgroundRepeat: "no-repeat",
                  backgroundPosition: "center",
                  backgroundSize: "contain",
-                 backgroundImage: `url(${item.product_name.trim('').toLowerCase() === 'sock' ? sockImage : pairShoes})`
+                 backgroundImage: `url(${item.product_name.trim('').toLowerCase() === 'pink sock' ? sockImage : pairShoes})`
                }}
              />
           </div>
