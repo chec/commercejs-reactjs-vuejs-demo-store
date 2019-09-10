@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Loading } from './Loaders';
+import { FootPrintsLoading as Loading } from './Loaders';
 import ProductDetail from './ProductDetail';
 
 class Products extends Component {
