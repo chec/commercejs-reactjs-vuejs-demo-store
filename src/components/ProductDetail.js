@@ -54,7 +54,7 @@ class ProductDetail extends Component {
     } = this.state;
 
     return (
-      <div className="productDetail w-100 pb1 ph2 ph4-ns">
+      <div className="productDetail w-100 pb1 ph3 ph4-ns">
         <div className="mw50rem center ph2">
           <div className="cf flex flex-column flex-row-l items-center">
             <div className="fl flex flex-column flex-grow-1 items-center justify-center w-100 w-50-l mt6-l order-1 order-0-l">
@@ -80,7 +80,7 @@ class ProductDetail extends Component {
               </div>
             </div>
           </div>
-          <div className="productDetail__info-container center justify-start mw8 pb2 mt4 mt2-l ph3 ph1-ns">
+          <div className="productDetail__info-container center justify-start mw8 pb2 mt4 mt2-l ph0 ph1-ns">
             <div className="flex flex-row flex-grow-1 flex-wrap items-center">
               <Label
                 labelTitle='price'
@@ -91,26 +91,25 @@ class ProductDetail extends Component {
                 <Label
                   placeholder="choose a size"
                   body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
-                  classes='chooseASize'>
+                  classes='chooseASize br1'>
                   <div className="arrowDownContainer ml2 pr3">
                     <ArrowIcon />
                   </div>
+                  <select
+                    onChange={this.handleChange}
+                    className="absolute absolute--fill left-0 o-0 pointer w-100"
+                    value={sizeSelect}
+                    name='sizeSelect'>
+                    <option value="" disabled>Choose a size</option>
+                    {
+                      product.variants[0].options.map(option =>
+                        <option value={option.id} key={option.id}>
+                          {option.name}
+                        </option>
+                      )
+                    }
+                  </select>
                 </Label>
-
-                <select
-                  onChange={this.handleChange}
-                  className="absolute absolute--fill left-0 o-0 pointer w-100"
-                  value={sizeSelect}
-                  name='sizeSelect'>
-                  <option value="" disabled>Choose a size</option>
-                  {
-                    product.variants[0].options.map(option =>
-                      <option value={option.id} key={option.id}>
-                        {option.name}
-                      </option>
-                    )
-                  }
-                </select>
               </div>
             </div>
             <div className="w-100 w-50-l mt4 mt0-l">
