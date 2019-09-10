@@ -104,6 +104,7 @@ class App extends Component {
     })
   }
 
+  // refreshes cart
   refreshCart(){
     this.props.commerce.Cart.refresh((resp) => {
       // successful
@@ -120,7 +121,6 @@ class App extends Component {
             checkout: null,
             order: resp
           })
-          this.props.history.replace("/thank-you")
           return resolve(resp);
         }, (error) => {
           console.log(error)
