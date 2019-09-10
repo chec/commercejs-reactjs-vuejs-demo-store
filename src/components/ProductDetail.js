@@ -48,13 +48,14 @@ class ProductDetail extends Component {
     const {
       product
     } = this.props;
+
     const {
       sizeSelect
     } = this.state;
 
     return (
-      <div className="productDetail w-100 pb2 ph2 ph4-ns">
-        <div className="mw8 center ph2">
+      <div className="productDetail w-100 pb1 ph2 ph4-ns">
+        <div className="mw50rem center ph2">
           <div className="cf flex flex-column flex-row-l items-center">
             <div className="fl flex flex-column flex-grow-1 items-center justify-center w-100 w-50-l mt6-l order-1 order-0-l">
               <p className="large-title-text dark-gray w-100 ttl tl">
@@ -79,50 +80,51 @@ class ProductDetail extends Component {
               </div>
             </div>
           </div>
-        </div>
-        <div className="productDetail__info-container center justify-start mw8 pb4 mt4 mt2-l ph3 ph1-ns">
-          <div className="flex flex-row flex-grow-1 flex-wrap items-center">
-            <Label
-              labelTitle='price'
-              body='$100.00 USD'
-              classes='mr4 mb3'
-            />
-            <div className="relative">
+          <div className="productDetail__info-container center justify-start mw8 pb2 mt4 mt2-l ph3 ph1-ns">
+            <div className="flex flex-row flex-grow-1 flex-wrap items-center">
               <Label
-                placeholder="choose a size"
-                body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
-                classes='chooseASize'>
-                <div className="arrowDownContainer ml2 pr3">
-                  <ArrowIcon />
-                </div>
-              </Label>
+                labelTitle='price'
+                body='$100.00 USD'
+                classes='mr4 mb3'
+              />
+              <div className="relative">
+                <Label
+                  placeholder="choose a size"
+                  body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
+                  classes='chooseASize'>
+                  <div className="arrowDownContainer ml2 pr3">
+                    <ArrowIcon />
+                  </div>
+                </Label>
 
-              <select
-                onChange={this.handleChange}
-                className="absolute absolute--fill left-0 o-0 pointer w-100"
-                value={sizeSelect}
-                name='sizeSelect'>
-                <option value="" disabled>Choose a size</option>
-                {
-                  product.variants[0].options.map(option =>
-                    <option value={option.id} key={option.id}>
-                      {option.name}
-                    </option>
-                  )
-                }
-              </select>
+                <select
+                  onChange={this.handleChange}
+                  className="absolute absolute--fill left-0 o-0 pointer w-100"
+                  value={sizeSelect}
+                  name='sizeSelect'>
+                  <option value="" disabled>Choose a size</option>
+                  {
+                    product.variants[0].options.map(option =>
+                      <option value={option.id} key={option.id}>
+                        {option.name}
+                      </option>
+                    )
+                  }
+                </select>
+              </div>
+            </div>
+            <div className="w-100 w-50-l mt4 mt0-l">
+              <button
+                disabled={!!!sizeSelect}
+                onClick={this.addProductToCart}
+                name="addToCartButton"
+                className={`button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 ${!!this.state.sizeSelect ? 'dim' :'o-30'}`}>
+                add to cart
+              </button>
             </div>
           </div>
-          <div className="w-100 w-50-l mt4 mt0-l">
-            <button
-              disabled={!!!sizeSelect}
-              onClick={this.addProductToCart}
-              name="addToCartButton"
-              className={`button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 ${!!this.state.sizeSelect ? 'dim' :'o-30'}`}>
-              add to cart
-            </button>
-          </div>
         </div>
+
       </div>
     )
   }
