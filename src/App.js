@@ -196,8 +196,11 @@ class App extends Component {
           </Switch>
         </main>
         <footer className="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
-          <div className="self-end w-100">
-            <p className="medium-text tc cherry">
+          <div className="self-end w-100 flex flex-column justify-center">
+            <a href="https://icons8.com" className="medium-text white-70 f8 ttu lh-title center mv2">
+              design resources from icons8.com
+            </a>
+            <p className="medium-text tc cherry mv2">
               © 2019 CHEC PLATFORM/COMMERCEJS
             </p>
           </div>
