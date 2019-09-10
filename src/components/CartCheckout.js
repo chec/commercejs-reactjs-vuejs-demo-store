@@ -13,7 +13,6 @@ import sockImage from '../assets/updated-sock-image.png'
 
 
 function CartLineItem(props) {
-  console.log('props is', props.item)
   return (
     <div className="">
       <div className="flex flex-row justify-between items-center ph4 pv2">
