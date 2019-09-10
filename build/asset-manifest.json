@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/example.checkout.v2/static/css/main.beca8054.chunk.css",
+    "main.css": "/example.checkout.v2/static/css/main.68510112.chunk.css",
     "main.js": "/example.checkout.v2/static/js/main.ab136c4a.chunk.js",
     "main.js.map": "/example.checkout.v2/static/js/main.ab136c4a.chunk.js.map",
     "runtime~main.js": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js",
@@ -8,9 +8,9 @@
     "static/js/2.5a440bde.chunk.js": "/example.checkout.v2/static/js/2.5a440bde.chunk.js",
     "static/js/2.5a440bde.chunk.js.map": "/example.checkout.v2/static/js/2.5a440bde.chunk.js.map",
     "index.html": "/example.checkout.v2/index.html",
-    "precache-manifest.ac2bbd8b85d4d14cda81f7dc74f17058.js": "/example.checkout.v2/precache-manifest.ac2bbd8b85d4d14cda81f7dc74f17058.js",
+    "precache-manifest.d3055dca2d3bdfc5ce7190d6e7060b36.js": "/example.checkout.v2/precache-manifest.d3055dca2d3bdfc5ce7190d6e7060b36.js",
     "service-worker.js": "/example.checkout.v2/service-worker.js",
-    "static/css/main.beca8054.chunk.css.map": "/example.checkout.v2/static/css/main.beca8054.chunk.css.map",
+    "static/css/main.68510112.chunk.css.map": "/example.checkout.v2/static/css/main.68510112.chunk.css.map",
     "static/media/arrow-icon.3a5e09cc.svg": "/example.checkout.v2/static/media/arrow-icon.3a5e09cc.svg",
     "static/media/cart-icon.d744b1f3.svg": "/example.checkout.v2/static/media/cart-icon.d744b1f3.svg",
     "static/media/down-arrow.c8c4c385.svg": "/example.checkout.v2/static/media/down-arrow.c8c4c385.svg",
