@@ -926,6 +926,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .mw7 { max-width: 48rem; }
 .mw8 { max-width: 64rem; }
 .mw9 { max-width: 84rem; }
+.mw50rem { max-width: 50rem; }
 /* Max Width String Properties */
 .mw-none { max-width: none; }
 /*
@@ -2232,6 +2233,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .mw8-ns { max-width: 64rem; }
  .mw9-ns { max-width: 84rem; }
  .mw-none-ns { max-width: none; }
+ .mw50rem-ns { max-width: 50rem; }
  .w1-ns { width: 1rem; }
  .w2-ns { width: 2rem; }
  .w3-ns { width: 4rem; }
@@ -2662,6 +2664,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .mw8-m { max-width: 64rem; }
  .mw9-m { max-width: 84rem; }
  .mw-none-m { max-width: none; }
+ .mw50rem-m { max-width: 50rem; }
  .w1-m { width: 1rem; }
  .w2-m { width: 2rem; }
  .w3-m { width: 4rem; }
@@ -3091,6 +3094,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .mw8-l { max-width: 64rem; }
  .mw9-l { max-width: 84rem; }
  .mw-none-l { max-width: none; }
+ .mw50rem-l { max-width: 50rem; }
  .w1-l { width: 1rem; }
  .w2-l { width: 2rem; }
  .w3-l { width: 4rem; }
