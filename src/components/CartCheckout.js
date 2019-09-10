@@ -68,6 +68,7 @@ class CartCheckout extends Component {
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
     this.loadingScreenMinLifetime = 4000; // ms lifetime for loading screen
+    this.capturingOrderLoadingScreenMinLifetime = 4000;
     this.state = {
       firstName: 'John',
       lastName: 'Doe',
@@ -167,29 +168,16 @@ class CartCheckout extends Component {
     }
 
     if (this.props.cart.total_items > 0) {
-      this.setState({
-        loading: {
-          ...this.state.loading,
-          checkout: true,
-        }
-      })
-      this.props.commerce.Checkout
-        .generateToken(this.props.cart.id, { type: 'cart' },
-
-          (checkout) => {
-            this.getShippingOptions(checkout.id, (this.state.deliveryCountry || 'US'))
-            this.setState({
-              checkout: checkout,
-              loading: {
-                ...this.state.loading,
-                checkout: false
-              }
-            })
-          },
-
-          function(error) {
-            console.log('Error:', error)
+      this.props.commerce.Checkout.generateToken(this.props.cart.id, { type: 'cart' },
+        (checkout) => {
+          this.getShippingOptions(checkout.id, (this.state.deliveryCountry || 'US'))
+          this.setState({
+            checkout: checkout
           })
+        },
+        (error) => {
+          console.log('Error:', error)
+        })
 
     } else {
       alert("Your cart is empty")
@@ -224,7 +212,7 @@ class CartCheckout extends Component {
 
     const lifetimeTimeout = setTimeout(() => {
       exceededMinLifetime = true
-    }, this.loadingScreenMinLifetime);
+    }, this.capturingOrderLoadingScreenMinLifetime);
 
     const secondsInterval = setInterval(() => {
       secondsPassed = secondsPassed + 1000;
@@ -287,10 +275,33 @@ class CartCheckout extends Component {
       }
     }
     console.log('The order constructed:', newOrder)
-    let captureOrderPromiseRejected = false;
     this.props.captureOrder(this.state.checkout.id, newOrder)
+      .then(() => {
+        if (exceededMinLifetime) {
+          this.setState({
+            loading: {
+              ...this.state.loading,
+              order: false,
+            }
+          })
+          this.props.history.replace("/thank-you") // redirect now since capturingOrderLoadingScreenMinLifetime satisfied
+        } else {
+          clearInterval(secondsInterval);
+          clearTimeout(lifetimeTimeout)
+          const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
+          setTimeout(() => {
+            this.setState({
+              loading: {
+                ...this.state.loading,
+                order: false,
+              }
+            })
+            this.props.history.replace("/thank-you") // redirect after waiting remainingSecondsToWait
+          }, remainingSecondsToWait)
+        }
+      })
       .catch(({error}) => {
-        captureOrderPromiseRejected = true;
+        let errorToAlert = '';
         if (error.type === 'validation') {
           console.log('the error messages:', error.message)
 
@@ -306,7 +317,7 @@ class CartCheckout extends Component {
           const allErrors = error.message.reduce((string, error) => {
             return `${string} ${error.error}`
           }, '')
-          alert(allErrors)
+          errorToAlert = allErrors;
         }
 
         if (error.type === 'gateway_error') {
@@ -316,34 +327,28 @@ class CartCheckout extends Component {
               [error.type]: error.message
             }
           })
-          alert(error.message)
+          errorToAlert = error.message
         }
 
-      }).finally(() => {
         if (exceededMinLifetime) {
           this.setState({
             loading: {
               ...this.state.loading,
               order: false,
-            }
-          })
-          if (!captureOrderPromiseRejected) {
-            this.props.history.replace("/thank-you")
-          }
+            },
+          }, alert(errorToAlert))
+
         } else {
           clearInterval(secondsInterval);
           clearTimeout(lifetimeTimeout)
-          const remainingSecondsToWait = this.loadingScreenMinLifetime - secondsPassed;
+          const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
           setTimeout(() => {
             this.setState({
               loading: {
                 ...this.state.loading,
                 order: false,
               }
-            })
-            if (!captureOrderPromiseRejected) {
-              this.props.history.replace("/thank-you")
-            }
+            }, alert(errorToAlert))
           }, remainingSecondsToWait)
         }
       })
@@ -416,13 +421,9 @@ class CartCheckout extends Component {
     return (
       <Fragment>
         {
-          (loading.checkout || loading.order) && (
+          (loading.order) && (
             <Loading>
-              {
-                loading.checkout ?
-                'Loading...' :
-                'processing order...'
-              }
+              processing order...
             </Loading>
           )
         }
@@ -704,7 +705,7 @@ class CartCheckout extends Component {
                       onClick={this.state.checkout ? this.captureOrder : this.createCheckout}
                       className="button__checkout bg-cherry white ttu b self-end pointer dim shadow-5 tracked-mega-1"
                     >
-                      {`${this.state.checkout ? 'buy now' : 'checkout'}`}
+                      {`${this.state.checkout ? 'buy now' : 'delivery & payment'}`}
                     </button>
                   </div>
 
