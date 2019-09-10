@@ -84,7 +84,7 @@ class ProductDetail extends Component {
             <div className="flex flex-row flex-grow-1 flex-wrap items-center">
               <Label
                 labelTitle='price'
-                body='$100.00 USD'
+                body={`$${product.price.formatted_with_code}`}
                 classes='mr4 mb3'
               />
               <div className="relative">
