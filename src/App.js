@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
@@ -152,15 +152,15 @@ class App extends Component {
       products
     } = this.state;
     return (
-      <div>
+      <Fragment>
         {
           (this.props.location.pathname !== '/cart-checkout') &&
           <Header cart={cart} location={this.props.location} />
         }
         <main id="main" className="flex">
           <Switch>
-            <Route path="/" exact component={LandingPage} />
-            <Route
+           <Route path="/" exact component={LandingPage} />
+           <Route
               path="/products"
               render={(props) => {
                 return (
@@ -171,38 +171,38 @@ class App extends Component {
                   />
                 )
               }}
-            />
-              <Route
-                  path="/cart-checkout"
-                  render={(props) => {
-                    return (
-                      <CartCheckout
-                        {...props}
-                        cart={cart}
-                        commerce={this.props.commerce}
-                        removeProductFromCart={this.removeProductFromCart}
-                        captureOrder={this.captureOrder}
-                        updateQuantity={this.updateQuantity}
-                      />
-                    )
-                  }} />
-                <Route path="/thank-you" render={(props) => {
-                    if (!this.state.order) {
-                      return props.history.push("/")
-                    }
-                    return <ThankYou {...props} order={this.state.order} />
-                  }}/>
-
-                </Switch>
-              </main>
-              <footer className="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
-                <div className="self-end w-100">
-                  <p className="medium-text tc cherry">
-                    © 2019 CHEC PLATFORM/COMMERCEJS
-                  </p>
-                </div>
-              </footer>
-            </div>
+          />
+          <Route
+            path="/cart-checkout"
+            render={(props) => {
+              return (
+                <CartCheckout
+                  {...props}
+                  cart={cart}
+                  commerce={this.props.commerce}
+                  removeProductFromCart={this.removeProductFromCart}
+                  captureOrder={this.captureOrder}
+                  updateQuantity={this.updateQuantity}
+                />
+              )
+          }}
+          />
+          <Route path="/thank-you" render={(props) => {
+              if (!this.state.order) {
+                return props.history.push("/")
+              }
+              return <ThankYou {...props} order={this.state.order} />
+            }}/>
+          </Switch>
+        </main>
+        <footer className="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
+          <div className="self-end w-100">
+            <p className="medium-text tc cherry">
+              © 2019 CHEC PLATFORM/COMMERCEJS
+            </p>
+          </div>
+        </footer>
+      </Fragment>
     )
   }
 }
