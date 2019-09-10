@@ -63,7 +63,9 @@ class ThankYou extends Component {
                     <span className="db pt1 f7 mid-gray">{this.props.order.customer.email}</span>
                   </p>
                   <p className="medium-text f6 black ttu tracked tr">
-                    delivery address
+                    <span className="lh-title">
+                      delivery address
+                    </span>
                     <span className="db pt1 f7 mid-gray">
                       {
                         this.props.order.shipping.name
