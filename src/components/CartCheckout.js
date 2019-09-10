@@ -67,6 +67,7 @@ class CartCheckout extends Component {
     this.captureOrder = this.captureOrder.bind(this);
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
+    this.loadingScreenMinLifetime = 4000; // ms lifetime for loading screen
     this.state = {
       firstName: 'John',
       lastName: 'Doe',
@@ -218,6 +219,17 @@ class CartCheckout extends Component {
   }
 
   captureOrder(e) {
+    let exceededMinLifetime = false;
+    let secondsPassed = 0;
+
+    const lifetimeTimeout = setTimeout(() => {
+      exceededMinLifetime = true
+    }, this.loadingScreenMinLifetime);
+
+    const secondsInterval = setInterval(() => {
+      secondsPassed = secondsPassed + 1000;
+    }, 1000)
+
     this.setState({
       errors: {
         "fulfillment[shipping_method]": null,
@@ -275,9 +287,10 @@ class CartCheckout extends Component {
       }
     }
     console.log('The order constructed:', newOrder)
+    let captureOrderPromiseRejected = false;
     this.props.captureOrder(this.state.checkout.id, newOrder)
       .catch(({error}) => {
-
+        captureOrderPromiseRejected = true;
         if (error.type === 'validation') {
           console.log('the error messages:', error.message)
 
@@ -307,12 +320,32 @@ class CartCheckout extends Component {
         }
 
       }).finally(() => {
-        this.setState({
-          loading: {
-            ...this.state.loading,
-            order: false,
+        if (exceededMinLifetime) {
+          this.setState({
+            loading: {
+              ...this.state.loading,
+              order: false,
+            }
+          })
+          if (!captureOrderPromiseRejected) {
+            this.props.history.replace("/thank-you")
           }
-        })
+        } else {
+          clearInterval(secondsInterval);
+          clearTimeout(lifetimeTimeout)
+          const remainingSecondsToWait = this.loadingScreenMinLifetime - secondsPassed;
+          setTimeout(() => {
+            this.setState({
+              loading: {
+                ...this.state.loading,
+                order: false,
+              }
+            })
+            if (!captureOrderPromiseRejected) {
+              this.props.history.replace("/thank-you")
+            }
+          }, remainingSecondsToWait)
+        }
       })
   }
 
@@ -386,8 +419,9 @@ class CartCheckout extends Component {
           (loading.checkout || loading.order) && (
             <Loading>
               {
-                loading.checkout &&
-                'Loading...'
+                loading.checkout ?
+                'Loading...' :
+                'processing order...'
               }
             </Loading>
           )
