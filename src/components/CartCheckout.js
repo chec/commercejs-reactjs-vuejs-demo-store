@@ -355,12 +355,14 @@ class CartCheckout extends Component {
 
   removeProductFromCart(itemId) {
     this.props.removeProductFromCart(itemId).then(({ cart }) => {
-      if (cart.total_items === 0) {
+      if (cart.total_items === 0 && this.state.checkout) {
         return this.setState({
           checkout: null
         }, () => alert("Add items to your cart before to continue checkout."))
       }
-      this.createCheckout()
+      if (this.state.checkout) {
+        this.createCheckout()
+      }
     })
   }
 
