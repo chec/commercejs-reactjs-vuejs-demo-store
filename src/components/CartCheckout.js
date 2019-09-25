@@ -429,7 +429,7 @@ class CartCheckout extends Component {
           )
         }
         <div className="flex flex-grow-1 flex-column bg-tan-white w-100 pb4">
-        <div className="flex justify-between mw9 w-100 items-center center pt4 ph4">
+        <div className="flex justify-between mw9 w-100 items-center center pt4 ph4 z-1">
           <Link to="/products" className="flex items-center medium-text f7 f6-ns tracked-mega ttu no-underline dark-gray dim">
             <div className="arrowIconContainer fill-cherry pr4">
               <ArrowIcon />
