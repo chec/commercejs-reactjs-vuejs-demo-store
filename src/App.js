@@ -18,7 +18,16 @@ class App extends Component {
     this.state = {
       products: [],
       cart: null,
-      order: null
+      order: null,
+      playCartAnimation: false
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if ( prevState.cart && prevState.cart.total_items !== this.state.cart.total_items) {
+      this.setState({
+        playCartAnimation: true
+      })
     }
   }
 
@@ -69,6 +78,9 @@ class App extends Component {
   // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
   // https://commercejs.com/docs/api/?javascript#add-item-to-cart
   addProductToCart(product) {
+    this.setState({
+      playCartAnimation: false
+    })
     const {
       productId,
       variant
@@ -83,7 +95,6 @@ class App extends Component {
         this.setState({
           cart: resp.cart
         })
-        alert("Added to cart!")
       }
     });
   }
@@ -146,6 +157,8 @@ class App extends Component {
     })
   }
 
+
+
   render() {
     const {
       cart,
@@ -154,8 +167,7 @@ class App extends Component {
     return (
       <Fragment>
         {
-          (this.props.location.pathname !== '/cart-checkout') &&
-          <Header cart={cart} location={this.props.location} />
+          <Header rootClasses={`${this.props.location.pathname === '/cart-checkout' && 'clip'}`} cart={cart} location={this.props.location} playCartAnimation={this.state.playCartAnimation}/>
         }
         <main id="main" className="flex">
           <Switch>
