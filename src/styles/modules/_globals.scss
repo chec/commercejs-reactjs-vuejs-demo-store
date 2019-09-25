@@ -11,3 +11,13 @@
    -webkit-appearance: none;
    margin: 0;
  }
+
+.scale {
+  animation: scale 2000ms 1;
+}
+
+ @keyframes scale {
+ 	0%, 20%, 50%, 80%, 100% {transform: scale(1);}
+ 	40% {transform: scale(1.2);}
+ 	60% {transform: scale(1.4);}
+ }
