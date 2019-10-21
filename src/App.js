@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, withRouter } from "react-router-dom";
+import commerce from './lib/commerce';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import Products from './components/Products';
@@ -15,6 +16,7 @@ class App extends Component {
     this.captureOrder = this.captureOrder.bind(this);
     this.refreshCart = this.refreshCart.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
+    this.retrieveCart = this.retrieveCart.bind(this);
     this.state = {
       products: [],
       cart: null,
@@ -32,47 +34,42 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const {
-      commerce
-    } = this.props;
-    if (commerce !== undefined && typeof commerce !== 'undefined') {
-      commerce.Products.list(
-        (resp) => {
-          //Success
-          this.setState({
-            products: [
-              ...resp.data.map(product => ({
-                ...product,
-                variants: product.variants ? product.variants.map(variant => ({
-                  ...variant,
-                  optionsById: variant.options.reduce((obj, currentOption) => {
-                      obj[currentOption.id] = {
-                        ...currentOption,
-                        variantId: variant.id
-                      }
-                      return obj;
-                    }, {})
-                })) : []
-              }))
-            ] || []
-          })
-        },
-        (error) => {
-          // handle error properly in real-world
-          console.log(error)
-        }
-      );
-      window.addEventListener("Commercejs.Cart.Ready", function () {
-        // invoke commerce cart method to retrieve cart in session
-        commerce.Cart.retrieve((cart) => {
-          if (!cart.error) {
-            this.setState({
-              cart
-            })
-          }
-        });
-      }.bind(this))
-    }
+    this.retrieveCart()
+    commerce.products.list().then(
+      (resp) => {
+        //Success
+        this.setState({
+          products: [
+            ...resp.data.map(product => ({
+              ...product,
+              variants: product.variants ? product.variants.map(variant => ({
+                ...variant,
+                optionsById: variant.options.reduce((obj, currentOption) => {
+                    obj[currentOption.id] = {
+                      ...currentOption,
+                      variantId: variant.id
+                    }
+                    return obj;
+                  }, {})
+              })) : []
+            }))
+          ] || []
+        })
+      }
+    ).catch(
+      (error) => {
+        // handle error properly in real-world
+        console.log(error)
+      }
+    );
+  }
+
+  retrieveCart(){
+    commerce.cart.retrieve().then(cart => {
+      this.setState({
+        cart
+      })
+    }).catch(error => console.log(error));
   }
 
   // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
@@ -86,46 +83,38 @@ class App extends Component {
       variant
     } = product
 
-    this.props.commerce.Cart.add({
+    commerce.cart.add({
       id: productId,
       variant
-    }, (resp) => {
+    }).then(resp => {
       // if successful update Cart
-      if (!resp.error) {
         this.setState({
           cart: resp.cart
         })
-      }
-    });
+    }).catch(error => console.log(error))
   }
 
   // cart methods
   removeProductFromCart(lineItemId) {
-    return new Promise((resolve, reject) => {
-      this.props.commerce.Cart.remove(lineItemId, (resp) => {
-        // if successful update Cart
-        if (!resp.error) {
-          this.setState({
-            cart: resp.cart
-          })
-          return resolve(resp)
-        }
-        reject(resp)
-      });
+    return commerce.cart.remove(lineItemId).then((resp) => {
+      this.setState({
+        cart: resp.cart
+      })
+      return resp
     })
   }
 
   // refreshes cart
   refreshCart(){
-    this.props.commerce.Cart.refresh((resp) => {
-      // successful
-    }, error => console.log(error))
+    commerce.cart.refresh().then(resp => {
+      this.retrieveCart()
+    }).catch(error => console.log(error))
   }
 
   captureOrder(checkoutId, order) {
     return new Promise((resolve, reject) => {
       // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
-      this.props.commerce.Checkout
+      commerce.Checkout
         .capture(checkoutId, order, (resp) => {
           this.refreshCart()
           this.setState({
@@ -142,7 +131,7 @@ class App extends Component {
 
   updateQuantity(lineItemId, quantity) {
     return new Promise((resolve, reject) => {
-      this.props.commerce.Cart.update(lineItemId, { quantity },
+      commerce.Cart.update(lineItemId, { quantity },
         function(resp){
           // if (resp.cart.total_items === 0) {
           //   this.setState({
@@ -191,7 +180,7 @@ class App extends Component {
                 <CartCheckout
                   {...props}
                   cart={cart}
-                  commerce={this.props.commerce}
+                  commerce={commerce}
                   removeProductFromCart={this.removeProductFromCart}
                   captureOrder={this.captureOrder}
                   updateQuantity={this.updateQuantity}
