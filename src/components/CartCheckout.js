@@ -135,22 +135,22 @@ class CartCheckout extends Component {
 
   getAllCountries() {
 
-    this.props.commerce.Services.localeListCountries((resp) => {
+    this.props.commerce.services.localeListCountries().then(resp => {
       this.setState({
         countries: resp.countries
       })
-    },
+    }).catch(
     error => console.log(error)
     )
   }
 
   getRegions(countryCode) {
 
-    this.props.commerce.Services.localeListSubdivisions(countryCode, (resp) => {
+    this.props.commerce.services.localeListSubdivisions(countryCode).then(resp => {
       this.setState({
         subdivisions: resp.subdivisions
       })
-    },
+    }).catch(
     error => console.log(error)
     )
   }
@@ -167,17 +167,16 @@ class CartCheckout extends Component {
     }
 
     if (this.props.cart.total_items > 0) {
-      this.props.commerce.Checkout.generateToken(this.props.cart.id, { type: 'cart' },
+      this.props.commerce.checkout.generateToken(this.props.cart.id, { type: 'cart' }).then(
         (checkout) => {
           this.getShippingOptions(checkout.id, (this.state.deliveryCountry || 'US'))
           this.setState({
             checkout: checkout
           })
-        },
+        }).catch(
         (error) => {
           console.log('Error:', error)
         })
-
     } else {
       alert("Your cart is empty")
     }
@@ -185,9 +184,7 @@ class CartCheckout extends Component {
 
   getShippingOptions(checkoutId, country) {
 
-    this.props.commerce.Checkout.getShippingOptions(checkoutId, { country }, (resp) => {
-
-      if (!resp.error) {
+    this.props.commerce.checkout.getShippingOptions(checkoutId, { country }).then(resp => {
         this.setState({
           shippingOptions: resp,
           shippingOptionsById: resp.reduce((obj, option) => {
@@ -195,14 +192,12 @@ class CartCheckout extends Component {
            return obj
           }, {})
         })
-      } else {
-
+      }).catch(error => 
         this.setState({
           shippingOptions: [],
           shippingOptionsById: {}
         })
-      }
-    })
+      )
   }
 
   captureOrder(e) {
