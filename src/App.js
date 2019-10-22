@@ -194,7 +194,7 @@ class App extends Component {
         </main>
         <footer className="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
           <div className="self-end w-100 flex flex-column justify-center">
-            <a href="https://icons8.com" className="medium-text white-70 f8 ttu lh-title center mv2">
+            <a href="https://icons8.com" className="medium-text white-70 f8 ttu lh-title center mv2 tc">
               design resources from icons8.com
             </a>
             <p className="medium-text tc cherry mv2">
