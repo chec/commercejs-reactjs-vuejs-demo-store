@@ -318,7 +318,7 @@ class CartCheckout extends Component {
           this.setState({
             errors: {
               ...this.state.errors,
-              [error.type]: error.message
+              [error.type !== 'not_valid' ? error.type : 'fulfillment[shipping_method]']: error.message
             }
           })
           errorToAlert = error.message
