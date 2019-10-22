@@ -58,7 +58,7 @@ class ProductDetail extends Component {
         <div className="mw50rem center ph2">
           <div className="cf flex flex-column flex-row-l items-center">
             <div className="fl flex flex-column flex-grow-1 items-center justify-center w-100 w-50-l mt6-l order-1 order-0-l">
-              <p className="large-title-text dark-gray w-100 ttl tl lh-title">
+              <p className="large-title-text dark-gray w-100 ttl tl lh-solid mb1">
                 {product.name}
               </p>
               <div
