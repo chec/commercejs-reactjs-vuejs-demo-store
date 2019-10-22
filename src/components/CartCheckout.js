@@ -183,10 +183,8 @@ class CartCheckout extends Component {
   }
 
   getShippingOptions(checkoutId, country) {
-
     this.props.commerce.checkout.getShippingOptions(checkoutId, { country }).then(resp => {
       const resValues = Object.values(resp)
-      debugger;
         this.setState({
           shippingOptions: resValues,
           shippingOptionsById: resValues.reduce((obj, option) => {
