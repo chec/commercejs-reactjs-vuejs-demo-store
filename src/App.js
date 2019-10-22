@@ -112,38 +112,34 @@ class App extends Component {
   }
 
   captureOrder(checkoutId, order) {
-    return new Promise((resolve, reject) => {
-      // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
-      commerce.Checkout
-        .capture(checkoutId, order, (resp) => {
-          this.refreshCart()
-          this.setState({
-            checkout: null,
-            order: resp
-          })
-          return resolve(resp);
-        }, (error) => {
-          console.log(error)
-          return reject(error)
+    // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
+    return commerce.checkout
+      .capture(checkoutId, order).then(resp => {
+        this.refreshCart()
+        this.setState({
+          checkout: null,
+          order: resp
         })
-    })
+        return resp;
+      }).catch(({response}) => {
+        console.log(response.data.error)
+        throw response.data;
+      })
   }
 
   updateQuantity(lineItemId, quantity) {
-    return new Promise((resolve, reject) => {
-      commerce.Cart.update(lineItemId, { quantity },
-        function(resp){
-          // if (resp.cart.total_items === 0) {
-          //   this.setState({
-          //     checkout: null
-          //   }, () => alert("Add items to your cart before to continue checkout."))
-          // } we won't need something like this, since when given quantity 0, Commercejs does
-          // not make line-item 0 but rather leaves it at 1
-          return this.setState({
-            cart: resp.cart
-          })
-        }.bind(this));
-    })
+    return commerce.cart.update(lineItemId, { quantity }).then(
+      resp => {
+        // if (resp.cart.total_items === 0) {
+        //   this.setState({
+        //     checkout: null
+        //   }, () => alert("Add items to your cart before to continue checkout."))
+        // } we won't need something like this, since when given quantity 0, Commercejs does
+        // not make line-item 0 but rather leaves it at 1
+        return this.setState({
+          cart: resp.cart
+        })
+      })
   }
 
 

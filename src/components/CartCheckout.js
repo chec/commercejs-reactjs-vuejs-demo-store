@@ -185,14 +185,16 @@ class CartCheckout extends Component {
   getShippingOptions(checkoutId, country) {
 
     this.props.commerce.checkout.getShippingOptions(checkoutId, { country }).then(resp => {
+      const resValues = Object.values(resp)
+      debugger;
         this.setState({
-          shippingOptions: resp,
-          shippingOptionsById: resp.reduce((obj, option) => {
+          shippingOptions: resValues,
+          shippingOptionsById: resValues.reduce((obj, option) => {
            obj[option.id] = option
            return obj
           }, {})
         })
-      }).catch(error => 
+      }).catch(error =>
         this.setState({
           shippingOptions: [],
           shippingOptionsById: {}
@@ -314,7 +316,7 @@ class CartCheckout extends Component {
           errorToAlert = allErrors;
         }
 
-        if (error.type === 'gateway_error') {
+        if (error.type === 'gateway_error' || error.type === 'not_valid') {
           this.setState({
             errors: {
               ...this.state.errors,
