@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3e033f6738f79a1952fed81663c2aea9",
+    "revision": "c6600356f8743d13e19b4f75b090b2ab",
     "url": "/example.checkout.v2/index.html"
   },
   {
-    "revision": "2bffd533794c8165a622",
-    "url": "/example.checkout.v2/static/css/main.b645f3a3.chunk.css"
+    "revision": "a763763feb3efe2d836d",
+    "url": "/example.checkout.v2/static/css/main.9569ac14.chunk.css"
   },
   {
-    "revision": "79b140cd244a0d78ea94",
-    "url": "/example.checkout.v2/static/js/2.e82cf103.chunk.js"
+    "revision": "1062acc190df610c8bef",
+    "url": "/example.checkout.v2/static/js/2.0083ac95.chunk.js"
   },
   {
-    "revision": "2bffd533794c8165a622",
-    "url": "/example.checkout.v2/static/js/main.95ce914b.chunk.js"
+    "revision": "a763763feb3efe2d836d",
+    "url": "/example.checkout.v2/static/js/main.6fa89a43.chunk.js"
   },
   {
-    "revision": "79122dcd4f8c7dbd87d1",
-    "url": "/example.checkout.v2/static/js/runtime~main.a9d8a7cf.js"
+    "revision": "933908964377c0edb90c",
+    "url": "/example.checkout.v2/static/js/runtime~main.2d8bcddb.js"
   },
   {
     "revision": "3a5e09ccf0abc1502ec44fcabd274a5b",
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/example.checkout.v2/static/media/cart-icon.d744b1f3.svg"
   },
   {
-    "revision": "c8c4c385c2f94c302f2fcb810ade05c4",
-    "url": "/example.checkout.v2/static/media/down-arrow.c8c4c385.svg"
+    "revision": "cdc06d863f0acb0da664154115a60866",
+    "url": "/example.checkout.v2/static/media/down-arrow.cdc06d86.svg"
   },
   {
     "revision": "8303cb28f915d5187838706836c3c482",
