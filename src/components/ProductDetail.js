@@ -92,7 +92,7 @@ class ProductDetail extends Component {
                   placeholder="choose a size"
                   body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
                   classes='chooseASize br1'>
-                  <div className="arrowDownContainer ml2 pr3">
+                  <div className="arrowDownContainer ml2">
                     <ArrowIcon />
                   </div>
                   <select
@@ -112,7 +112,7 @@ class ProductDetail extends Component {
                 </Label>
               </div>
             </div>
-            <div className="w-100 w-50-l mt4 mt0-l">
+            <div className="w-100 w-50-l mt2 mt0-l">
               <button
                 disabled={!!!sizeSelect}
                 onClick={this.addProductToCart}
