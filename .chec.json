@@ -1,0 +1,4 @@
+{
+  "npm": "yarn",
+  "buildScripts": ["start"]
+}
