@@ -1,6 +1,23 @@
-// :host {
-//   display: flex;
-// }
  #main {
    min-height: calc(100vh - #{$footer-height});
+ }
+
+ button {
+   outline: none;
+ }
+
+ input[type=number]::-webkit-inner-spin-button,
+ input[type=number]::-webkit-outer-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+ }
+
+.scale-animation {
+  animation: scale 2000ms 1;
+}
+
+ @keyframes scale {
+ 	0%, 20%, 50%, 80%, 100% {transform: scale(1);}
+ 	40% {transform: scale(1.2);}
+ 	60% {transform: scale(1.4);}
  }

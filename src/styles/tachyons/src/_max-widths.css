@@ -45,6 +45,8 @@
 .mw8  {  max-width: 64rem; }
 .mw9  {  max-width: 84rem; }
 
+.mw50rem { max-width: 50rem; }
+
 /* Max Width String Properties */
 
 .mw-none { max-width: none; }
@@ -63,6 +65,9 @@
   .mw9-ns  {  max-width: 84rem; }
 
   .mw-none-ns { max-width: none; }
+
+  .mw50rem-ns { max-width: 50rem; }
+
 }
 
 @media (--breakpoint-medium) {
@@ -79,6 +84,8 @@
   .mw9-m  {  max-width: 84rem; }
 
   .mw-none-m { max-width: none; }
+
+  .mw50rem-m { max-width: 50rem; }
 }
 
 @media (--breakpoint-large) {
@@ -95,4 +102,6 @@
   .mw9-l  {  max-width: 84rem; }
 
   .mw-none-l { max-width: none; }
+
+  .mw50rem-l { max-width: 50rem; }
 }

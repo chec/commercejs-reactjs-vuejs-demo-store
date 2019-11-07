@@ -1,0 +1,91 @@
+.FootPrintsLoader {
+  &__prints-container {
+    width: auto;
+    height: 5rem;
+    margin-right: 4.75rem;
+    margin-bottom: 10rem;
+  }
+
+  &__print {
+    animation: 2500ms pawAnimation ease-in infinite;
+    opacity: 0;
+
+
+    &:nth-child(odd){
+      transform: rotate(0deg);
+    }
+
+    &:nth-child(even){
+      margin-left: 6rem;
+      transform: rotate(0deg) scaleX(-1) translate(0, -50%);
+    }
+
+    @for $i from 1 through 10 {
+
+     @if($i == 1){
+           &:nth-child(#{$i}){
+              animation-delay: #{ (($i * -1)+10)*0.25 }s;
+              transform: rotate(0deg) translate3d(60%, -68%, 0);
+            }
+      }
+      @if($i == 2){
+       &:nth-child(#{$i}){
+          animation-delay: #{ (($i * -1)+10)*0.25 }s;
+          transform: rotate(0deg) scaleX(-1) translate3d(-10%, -137%, 0);
+        }
+      }
+
+     @if($i == 3){
+       &:nth-child(#{$i}){
+          animation-delay: #{ (($i * -1)+10)*0.25 }s;
+          transform: rotate(0deg) translate3d(58%, -155%, 0);
+        }
+      }
+      @if($i == 4){
+       &:nth-child(#{$i}){
+          animation-delay: #{ (($i * -1)+10)*0.25 }s;
+          transform: rotate(3deg) scaleX(-1) translate3d(5%, -227%, 0);
+        }
+      }
+
+      @if($i == 5){
+        &:nth-child(#{$i}){
+          animation-delay: #{ (($i * -1)+10)*0.25 }s;
+          transform: rotate(0deg) translate3d(55%, -246%, 0);
+        }
+      }
+      @if($i == 6){
+       &:nth-child(#{$i}){
+          animation-delay: #{ (($i * -1)+10)*0.25 }s;
+          transform: rotate(0deg) scaleX(-1) translate3d(-3.9%, -312%, 0);
+        }
+      }
+
+      @if($i == 7){
+       &:nth-child(#{$i}){
+          animation-delay: #{ (($i * -1)+10)*0.25 }s;
+          transform: rotate(0deg) translate3d(56%, -336%, 0)
+        }
+      }
+
+      @if($i == 8){
+        &:nth-child(#{$i}) {
+          animation-delay: #{ (($i * -1)+10)*0.25 }s;
+          transform: rotate(0deg) scaleX(-1) translate3d(0%, -400%, 0);
+        }
+      }
+    }//for loop ends
+  }
+}
+
+@keyframes pawAnimation {
+	0%{
+		opacity: 1;
+	}
+	50%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 0;
+	}
+}

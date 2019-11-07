@@ -8,7 +8,7 @@
   }
 
   &__checkout {
-    padding: 1.8rem 6rem;
+    padding: 1.8rem 5rem;
     font-size: 0.70rem;
     letter-spacing: 0.25rem;
     border-radius: 0.30rem;
@@ -26,8 +26,8 @@
 }
 
 .cartIconContainer {
-  width: 1.87rem;;
-  height: 1.87rem;
+  width: 1.97rem;;
+  height: 1.97rem;
 }
 
 .arrowIconContainer {
@@ -35,6 +35,15 @@
   height: 1.8rem;
 }
 
+.arrowDownContainer {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.footPrintContainer {
+  width: 6rem;
+  height: 6rem;
+}
 
 .checkoutFormInput {
   @extend .w-100 !optional;
@@ -61,4 +70,16 @@
   @extend .pb2 !optional;
   @extend .nowrap !optional;
   @extend .overflow-scroll !optional;
+}
+
+.chooseASize {
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 0.75rem 1rem;
+  background: black;
+  p {
+    padding: 0px;
+    font-size: 2.2rem;
+  }
 }
