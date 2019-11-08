@@ -1,23 +1,15 @@
 <template>
-  <div v-if="product" class="productDetail w-100 pb5 ph4">
-    <div class="mw8 center ph2">
+  <div v-if="product" class="productDetail w-100 pb1 ph3 ph4-ns">
+    <div class="mw50rem center ph2">
       <div class="cf flex flex-column flex-row-l items-center">
-        <div class="fl flex flex-column flex-grow-1 items-center justify-center mw6 mt6-l order-1 order-0-l">
-          <p class="large-title-text dark-gray w-100 ttl tc">
+        <div class="fl flex flex-column flex-grow-1 items-center justify-center w-100 w-50-l mt6-l order-1 order-0-l">
+          <p class="large-title-text dark-gray w-100 ttl tl lh-solid mb1">
             {{product.name}}
           </p>
-          <p class="medium-body-text gray w-90 tc">
-            lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-          </p>
-          <button
-            :disabled="!!!sizeSelect"
-            @click="addProductToCart"
-            name="addToCartButton"
-            class="button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3"
-            :class="[sizeSelect ? 'dim' :'o-30']"
-          >
-            add to cart
-          </button>
+          <div
+            class="medium-body-text gray w-100 tl"
+            v-html=" product.description"
+            ></div>
         </div>
         <div class="fl w-90 w-50-l self-start-l relative pb5 pa0-l">
           <img :src="product.media.source" alt="Product" width="100%" height="auto" />
@@ -33,29 +25,45 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="productDetail__info-container center mw8 justify-start flex flex-row flex-grow-1 flex-wrap pb4 mt4 ph3 ph1-ns">
-      <Label
-        labelTitle='price'
-        body='$100.00 USD'
-        :classes="['mr5-ns', 'mb4']"
-      />
-      <div class="relative">
-        <Label
-          labelTitle='size'
-          placeholder="choose a size"
-          :body="product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name"
-        />
-        <select
-          class="absolute absolute--fill left-0 o-0 pointer w-100"
-          v-model="sizeSelect"
-          name='sizeSelect'
-        >
-          <option value="" disabled>Choose a size</option>
-          <option v-for="option of product.variants[0].options" :value="option.id" :key="option.id">
-            {{option.name}}
-          </option>
-        </select>
+      <div class="productDetail__info-container center justify-start mw8 pb2 mt4 mt2-l ph0 ph1-ns">
+        <div class="flex flex-row flex-grow-1 flex-wrap items-center">
+          <Label
+            labelTitle='price'
+            :body='"$"+product.price.formatted_with_code'
+            :classes="['mr4', 'mb3']"
+          />
+          <div class="relative">
+            <Label
+              placeholder="choose a size"
+              classes="chooseASize br1"
+              :body="product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name">
+              <div className="arrowDownContainer ml2">
+                <ArrowIcon />
+              </div>
+              <select
+                class="absolute absolute--fill left-0 o-0 pointer w-100"
+                v-model="sizeSelect"
+                name='sizeSelect'
+              >
+                <option value="" disabled>Choose a size</option>
+                <option v-for="option of product.variants[0].options" :value="option.id" :key="option.id">
+                  {{option.name}}
+                </option>
+              </select>
+            </Label>
+          </div>
+        </div>
+        <div class="w-100 w-50-l mt2 mt0-l">
+          <button
+            :disabled="!!!sizeSelect"
+            @click="addProductToCart"
+            name="addToCartButton"
+            class="button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3"
+            :class="[sizeSelect ? 'dim' :'o-30']"
+          >
+            add to cart
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -63,6 +71,7 @@
     Loading Product
   </p>
 </template>
+
 <script>
 import Label from './Label'
 
@@ -73,7 +82,7 @@ export default {
     Label
   },
   methods: {
-    addProductToCart(e) {
+    addProductToCart() {
       const product = {
         productId: this.product.id,
         variant: {
