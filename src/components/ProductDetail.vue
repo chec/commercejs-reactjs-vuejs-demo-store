@@ -37,8 +37,8 @@
               placeholder="choose a size"
               classes="chooseASize br1"
               :body="product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name">
-              <div className="arrowDownContainer ml2">
-                <ArrowIcon />
+              <div class="arrowDownContainer ml2">
+                <TriangleIconSvg />
               </div>
               <select
                 class="absolute absolute--fill left-0 o-0 pointer w-100"
@@ -74,12 +74,14 @@
 
 <script>
 import Label from './Label'
+import TriangleIconSvg from '../assets/triangle-icon.svg'
 
 export default {
   name: 'ProductDetail',
   props: ['product'],
   components: {
-    Label
+    Label,
+    TriangleIconSvg
   },
   methods: {
     addProductToCart() {
