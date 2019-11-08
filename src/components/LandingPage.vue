@@ -7,7 +7,7 @@
       <div class="absolute absolute--fill flex flex-column items-center w-90 center mt6 justify-center">
         <img src="../assets/shoes-hero.png" alt="Pair of Shoes" width="100%" height="auto" />
         <div class="relative absolute--fill flex flex-column justify-center items-center ph3">
-          <router-link to="/white-shoe" class="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer self-center no-underline mt1">
+          <router-link to="/products" class="medium-text f7 cherry bg-blossom ttu pv3 ph3 bg-white outline-0 dim pointer self-center no-underline mt1">
             shop products
           </router-link>
         </div>
