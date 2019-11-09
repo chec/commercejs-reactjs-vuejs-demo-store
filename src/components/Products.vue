@@ -2,8 +2,8 @@
   <div class="w-100">
     <template v-if="products.length">
       <ProductDetail
-        v-for="(product, id) in products.reverse()" :key="id"
-        @add-product-to-cart="$emit('add-product-to-cart')"
+        v-for="(product, id) in productsReversed" :key="id"
+        @add-product-to-cart="$emit('add-product-to-cart', $event)"
         :product="product"
       />
     </template>
@@ -20,6 +20,11 @@ export default {
     products: {
       type: Array,
       default: () => []
+    }
+  },
+  computed: {
+    productsReversed() {
+      return [...this.products].reverse()
     }
   },
   components: {
