@@ -5,7 +5,7 @@
       <router-view
         @add-product-to-cart="addProductToCart"
         @remove-product-from-cart="removeProductFromCart"
-        :product="products.length ? products[0] : null"
+        :products="products"
         :cart="cart"
         :commerce="commerce"
         :order="order"

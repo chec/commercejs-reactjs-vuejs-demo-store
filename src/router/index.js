@@ -12,9 +12,9 @@ export default new Router({
       component: () => import("@/components/LandingPage")
     },
     {
-      path: "/white-shoe",
-      name: 'product-detail',
-      component: () => import("@/components/ProductDetail"),
+      path: "/products",
+      name: 'products',
+      component: () => import("@/components/Products"),
       props: true,
     },
     {
