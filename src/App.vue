@@ -1,6 +1,6 @@
 <template>
 <div>
-    <Header v-if="$route.name !== 'cart-checkout'" :cart="cart" />
+    <Header :cart="cart" />
     <main id="main" class="flex">
       <router-view
         @add-product-to-cart="addProductToCart"
