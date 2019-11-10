@@ -207,4 +207,5 @@ class App extends Component {
   }
 }
 
+// doc for withRouter https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/withRouter.md
 export default withRouter(App);
