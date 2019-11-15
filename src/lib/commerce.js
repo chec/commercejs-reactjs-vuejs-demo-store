@@ -5,7 +5,8 @@ const commercejsConfig = {
     headers: {
       "X-Chec-Agent": "commerce.js/v1"
     }
-  }
+  },
+  url: process.env.CHEC_URL || 'https://api.chec.io'
 }
 
 
