@@ -1,4 +1,8 @@
 {
   "npm": "yarn",
-  "buildScripts": ["start"]
+  "buildScripts": ["start"],
+  "dotenv": {
+    "NODE_ENV": "development",
+    "COMMERCEJS_PUBLIC_KEY": "%chec_pkey%"
+  }
 }
