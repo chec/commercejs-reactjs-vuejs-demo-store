@@ -6,8 +6,11 @@ const commercejsConfig = {
       "X-Chec-Agent": "commerce.js/v1"
     }
   },
-  url: process.env.CHEC_URL || 'https://api.chec.io'
+  url: process.env.REACT_APP_CHEC_URL || 'https://api.chec.io'
 }
 
-
-export default new Commerce(process.env.COMMERCEJS_PUBLIC_KEY, (process.env.NODE_ENV === 'development') ? true : false, commercejsConfig);
+export default new Commerce(
+  process.env.REACT_APP_COMMERCEJS_PUBLIC_KEY,
+  process.env.NODE_ENV === 'development',
+  commercejsConfig
+);
