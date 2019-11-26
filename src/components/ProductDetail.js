@@ -90,7 +90,7 @@ class ProductDetail extends Component {
               <div className="relative">
                 <Label
                   placeholder="choose a size"
-                  body={product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
+                  body={ product.variants.length && product.variants[0].optionsById[sizeSelect] &&  product.variants[0].optionsById[sizeSelect].name }
                   classes='chooseASize br1'>
                   <div className="arrowDownContainer ml2">
                     <ArrowIcon />
@@ -102,7 +102,7 @@ class ProductDetail extends Component {
                     name='sizeSelect'>
                     <option value="" disabled>Choose a size</option>
                     {
-                      product.variants[0].options.map(option =>
+                      product.variants.length && product.variants[0].options.map(option =>
                         <option value={option.id} key={option.id}>
                           {option.name}
                         </option>
