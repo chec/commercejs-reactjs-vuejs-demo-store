@@ -1,0 +1,59 @@
+[
+  {
+    "product": {
+      "name": "New season shoes",
+      "price": "89.99",
+      "description": "Fresh off the press, these new season shoes are keen for a sniff"
+    },
+    "variant": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "description": "8",
+            "price": "0.00"
+          },
+          {
+            "description": "9",
+            "price": "5.00"
+          },
+          {
+            "description": "10",
+            "price": "5.00"
+          },
+          {
+            "description": "11",
+            "price": "10.00"
+          },
+          {
+            "description": "12",
+            "price": "10.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Cute socks",
+      "price": "9.99",
+      "description": "Warning: will befriend your feet immediately with incomparable softness"
+    },
+    "variant": [
+      {
+        "name": "Size",
+        "options": [
+          {
+            "description": "S"
+          },
+          {
+            "description": "M"
+          },
+          {
+            "description": "L"
+          }
+        ]
+      }
+    ]
+  }
+]

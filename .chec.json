@@ -1,8 +1,10 @@
 {
   "npm": "yarn",
-  "buildScripts": ["start"],
+  "buildScripts": ["seed", "start"],
   "dotenv": {
     "NODE_ENV": "development",
-    "REACT_APP_COMMERCEJS_PUBLIC_KEY": "%chec_pkey%"
+    "REACT_APP_COMMERCEJS_PUBLIC_KEY": "%chec_pkey%",
+    "REACT_APP_COMMERCEJS_SECRET_KEY": "%chec_skey%",
+    "REACT_APP_COMMERCEJS_API_URL": "%chec_api_url%"
   }
 }

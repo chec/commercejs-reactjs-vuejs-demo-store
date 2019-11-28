@@ -18,7 +18,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "seed": "node scripts/seed.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +36,13 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://chec.github.io/example.checkout.v2/"
+  "homepage": "https://chec.github.io/example.checkout.v2/",
+  "devDependencies": {
+    "chalk": "^3.0.0",
+    "dotenv": "^8.2.0",
+    "got": "^9.6.0",
+    "json-colorizer": "^2.2.1",
+    "ora": "^4.0.3",
+    "promise-queue": "^2.2.5"
+  }
 }
