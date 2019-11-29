@@ -18,7 +18,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "seed": "chec-seed seeds"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +36,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://chec.github.io/example.checkout.v2/"
+  "homepage": "https://chec.github.io/example.checkout.v2/",
+  "devDependencies": {
+    "@chec/seeder": "^1.0.0-beta1"
+  }
 }
