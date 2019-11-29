@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@chec/commerce.js": "^2.0.0-beta5",
-    "@chec/seeder": "^1.0.0-beta1",
     "gh-pages": "^2.1.1",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
@@ -37,5 +36,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://chec.github.io/example.checkout.v2/"
+  "homepage": "https://chec.github.io/example.checkout.v2/",
+  "devDependencies": {
+    "@chec/seeder": "^1.0.0-beta1"
+  }
 }
