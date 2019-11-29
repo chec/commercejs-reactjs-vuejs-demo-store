@@ -7,6 +7,7 @@ const chalk = require('chalk');
 const colourise = require('json-colorizer');
 const PromiseQueue = require('promise-queue');
 const got = require('got');
+const get = require('lodash.get');
 
 class Seeder {
   async run(path = __dirname) {
@@ -16,6 +17,8 @@ class Seeder {
       return this.error('The given path must be a .json file or a directory containing at least one .json file');
     }
 
+    entries.sort(([a], [b]) => a === 'assets' ? 1 : b === 'assets' ? -1 : 0);
+
     this.spinner = ora({
       text: 'Seeding...',
       stream: process.stdout,
@@ -23,27 +26,41 @@ class Seeder {
 
     const typeCounts = {};
     const queuedPromises = [];
+    const responses = {};
     const queue = new PromiseQueue(1, Infinity);
 
     entries.forEach(([endpoint, data]) => {
-      (Array.isArray(data) ? data : [data]).forEach(datum => {
+      (Array.isArray(data) ? data : [data]).forEach((datum, index) => {
+        const {link, ...rest} = datum;
+
         queuedPromises.push(queue.add(() =>
-          this.post(`/v1/${endpoint}`, datum)
-            .then(() => {
+          this.post(`/v1/${endpoint}`, rest)
+            .then(response => {
               if (Object.hasOwnProperty.call(typeCounts, endpoint)) {
-                typeCounts[endpoint]++
+                typeCounts[endpoint]++;
               } else {
-                typeCounts[endpoint] = 1
+                responses[endpoint] = [];
+                typeCounts[endpoint] = 1;
               }
+              responses[endpoint].push(JSON.parse(response.body))
             })
             .catch(error => {
               this.spinner.stop();
-              this.log(`Could not push the following object to the ${chalk.dim(endpoint)} endpoint (${error.message}):`);
-              this.log(colourise(datum, {pretty: true}));
-              this.log(error.response);
+              this.log(`Could not push an object to the ${chalk.dim(endpoint)} endpoint (${error.message}):`);
               this.spinner.start()
             })
         ));
+
+        if (endpoint === 'assets' && link) {
+          queuedPromises.push(queue.add(() => {
+            const assetId = responses.assets[index].id;
+            const productId = get(responses, link);
+
+            return this.post(`/v1/products/${productId}/assets`, {
+              assets: [{id: assetId}]
+            })
+          }))
+        }
       });
     });
 

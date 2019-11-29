@@ -42,6 +42,7 @@
     "dotenv": "^8.2.0",
     "got": "^9.6.0",
     "json-colorizer": "^2.2.1",
+    "lodash.get": "^4.4.2",
     "ora": "^4.0.3",
     "promise-queue": "^2.2.5"
   }
