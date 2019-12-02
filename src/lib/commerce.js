@@ -1,4 +1,4 @@
-import Commerce from '@chec.io/commerce';
+import Commerce from '@chec/commerce.js';
 
 const commercejsConfig = {
   axiosConfig: {
