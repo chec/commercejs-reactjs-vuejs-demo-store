@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Loading } from './Loaders';
 import { ReactComponent as ArrowIcon } from '../assets/down-arrow.svg'
 
 function Label(props) {

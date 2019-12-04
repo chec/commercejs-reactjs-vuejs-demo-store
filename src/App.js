@@ -4,7 +4,6 @@ import commerce from './lib/commerce';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import Products from './components/Products';
-import ProductDetail from './components/ProductDetail';
 import CartCheckout from './components/CartCheckout';
 import ThankYou from './components/ThankYou';
 
@@ -202,6 +201,9 @@ class App extends Component {
             </p>
           </div>
         </footer>
+        <a className="github-fork-ribbon right-bottom fixed" href="https://github.com/chec/example.checkout.v2" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">
+          Fork me on GitHub
+        </a>
       </Fragment>
     )
   }
