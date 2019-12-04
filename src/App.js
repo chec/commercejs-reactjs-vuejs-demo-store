@@ -4,7 +4,6 @@ import commerce from './lib/commerce';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import Products from './components/Products';
-import ProductDetail from './components/ProductDetail';
 import CartCheckout from './components/CartCheckout';
 import ThankYou from './components/ThankYou';
 
