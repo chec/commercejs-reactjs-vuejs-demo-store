@@ -202,6 +202,9 @@ class App extends Component {
             </p>
           </div>
         </footer>
+        <a className="github-fork-ribbon right-bottom fixed" href="https://github.com/chec/example.checkout.v2" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">
+          Fork me on GitHub
+        </a>
       </Fragment>
     )
   }
