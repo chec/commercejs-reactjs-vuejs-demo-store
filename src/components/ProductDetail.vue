@@ -32,7 +32,7 @@
             :body='"$"+product.price.formatted_with_code'
             :classes="['mr4', 'mb3']"
           />
-          <div class="relative">
+          <div class="relative" v-if="product.variants.length">
             <Label
               placeholder="choose a size"
               classes="chooseASize br1"

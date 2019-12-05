@@ -20,7 +20,7 @@
       <p class="medium-text f6 white tr ttu mw4">
         {{item.name}}
         <span class="db f7 pv1">
-          {{item.variants[0].option_name}}
+          {{item.variants.length && item.variants[0].option_name}}
         </span>
         <span class="db f7">
           ${{item.line_total.formatted_with_code}}
