@@ -42,42 +42,13 @@ export default {
     }
   },
   created() {
-    this.retrieveCart() // invokes component method retrieveCart, and saves the initial Commercejs Cart Object to state/data this.cart
-    if (this.commerce !== undefined && typeof this.commerce !== 'undefined') {
-      this.commerce.Products.list(
-        (resp) => {
-          //Success
-          this.products = [
-              ...resp.data.map(product => ({
-                ...product,
-                variants: product.variants.map(variant => ({
-                  ...variant,
-                  optionsById: variant.options.reduce((obj, currentOption) => {
-                      obj[currentOption.id] = {
-                        ...currentOption,
-                        variantId: variant.id
-                      }
-                      return obj;
-                    }, {})
-                }))
-              }))
-            ]
-        },
-        (error) => {
-          // handle error properly in real-world
-          // eslint-disable-next-line
-          console.log(error)
-        }
-      );
-      window.addEventListener("Commercejs.Cart.Ready", function () {
-        // invoke commerce cart method to retrieve cart in session
-        this.commerce.Cart.retrieve((cart) => {
-          if (!cart.error) {
-            this.cart = cart;
-          }
-        });
-      }.bind(this))
-    }
+    // invokes Commerce.js method commerce.cart.retrieve
+    // and saves the initial Commercejs Cart Object to state/data this.cart
+    this.retrieveCart()
+
+    // invokes Commerce.js method commerce.products.list
+    // and saves all the Products to this.products
+    this.getAllProducts()
   },
   methods: {
     // retrieve initial cart object
@@ -88,6 +59,38 @@ export default {
         // eslint-disable-next-line no-console
         console.log('There was an error retrieving the cart', error)
       });
+    },
+    // retrieve and list all products
+    // https://commercejs.com/docs/api/#list-all-products
+    getAllProducts() {
+      this.$commerce.products.list().then(
+        (resp) => {
+          this.products = [
+              ...resp.data.map(product => { // spread out product objects into array assigned to this.products
+                return {
+                  ...product, // spread the current iteration's product's items on to the object returned
+                  variants: product.variants.map(variant => {
+                    return { // modify the shape of the product's variants mapping the options by id for easier selection
+                      ...variant,
+                      optionsById: variant.options.reduce((obj, currentOption) => {
+                          obj[currentOption.id] = {
+                            ...currentOption,
+                            variantId: variant.id
+                          }
+                          return obj;
+                      }, {})
+                    }
+                  })
+                }
+              })
+            ]
+        }
+      ).catch(
+        (error) => {
+          // eslint-disable-next-line no-console
+          console.log(error)
+        }
+      );
     },
     // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
     // https://commercejs.com/docs/api/?javascript#add-item-to-cart
