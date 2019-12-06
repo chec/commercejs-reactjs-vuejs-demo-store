@@ -471,10 +471,10 @@ export default {
             alert(allErrors)
           }
 
-          if (error.type === 'gateway_error') {
+          if (error.type === 'gateway_error' || error.type === 'not_valid') { // either a gateway error or a shipping error
             this.errors = {
               ...this.errors,
-              [error.type]: error.message
+              [error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type]: error.message
             }
             alert(error.message)
           }
