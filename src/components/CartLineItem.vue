@@ -13,7 +13,7 @@
              backgroundRepeat: 'no-repeat',
              backgroundPosition: 'center',
              backgroundSize: 'contain',
-             backgroundImage: `url(${require('../assets/pair-shoes-small.png')})`
+             backgroundImage: `url(${item.name.trim('').toLowerCase() === 'pink sock' ? require('../assets/updated-sock-image.png') : require('../assets/pair-shoes-small.png')})`
            }"
          />
       </div>
