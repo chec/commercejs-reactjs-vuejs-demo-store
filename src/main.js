@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import commercejs from '@chec/commerce.js'
-Vue.config.productionTip = false
+import commercejs from './configCommercejs'
 
+Vue.config.productionTip = false
 
 // inject commercejs as a plugin, globally
 Vue.mixin({

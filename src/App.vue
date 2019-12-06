@@ -42,6 +42,7 @@ export default {
     }
   },
   created() {
+    this.retrieveCart() // invokes component method retrieveCart, and saves the initial Commercejs Cart Object to state/data this.cart
     if (this.commerce !== undefined && typeof this.commerce !== 'undefined') {
       this.commerce.Products.list(
         (resp) => {
@@ -79,6 +80,15 @@ export default {
     }
   },
   methods: {
+    // retrieve initial cart object
+    retrieveCart() {
+      this.$commerce.cart.retrieve().then(cart => {
+        this.cart = cart
+      }).catch(error => {
+        // eslint-disable-next-line no-console
+        console.log('There was an error retrieving the cart', error)
+      });
+    },
     // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
     // https://commercejs.com/docs/api/?javascript#add-item-to-cart
     addProductToCart({ productId, variant}) {
