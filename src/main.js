@@ -14,5 +14,5 @@ Vue.mixin({
 
 new Vue({
   router,
-  render: h => h(App, { props: { commerce } }),
+  render: h => h(App),
 }).$mount('#app')
