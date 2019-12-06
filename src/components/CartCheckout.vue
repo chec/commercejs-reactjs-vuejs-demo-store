@@ -455,9 +455,7 @@ export default {
         })
         .catch(({error}) => {
 
-          if (error.type === 'validation') {
-            console.log('the error messages:', error.message)
-
+          if (error.type === 'validation') { // catch validation errors and update corresponding data/state
             error.message.forEach(({param, error}, i) => {
               this.errors = {
                 ...this.errors,
@@ -471,12 +469,11 @@ export default {
             alert(allErrors)
           }
 
-          if (error.type === 'gateway_error' || error.type === 'not_valid') { // either a gateway error or a shipping error
+          if (error.type === 'gateway_error' || error.type === 'not_valid') { // either a gateway error or a shipping error and update corresponding data/state
             this.errors = {
               ...this.errors,
               [error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type]: error.message
             }
-            alert(error.message)
           }
 
         })

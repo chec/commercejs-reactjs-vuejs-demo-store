@@ -34,6 +34,13 @@ export default {
   components: {
     Header
   },
+  data: function() {
+    return {
+      products: [],
+      cart: null,
+      order: null
+    }
+  },
   created() {
     if (this.commerce !== undefined && typeof this.commerce !== 'undefined') {
       this.commerce.Products.list(
@@ -112,19 +119,6 @@ export default {
     handleNewOrder(order) {
       this.order = order
       this.$router.replace("/thank-you")
-    }
-  },
-  props: {
-    commerce: {
-      required: true,
-      type: Object
-    }
-  },
-  data: function() {
-    return {
-      products: [],
-      cart: null,
-      order: null
     }
   }
 }
