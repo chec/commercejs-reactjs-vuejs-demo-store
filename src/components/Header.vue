@@ -8,7 +8,7 @@
         <LogoSvg width="100%" height="auto"/>
       </div>
     </router-link>
-    <div class="flex">
+    <div class="flex" :class="{ 'scale-animation': cartAnimation }">
       <router-link to="cart-checkout" class="flex flex-row items-center no-underline dim">
         <div
           class="cartIconContainer pointer"
@@ -34,6 +34,9 @@ export default {
   props: {
     cart: {
       required: true,
+    },
+    cartAnimation: {
+      required: true
     }
   },
   components: {

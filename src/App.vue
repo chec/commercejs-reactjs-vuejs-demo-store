@@ -1,6 +1,6 @@
 <template>
 <div>
-    <Header :cart="cart" />
+    <Header :cart="cart" :cartAnimation="cartAnimation" />
     <main id="main" class="flex">
       <router-view
         @add-product-to-cart="addProductToCart"
@@ -38,7 +38,8 @@ export default {
     return {
       products: [],
       cart: null,
-      order: null
+      order: null,
+      cartAnimation: false,
     }
   },
   created() {
@@ -92,19 +93,23 @@ export default {
         }
       );
     },
-    // adds product to cart by invoking Commerce.js's Cart method 'Cart.add'
+    // adds product to cart by invoking Commerce.js's Cart method commerce.cart.add
     // https://commercejs.com/docs/api/?javascript#add-item-to-cart
     addProductToCart({ productId, variant}) {
-      this.commerce.Cart.add({
+      if (!this.cartAnimation) {
+        this.cartAnimation = false // ensure cartAnimation flag is reset
+      }
+      this.$commerce.cart.add({
         id: productId,
         variant
-      }, (resp) => {
-        // if successful update Cart
-        if (!resp.error) {
-          this.cart = resp.cart
-          alert("Added to cart!")
-        }
-      });
+      }).then(resp => {
+        // if successful update cart and animate cart UI
+        this.cartAnimation = true
+        this.cart = resp.cart
+      }).catch(error => {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      })
     },
 
     // removes product from cart by invoking Commerce.js's Cart method 'Cart.remove'
