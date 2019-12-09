@@ -11,7 +11,6 @@ import { ReactComponent as ArrowIcon } from '../assets/arrow-icon.svg';
 import pairShoes from '../assets/pair-shoes-small.png'
 import sockImage from '../assets/updated-sock-image.png'
 
-
 function CartLineItem(props) {
   return (
     <div className="">
@@ -52,7 +51,6 @@ function CartLineItem(props) {
     </div>
   )
 }
-
 
 class CartCheckout extends Component {
 
@@ -134,7 +132,6 @@ class CartCheckout extends Component {
   }
 
   getAllCountries() {
-
     this.props.commerce.services.localeListCountries().then(resp => {
       this.setState({
         countries: resp.countries
@@ -145,7 +142,6 @@ class CartCheckout extends Component {
   }
 
   getRegions(countryCode) {
-
     this.props.commerce.services.localeListSubdivisions(countryCode).then(resp => {
       this.setState({
         subdivisions: resp.subdivisions
@@ -157,7 +153,6 @@ class CartCheckout extends Component {
 
   // checkout methods
   createCheckout(e) {
-
     if (e) {
       e.preventDefault()
     }
@@ -368,7 +363,6 @@ class CartCheckout extends Component {
       }
     })
   }
-
 
   render() {
     const {
