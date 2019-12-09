@@ -287,9 +287,9 @@
               <div class="flex flex-column">
                 <button
                   @click.prevent="() => checkout ? captureOrder() : createCheckout()"
-                  class="button__checkout bg-dark-gray white ttu b self-end pointer dim shadow-5 tracked-mega-1"
+                  class="button__checkout bg-cherry white ttu b self-end pointer dim shadow-5 tracked-mega-1"
                 >
-                  {{`${checkout ? 'complete checkout' : 'checkout'}`}}
+                  {{`${checkout ? 'buy now' : 'delivery & payment'}`}}
                 </button>
               </div>
             </form>
