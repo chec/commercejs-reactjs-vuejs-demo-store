@@ -15,7 +15,7 @@
     </div>
     <div class="cf mw9 center w-100 ph3 mt5">
         <div class="fl w-100 w-40-l ph2 ph4-l mb4">
-            <div class="relative z-1 h5 br3 bg-dark-gray w-100 shadow-3 pt2 overflow-scroll">
+            <div class="relative z-1 br3 bg-dark-gray w-100 shadow-3 pv4 overflow-scroll">
               <CartLineItem
                 v-for="item in cart.line_items"
                 @remove-product-from-cart="removeProductFromCart"
@@ -309,10 +309,6 @@ export default {
     ArrowIconSvg,
     CartLineItem
   },
-  created() {
-    this.getAllCountries()
-    this.getRegions(this.deliveryCountry)
-  },
   data() {
     return {
       firstName: 'John',
@@ -345,7 +341,15 @@ export default {
         "shipping[street]": null,
         "shipping[town_city]": null,
         "shipping[postal_zip_code]": null
-      }
+      },
+
+      loading: {
+        checkout: false,
+        order: false
+      },
+
+      loadingScreenMinLifetime: 4000, // ms lifetime for loading screen
+      capturingOrderLoadingScreenMinLifetime: 4000,
     }
   },
   watch: {
@@ -367,13 +371,18 @@ export default {
       }
     }
   },
+  created() {
+    this.getAllCountries()
+    this.getRegions(this.deliveryCountry)
+  },
   methods: {
     // update respective line-item's quantity using commerce.cart.update
     // cart.update can also be used to update variant
+    // https://commercejs.com/docs/api/#update-item-in-cart
     updateQuantity(lineItemId, quantity) {
       this.$commerce.cart.update(lineItemId, { quantity })
         .then(resp => {
-          this.cart = resp.cart
+          this.$emit('update:cart', resp.cart)
         })
     },
     getAllCountries() {
@@ -386,13 +395,29 @@ export default {
     removeProductFromCart(itemId) {
       this.$emit('remove-product-from-cart', itemId)
     },
-    captureOrder() {
+    captureOrder(e) {
+      let exceededMinLifetime = false;
+      let secondsPassed = 0;
+
+      const lifetimeTimeout = setTimeout(() => {
+        exceededMinLifetime = true
+      }, this.capturingOrderLoadingScreenMinLifetime);
+
+      const secondsInterval = setInterval(() => {
+        secondsPassed = secondsPassed + 1000;
+      }, 1000)
+
       this.errors = {
-        "fulfillment[shipping_method]": null,
-        gateway_error: null,
-        "shipping[name]": null,
-        "shipping[street]": null,
-      }
+          "fulfillment[shipping_method]": null,
+          gateway_error: null,
+          "shipping[name]": null,
+          "shipping[street]": null,
+        };
+
+      this.loading = {
+          ...this.loading,
+          order: true,
+        }
 
       const lineItems = this.checkout.live.line_items.reduce((obj, lineItem) => {
         obj[lineItem.id] = {
@@ -432,25 +457,37 @@ export default {
           }
         }
       }
+      // eslint-disable-next-line no-console
       console.log('The order constructed:', newOrder)
-      return new Promise((resolve, reject) => {
-        // upon successful capturing of order, refresh cart, and clear checkout state, then set order state
-        this.commerce.Checkout
-          .capture(this.checkout.id, newOrder, (resp) => {
-            this.checkout = null
-            return resolve(resp);
-          }, (error) => {
-            console.log(error)
-            return reject(error)
-          })
-        })
+      this.$commerce.checkout.capture(this.checkout.id, newOrder)
         .then(resp => {
-          // emit refresh-cart event cause to refresh cart in app container
           this.$emit('refresh-cart')
-          this.$emit('new-order', resp)
+          this.$emit('update:order', resp)
+          this.checkout = null
+          return resp;
+      })
+      .then(() => {
+          if (exceededMinLifetime) {
+            this.loading = {
+              ...this.loading,
+              order: false
+            }
+            this.$router.replace("/thank-you") // redirect now since capturingOrderLoadingScreenMinLifetime satisfied
+          } else {
+            clearInterval(secondsInterval);
+            clearTimeout(lifetimeTimeout)
+            const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
+            setTimeout(() => {
+              this.loading = {
+                ...this.loading,
+                order: false
+              }
+              this.$router.replace("/thank-you") // redirect after waiting remainingSecondsToWait
+            }, remainingSecondsToWait)
+          }
         })
-        .catch(({error}) => {
-
+        .catch((err) => {
+          const error = err.data.error
           if (error.type === 'validation') { // catch validation errors and update corresponding data/state
             error.message.forEach(({param, error}, i) => {
               this.errors = {
@@ -458,11 +495,6 @@ export default {
                 [param]: error
               }
             })
-
-            const allErrors = error.message.reduce((string, error) => {
-              return `${string} ${error.error}`
-            }, '')
-            alert(allErrors)
           }
 
           if (error.type === 'gateway_error' || error.type === 'not_valid') { // either a gateway error or a shipping error and update corresponding data/state
@@ -472,50 +504,67 @@ export default {
             }
           }
 
+          if (exceededMinLifetime) {
+            this.loading = {
+              ...this.loading,
+              order: false
+            }
+
+          } else {
+            clearInterval(secondsInterval);
+            clearTimeout(lifetimeTimeout)
+            const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
+            setTimeout(() => {
+              this.loading = {
+                ...this.loading,
+                order: false
+              }
+            }, remainingSecondsToWait)
+          }
         })
     },
     getRegions(countryCode) {
-      this.commerce.Services.localeListSubdivisions(countryCode, (resp) => {
-        this.subdivisions = resp.subdivisions
-      },
-      error => console.log(error)
-      )
+      this.$commerce.services.localeListSubdivisions(countryCode)
+        .then(resp => {
+          this.subdivisions = resp.subdivisions
+        }).catch(error => {
+          // eslint-disable-next-line no-console
+          console.log(error)
+        })
     },
     // generate checkout token, receive checkout object
-    createCheckout(e) {
+    createCheckout() {
       if (!this.cart) {
         return;
       }
 
       if (this.cart.total_items > 0) {
-        this.commerce.Checkout
-          .generateToken(this.cart.id, { type: 'cart' },
-            (checkout) => {
-              this.getShippingOptions(checkout.id, (this.deliveryCountry || 'US'))
-              this.checkout = checkout
-            },
-            function(error) {
-              console.log('Error:', error)
-            })
-
+        this.$commerce.checkout.generateToken(this.cart.id, { type: 'cart' }).then(
+          (checkout) => {
+            this.getShippingOptions(checkout.id, (this.deliveryCountry || 'US'))
+            this.checkout = checkout
+          }).catch(error => {
+            // eslint-disable-next-line no-console
+            console.log('Error:', error)
+          })
       } else {
         alert("Your cart is empty")
       }
     },
     getShippingOptions(checkoutId, country) {
-
-      this.commerce.Checkout.getShippingOptions(checkoutId, { country }, (resp) => {
-        if (!resp.error) {
+      this.$commerce.checkout.getShippingOptions(checkoutId, { country })
+        .then(resp => {
           this.shippingOptions = resp
           this.shippingOptionsById = resp.reduce((obj, option) => {
            obj[option.id] = option
            return obj
           }, {})
-        } else {
+        }).catch(error => {
           this.shippingOptions = []
           this.shippingOptionsById = {}
-        }
-      })
+          // eslint-disable-next-line no-console
+          console.log('Error in getShippingOptions', error)
+        })
     }
 
   }
