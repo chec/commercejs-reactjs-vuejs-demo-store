@@ -94,13 +94,14 @@ export default {
     // adds product to cart by invoking Commerce.js's Cart method commerce.cart.add
     // https://commercejs.com/docs/api/?javascript#add-item-to-cart
     addProductToCart({ productId, variant}) {
-      if (!this.cartAnimation) {
+      if (this.cartAnimation) {
         this.cartAnimation = false // ensure cartAnimation flag is reset
       }
-      this.$commerce.cart.add({
-        id: productId,
+      this.$commerce.cart.add(
+        productId,
+        '1',
         variant
-      }).then(resp => {
+      ).then(resp => {
         // if successful update cart and animate cart UI
         this.cartAnimation = true
         this.cart = resp.cart
