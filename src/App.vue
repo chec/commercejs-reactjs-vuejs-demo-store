@@ -8,8 +8,9 @@
         :products="products"
         :cart="cart"
         :order="order"
+        @update:cart="cart = $event"
         @refresh-cart="refreshCart"
-        @new-order="handleNewOrder"
+        @update:order="order = $event"
       />
     </main>
     <footer class="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
@@ -113,25 +114,20 @@ export default {
     // removes product from cart by invoking Commerce.js's Cart method 'Cart.remove'
     // https://commercejs.com/docs/api/?javascript#remove-item-from-cart
     removeProductFromCart(lineItemId) {
-      return new Promise((resolve, reject) => {
-        this.commerce.Cart.remove(lineItemId, (resp) => {
-          // if successful update Cart
-          if (!resp.error) {
-            this.cart = resp.cart
-            return resolve(resp)
-          }
-          reject(resp)
-        });
+      return this.$commerce.cart.remove(lineItemId).then((resp) => {
+        this.cart = resp.cart
+        return resp
       })
     },
     refreshCart() {
-      this.commerce.Cart.refresh((resp) => {
+      this.$commerce.cart.refresh(() => {
         // successful
-      }, error => console.log(error))
-    },
-    handleNewOrder(order) {
-      this.order = order
-      this.$router.replace("/thank-you")
+        this.cart = this.$commerce.cart.cart // TODO: when Commercejs.cart.refresh v2 resolves
+        // with resp.cart object rather resp.cartId, assign with resp not with $commerce.cart.cart
+      }, error => {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      })
     }
   }
 }
