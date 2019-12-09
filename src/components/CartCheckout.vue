@@ -352,7 +352,7 @@ export default {
     cart(newCart, oldCart) {
       if (newCart !== oldCart) {
         if (newCart.total_items === 0) {
-          this.checkout = null
+          this.checkout = null // clear checkout token object if cart empty now
           alert("You must add items to your cart to contiue checkout")
           return;
         }
@@ -368,20 +368,16 @@ export default {
     }
   },
   methods: {
+    // update respective line-item's quantity using commerce.cart.update
+    // cart.update can also be used to update variant
     updateQuantity(lineItemId, quantity) {
-      this.commerce.Cart.update(lineItemId, { quantity },
-        function(resp){
-          // if (resp.cart.total_items === 0) {
-          //   this.checkout = null
-          //   alert("Add items to your cart before to continue checkout.")
-          // }
-          // we won't need something like this, since when given quantity 0, Commercejs does
-          // not make line-item 0 but rather leaves it at 1
-          return this.$emit('update-cart', resp.cart)
-        }.bind(this));
+      this.$commerce.cart.update(lineItemId, { quantity })
+        .then(resp => {
+          this.cart = resp.cart
+        })
     },
     getAllCountries() {
-      this.commerce.Services.localeListCountries((resp) => {
+      this.$commerce.services.localeListCountries((resp) => {
         this.countries = resp.countries
       },
       error => console.log(error)
