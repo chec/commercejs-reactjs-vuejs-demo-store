@@ -1,5 +1,5 @@
 <template>
-  <div v-if="cart" class="flex flex-grow-1 flex-column bg-tan-white w-100 pb4">
+  <div v-if="cart && !loading.order" class="flex flex-grow-1 flex-column bg-tan-white w-100 pb4">
     <div class="flex justify-between mw9 w-100 items-center center pt4 ph4">
       <router-link to="/products" class="flex items-center medium-text f6 tracked-mega ttu no-underline dark-gray dim">
         <div class="arrowIconContainer fill-cherry pr4">
@@ -296,18 +296,22 @@
         </div>
     </div>
   </div>
-  <p v-else>Loading</p>
+  <FootPrintsLoading v-else>
+    {{loading.order ? 'Processing your order...' : 'Loading...'}}
+  </FootPrintsLoading>
 </template>
 <script>
 import ArrowIconSvg from '../assets/arrow-icon.svg'
 import CartLineItem from './CartLineItem'
+import FootPrintsLoading from './FootPrintsLoading';
 
 export default {
   name: 'CartCheckout',
   props: ["cart", "commerce"],
   components: {
     ArrowIconSvg,
-    CartLineItem
+    CartLineItem,
+    FootPrintsLoading
   },
   data() {
     return {
@@ -467,61 +471,61 @@ export default {
           return resp;
       })
       .then(() => {
-          if (exceededMinLifetime) {
+        if (exceededMinLifetime) {
+          this.loading = {
+            ...this.loading,
+            order: false
+          }
+          this.$router.replace("/thank-you") // redirect now since capturingOrderLoadingScreenMinLifetime satisfied
+        } else {
+          clearInterval(secondsInterval);
+          clearTimeout(lifetimeTimeout)
+          const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
+          setTimeout(() => {
             this.loading = {
               ...this.loading,
               order: false
             }
-            this.$router.replace("/thank-you") // redirect now since capturingOrderLoadingScreenMinLifetime satisfied
-          } else {
-            clearInterval(secondsInterval);
-            clearTimeout(lifetimeTimeout)
-            const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
-            setTimeout(() => {
-              this.loading = {
-                ...this.loading,
-                order: false
-              }
-              this.$router.replace("/thank-you") // redirect after waiting remainingSecondsToWait
-            }, remainingSecondsToWait)
-          }
-        })
-        .catch((err) => {
-          const error = err.data.error
-          if (error.type === 'validation') { // catch validation errors and update corresponding data/state
-            error.message.forEach(({param, error}, i) => {
-              this.errors = {
-                ...this.errors,
-                [param]: error
-              }
-            })
-          }
-
-          if (error.type === 'gateway_error' || error.type === 'not_valid') { // either a gateway error or a shipping error and update corresponding data/state
+            this.$router.replace("/thank-you") // redirect after waiting remainingSecondsToWait
+          }, remainingSecondsToWait)
+        }
+      })
+      .catch((err) => {
+        const error = err.data.error
+        if (error.type === 'validation') { // catch validation errors and update corresponding data/state
+          error.message.forEach(({param, error}, i) => {
             this.errors = {
               ...this.errors,
-              [error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type]: error.message
+              [param]: error
             }
+          })
+        }
+
+        if (error.type === 'gateway_error' || error.type === 'not_valid') { // either a gateway error or a shipping error and update corresponding data/state
+          this.errors = {
+            ...this.errors,
+            [error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type]: error.message
+          }
+        }
+
+        if (exceededMinLifetime) { // after handling errors update loading UI
+          this.loading = {
+            ...this.loading,
+            order: false
           }
 
-          if (exceededMinLifetime) {
+        } else {
+          clearInterval(secondsInterval);
+          clearTimeout(lifetimeTimeout)
+          const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
+          setTimeout(() => {
             this.loading = {
               ...this.loading,
               order: false
             }
-
-          } else {
-            clearInterval(secondsInterval);
-            clearTimeout(lifetimeTimeout)
-            const remainingSecondsToWait = this.capturingOrderLoadingScreenMinLifetime - secondsPassed;
-            setTimeout(() => {
-              this.loading = {
-                ...this.loading,
-                order: false
-              }
-            }, remainingSecondsToWait)
-          }
-        })
+          }, remainingSecondsToWait)
+        }
+      })
     },
     getRegions(countryCode) {
       this.$commerce.services.localeListSubdivisions(countryCode)
