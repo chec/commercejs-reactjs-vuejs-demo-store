@@ -7,9 +7,7 @@
         @remove-product-from-cart="removeProductFromCart"
         :products="products"
         :cart="cart"
-        :commerce="commerce"
         :order="order"
-        @update-cart="updateCart"
         @refresh-cart="refreshCart"
         @new-order="handleNewOrder"
       />
@@ -111,7 +109,6 @@ export default {
         console.log(error)
       })
     },
-
     // removes product from cart by invoking Commerce.js's Cart method 'Cart.remove'
     // https://commercejs.com/docs/api/?javascript#remove-item-from-cart
     removeProductFromCart(lineItemId) {
@@ -125,9 +122,6 @@ export default {
           reject(resp)
         });
       })
-    },
-    updateCart(cart) {
-      this.cart = cart
     },
     refreshCart() {
       this.commerce.Cart.refresh((resp) => {
