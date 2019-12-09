@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "seed": "chec-seed seeds"
   },
   "dependencies": {
     "@chec/commerce.js": "^2.0.0-beta6",
@@ -16,6 +17,7 @@
     "vue-router": "^3.1.2"
   },
   "devDependencies": {
+    "@chec/seeder": "^1.0.0-beta2",
     "@vue/cli-plugin-babel": "^3.10.0",
     "@vue/cli-plugin-eslint": "^3.10.0",
     "@vue/cli-service": "^3.10.0",
