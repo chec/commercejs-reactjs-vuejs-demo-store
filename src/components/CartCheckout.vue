@@ -364,10 +364,13 @@ export default {
           alert("You must add items to your cart to contiue checkout")
           return;
         }
-        this.createCheckout()
+        // only createCheckout if they already createdCheckout
+        if (this.checkout) {
+          this.createCheckout()
+        }
       }
     },
-    deliveryCountry(newVal, oldVal) {
+    deliveryCountry(newVal) {
       this.getRegions(newVal)
 
       if (this.checkout) {
@@ -390,16 +393,17 @@ export default {
         })
     },
     getAllCountries() {
-      this.$commerce.services.localeListCountries((resp) => {
+      this.$commerce.services.localeListCountries().then(resp => {
         this.countries = resp.countries
-      },
-      error => console.log(error)
-      )
+      }).catch(error => {
+        // eslint-disable-next-line no-console
+        console.log(error)
+      })
     },
     removeProductFromCart(itemId) {
       this.$emit('remove-product-from-cart', itemId)
     },
-    captureOrder(e) {
+    captureOrder() {
       let exceededMinLifetime = false;
       let secondsPassed = 0;
 
