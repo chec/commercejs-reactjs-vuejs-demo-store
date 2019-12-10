@@ -6,7 +6,7 @@ const commercejsConfig = {
       "X-Chec-Agent": "commerce.js/v1"
     }
   },
-  url: process.env.VUE_APP_COMMERCEJS_API_URL || 'https://api.chec.io'
+  url: process.env.VUE_APP_CHEC_API_URL || 'https://api.chec.io'
 }
 
 export default new Commerce(
