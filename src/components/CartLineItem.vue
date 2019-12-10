@@ -13,7 +13,9 @@
              backgroundRepeat: 'no-repeat',
              backgroundPosition: 'center',
              backgroundSize: 'contain',
-             backgroundImage: `url(${item.name.trim('').toLowerCase() === 'pink sock' ? require('../assets/updated-sock-image.png') : require('../assets/pair-shoes-small.png')})`
+             backgroundImage: `url(${/\b(\w*sock(s)?\w*)\b/.test(item.name.trim('').toLowerCase()) ? require('../assets/updated-sock-image.png') : require('../assets/pair-shoes-small.png')})` // checks if regex matches socks or sock
+             // in order to render proper cart line item image. ideally we would have a media
+             // property in the cart line-item objects
            }"
          />
       </div>
