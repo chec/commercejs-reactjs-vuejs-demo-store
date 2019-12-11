@@ -15,19 +15,16 @@ export default new Router({
       path: "/products",
       name: 'products',
       component: () => import("@/components/Products"),
-      props: true,
     },
     {
       path: "/cart-checkout",
       name: 'cart-checkout',
       component: () => import("@/components/CartCheckout"),
-      props: true,
     },
     {
       path: "/thank-you",
       name: 'order-detail',
       component: () => import("@/components/ThankYou"),
-      props: true,
     }
   ]
 })
