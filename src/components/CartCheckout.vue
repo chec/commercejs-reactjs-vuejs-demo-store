@@ -1,14 +1,14 @@
 <template>
   <div v-if="cart && !loading.order" class="flex flex-grow-1 flex-column bg-tan-white w-100 pb4">
     <div class="flex justify-between mw9 w-100 items-center center pt4 ph4">
-      <router-link to="/products" class="flex items-center medium-text f6 tracked-mega ttu no-underline dark-gray dim">
+      <router-link to="/products" class="flex items-center medium-text f6 tracked-mega ttu no-underline dark-gray dim lh-solid">
         <div class="arrowIconContainer fill-cherry pr4">
           <ArrowIconSvg />
         </div>
         continue shopping
       </router-link>
 
-      <p class="medium-text f6 tracked-mega ttu dark-gray tracked-mega">
+      <p class="medium-text f6 tracked-mega ttu dark-gray tracked-mega lh-solid tr">
         {{ cart ? cart.total_items : '0' }}
         <span class="f7">{{cart ? (cart.total_items === 1 ? 'item' : 'items') : 'items'}}</span>
       </p>
