@@ -55,11 +55,20 @@
         </div>
         <div class="w-100 w-50-l mt2 mt0-l">
           <button
+            v-if="product.variants.length"
             :disabled="!!!sizeSelect"
             @click="addProductToCart"
             name="addToCartButton"
             class="button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3"
             :class="[sizeSelect ? 'dim' :'o-30']"
+          >
+            add to cart
+          </button>
+          <button
+            v-else
+            @click="addProductToCart"
+            name="addToCartButton"
+            class="button button__add-to-cart white ttu bg-dark-gray tracked-mega-1 w-100 mv3 dim"
           >
             add to cart
           </button>
@@ -87,7 +96,7 @@ export default {
     addProductToCart() {
       const product = {
         productId: this.product.id,
-        variant: {
+        variant: !this.product.variants.length || {
           [this.product.variants[0].id]: this.sizeSelect
         }
       }
