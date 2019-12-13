@@ -69,7 +69,7 @@ export default {
               ...resp.data.map(product => { // spread out product objects into array assigned to this.products
                 return {
                   ...product, // spread the current iteration's product's items on to the object returned
-                  variants: product.variants.map(variant => {
+                  variants: (!product.variants && []) || product.variants.map(variant => {
                     return { // modify the shape of the product's variants mapping the options by id for easier selection
                       ...variant,
                       optionsById: variant.options.reduce((obj, currentOption) => {
