@@ -29,7 +29,7 @@
                 <p>
                   subtotal
                 </p>
-                <p class="tr">
+                <p class="tr lh-title">
                   {{cart ? cart.subtotal.formatted_with_code : '----'}}
                 </p>
               </div>
@@ -390,6 +390,9 @@ export default {
       this.$commerce.cart.update(lineItemId, { quantity })
         .then(resp => {
           this.$emit('update:cart', resp.cart)
+        }).catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log('Error when updating quanttiy', error);
         })
     },
     getAllCountries() {

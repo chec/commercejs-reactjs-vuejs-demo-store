@@ -19,12 +19,12 @@
            }"
          />
       </div>
-      <p class="medium-text f6 white tr ttu mw4">
+      <p class="medium-text f6 white tr ttu mw4 lh-title">
         {{item.name}}
-        <span v-if="item.variants.length" class="db f7 pv1">
+        <span v-if="item.variants.length" class="db f7 pt1">
           {{ item.variants[0].option_name }}
         </span>
-        <span class="db f7">
+        <span class="db f7 pt1">
           ${{item.line_total.formatted_with_code}}
         </span>
         <span class="db">
