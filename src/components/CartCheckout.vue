@@ -359,12 +359,18 @@ export default {
   watch: {
     cart(newCart, oldCart) {
       if (newCart !== oldCart) {
-        if (newCart.total_items === 0) {
+        // since this is a hyrbid component showcasing the cart and checkout simultanously
+        // we want to watch for this.cart updates, and do work such as
+        // reseting the checkout state when there are no longer any cart items
+        // Also if there was a checkout token object initiated prior to the change
+        // then we also want to get an updated checkout token object
+        // from Chec via this.createCheckout for the latest cart
+        if (newCart.total_items === 0) { // cart changed the
           this.checkout = null // clear checkout token object if cart empty now
           alert("You must add items to your cart to contiue checkout")
           return;
         }
-        // only createCheckout if they already createdCheckout
+        // only invoke createCheckout if this.checkout was initiated prior to this update
         if (this.checkout) {
           this.createCheckout()
         }
