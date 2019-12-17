@@ -323,7 +323,7 @@ export default {
       "shipping[town_city]": 'San Francisco',
       deliveryState: 'CA',
       "shipping[postal_zip_code]": "94103",
-      deliveryCountry: 'US',
+      deliveryCountry: 'US', // selected country example: this.countries[this.deliveryCountry]
       countries: {},
       subdivisions: {},
       checkout: null,
@@ -370,16 +370,18 @@ export default {
           alert("You must add items to your cart to contiue checkout")
           return;
         }
-        // only invoke createCheckout if this.checkout was initiated prior to this update
+        // only invoke createCheckout if this.checkout was initiated prior to this update to get an updated checkout token object
         if (this.checkout) {
           this.createCheckout()
         }
       }
     },
-    deliveryCountry(newVal) {
+    deliveryCountry(newVal) { // do something when new delivery country is selected
+      // update the regions/provinces/states that are based on the selected country (this.deliveryCountry)
       this.getRegions(newVal)
 
-      if (this.checkout) {
+      if (this.checkout) { // if there was a checkout initiated prior to this update we want to update
+        // the shipping options based on the selected country
         this.getShippingOptions(this.checkout.id, newVal)
       }
     }
@@ -506,7 +508,7 @@ export default {
       .catch((err) => {
         const error = err.data.error
         if (error.type === 'validation') { // catch validation errors and update corresponding data/state
-          error.message.forEach(({param, error}, i) => {
+          error.message.forEach(({param, error}) => {
             this.errors = {
               ...this.errors,
               [param]: error
