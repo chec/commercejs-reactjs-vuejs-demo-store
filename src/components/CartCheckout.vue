@@ -439,10 +439,9 @@ export default {
         }
 
       const lineItems = this.checkout.live.line_items.reduce((obj, lineItem) => {
-        debugger;
         obj[lineItem.id] = {
           quantity: lineItem.quantity,
-          variants: (lineItem.variants || {}) || {
+          variants: (!lineItem.variants || {}) || {
             [lineItem.variants[0].variant_id]: lineItem.variants[0].option_id
           }
         }
