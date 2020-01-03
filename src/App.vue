@@ -16,7 +16,7 @@
     <footer class="footer flex pa4 bg-black-90 bg-red-m bg-green-l">
         <div class="self-end w-100">
           <p class="medium-text tc cherry">
-            © 2019 CHEC PLATFORM/COMMERCEJS
+            © 2020 CHEC PLATFORM/COMMERCEJS
           </p>
         </div>
     </footer>
