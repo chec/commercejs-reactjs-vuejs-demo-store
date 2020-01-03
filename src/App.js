@@ -197,7 +197,7 @@ class App extends Component {
               design resources from icons8.com
             </a>
             <p className="medium-text tc cherry mv2">
-              © 2019 CHEC PLATFORM/COMMERCEJS
+              © 2020 CHEC PLATFORM/COMMERCEJS
             </p>
           </div>
         </footer>
