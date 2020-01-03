@@ -797,9 +797,9 @@
     to-fast-properties "^2.0.0"
 
 "@chec/commerce.js@^2.0.0-beta5":
-  version "2.0.0-beta7"
-  resolved "https://registry.yarnpkg.com/@chec/commerce.js/-/commerce.js-2.0.0-beta7.tgz#9a71c80dcaaec038cb8f1ee8f427fcf0ab0bda9f"
-  integrity sha512-SCJRUP+GggFhSrxyT2hv3NqDRpQEyBk0MhCLwXcmQOtfnWaGG2ef9iykL9bOurlOc+xtOwIZ/LxQwQCSfrufcA==
+  version "2.0.0-beta8"
+  resolved "https://registry.yarnpkg.com/@chec/commerce.js/-/commerce.js-2.0.0-beta8.tgz#b7834971d594efb18b97682368874a83d96ad28b"
+  integrity sha512-jLdpa4jojKrtmKejL5C+E+avAoX3HNQYcGsqWxO2Dh3UrtGmPDv/raNqHaiQlmh66UkeFy/LdIuT6ntAOA1HtQ==
   dependencies:
     axios "^0.19.0"
 

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chec/commerce.js": "^2.0.0-beta5",
+    "@chec/commerce.js": "^2.0.0-beta8",
     "gh-pages": "^2.1.1",
     "github-fork-ribbon-css": "^0.2.3",
     "node-sass": "^4.12.0",

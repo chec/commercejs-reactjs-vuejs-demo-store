@@ -82,10 +82,11 @@ class App extends Component {
       variant
     } = product
 
-    commerce.cart.add({
-      id: productId,
+    commerce.cart.add(
+      productId,
+      1,
       variant
-    }).then(resp => {
+    ).then(resp => {
       // if successful update Cart
         this.setState({
           cart: resp.cart
