@@ -293,7 +293,6 @@ class CartCheckout extends Component {
       .catch((errorResp) => {
         let errorToAlert = '';
         const { error = {} } = errorResp
-        debugger;
         if (error.type === 'validation') {
           console.log('the error messages:', error.message)
 
