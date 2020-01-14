@@ -227,7 +227,9 @@ class CartCheckout extends Component {
     const lineItems = this.state.checkout.live.line_items.reduce((obj, lineItem) => {
       obj[lineItem.id] = {
         quantity: lineItem.quantity,
-        variants: {
+      }
+      if (lineItem.variants.length) {
+        obj[lineItem.id].variants = {
           [lineItem.variants[0].variant_id]: lineItem.variants[0].option_id
         }
       }
@@ -288,8 +290,9 @@ class CartCheckout extends Component {
           }, remainingSecondsToWait)
         }
       })
-      .catch(({error}) => {
+      .catch((errorResp) => {
         let errorToAlert = '';
+        const { error = {} } = errorResp
         if (error.type === 'validation') {
           console.log('the error messages:', error.message)
 
@@ -308,11 +311,11 @@ class CartCheckout extends Component {
           errorToAlert = allErrors;
         }
 
-        if (error.type === 'gateway_error' || error.type === 'not_valid') {
+        if (error.type === 'gateway_error' || error.type === 'not_valid' || error.type === 'bad_request') {
           this.setState({
             errors: {
               ...this.state.errors,
-              [error.type !== 'not_valid' ? error.type : 'fulfillment[shipping_method]']: error.message
+              [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message
             }
           })
           errorToAlert = error.message

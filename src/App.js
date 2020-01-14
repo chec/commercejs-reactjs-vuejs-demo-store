@@ -17,7 +17,7 @@ class App extends Component {
     this.updateQuantity = this.updateQuantity.bind(this);
     this.retrieveCart = this.retrieveCart.bind(this);
     this.state = {
-      products: [],
+      products: null,
       cart: null,
       order: null,
       playCartAnimation: false
@@ -35,11 +35,11 @@ class App extends Component {
   componentDidMount() {
     this.retrieveCart()
     commerce.products.list().then(
-      (resp) => {
+      ({data = []}) => {
         //Success
         this.setState({
           products: [
-            ...resp.data.map(product => ({
+            ...data.map(product => ({
               ...product,
               variants: product.variants ? product.variants.map(variant => ({
                 ...variant,
@@ -52,7 +52,7 @@ class App extends Component {
                   }, {})
               })) : []
             }))
-          ] || []
+          ]
         })
       }
     ).catch(
@@ -121,9 +121,8 @@ class App extends Component {
           order: resp
         })
         return resp;
-      }).catch(({response}) => {
-        console.log(response.data.error)
-        throw response.data;
+      }).catch((errorResp) => {
+        throw errorResp.data;
       })
   }
 
