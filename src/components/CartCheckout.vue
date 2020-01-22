@@ -506,6 +506,7 @@ export default {
         }
       })
       .catch(({ data }) => {
+        let errorToAlert = '';
         const { error = {} } = data
         if (error.type === 'validation') { // catch validation errors and update corresponding data/state
           error.message.forEach(({param, error}) => {
@@ -514,6 +515,11 @@ export default {
               [param]: error
             }
           })
+
+          const allErrors = error.message.reduce((string, error) => {
+            return `${string} ${error.error}`
+          }, '') // accumalate a string of errors using reduce
+          errorToAlert = allErrors;
         }
 
         if (error.type === 'gateway_error' || error.type === 'not_valid' || error.type === 'bad_request') { // either a gateway error or a shipping error and update corresponding data/state
@@ -521,6 +527,7 @@ export default {
             ...this.errors,
             [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message
           }
+          errorToAlert = error.message
         }
 
         if (exceededMinLifetime) { // after handling errors update loading UI
@@ -528,7 +535,7 @@ export default {
             ...this.loading,
             order: false
           }
-
+          alert(errorToAlert)
         } else {
           clearInterval(secondsInterval);
           clearTimeout(lifetimeTimeout)
@@ -538,6 +545,7 @@ export default {
               ...this.loading,
               order: false
             }
+            alert(errorToAlert)
           }, remainingSecondsToWait)
         }
       })
