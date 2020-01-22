@@ -505,8 +505,8 @@ export default {
           }, remainingSecondsToWait)
         }
       })
-      .catch((err) => {
-        const error = err.data.error
+      .catch(({ data }) => {
+        const { error = {} } = data
         if (error.type === 'validation') { // catch validation errors and update corresponding data/state
           error.message.forEach(({param, error}) => {
             this.errors = {
@@ -516,10 +516,10 @@ export default {
           })
         }
 
-        if (error.type === 'gateway_error' || error.type === 'not_valid') { // either a gateway error or a shipping error and update corresponding data/state
+        if (error.type === 'gateway_error' || error.type === 'not_valid' || error.type === 'bad_request') { // either a gateway error or a shipping error and update corresponding data/state
           this.errors = {
             ...this.errors,
-            [error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type]: error.message
+            [(error.type === 'not_valid' ? 'fulfillment[shipping_method]' : error.type)]: error.message
           }
         }
 
