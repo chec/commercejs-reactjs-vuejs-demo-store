@@ -64,9 +64,9 @@ export default {
     // https://commercejs.com/docs/api/#list-all-products
     getAllProducts() {
       this.$commerce.products.list().then(
-        (resp) => {
+        ({ data = [] }) => {
           this.products = [
-              ...resp.data.map(product => { // spread out product objects into array assigned to this.products
+              ...data.map(product => { // spread out product objects into array assigned to this.products
                 return {
                   ...product, // spread the current iteration's product's items on to the object returned
                   variants: (!product.variants && []) || product.variants.map(variant => {
