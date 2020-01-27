@@ -1,6 +1,6 @@
 {
   "npm": "yarn",
-  "buildScripts": ["seed", "start"],
+  "buildScripts": ["seed", "serve"],
   "dotenv": {
     "NODE_ENV": "development",
     "VUE_APP_COMMERCEJS_PUBLIC_KEY": "%chec_pkey%",
