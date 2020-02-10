@@ -3,6 +3,8 @@
 This demo-store uses [Commerce.js](https://github.com/chec/commerce.js), an eCommerce client-side
 JavaScript SDK.
 
+Read the full integration tutorial [here](https://commercejs.com/blog/create-an-ecommerce-store-with-vuejs/).
+
 ## Spin up a local demo
 
 Here are some instructions for how to spin up a local demo with seeded products in your own
