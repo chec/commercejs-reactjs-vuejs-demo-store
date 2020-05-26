@@ -1,16 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import commercejs from './configCommercejs'
+import VueCommercejs from '@chec/commerce-components';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-// inject commercejs as a plugin, globally
-Vue.mixin({
-  beforeCreate() {
-    this.$commerce = commercejs
-  }
-})
+Vue.use(VueCommercejs, { commercejsPublicKey: process.env.VUE_APP_COMMERCEJS_PUBLIC_KEY });
 
 new Vue({
   router,
