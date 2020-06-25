@@ -1,4 +1,4 @@
-# Store using Commerce.js & React
+# Demo store using Commerce.js & React
 
 This demo-store uses [Commerce.js](https://github.com/chec/commerce.js), an eCommerce client-side 
 JavaScript SDK. [View the live demo](https://chec.github.io/example.checkout.v2/#/).
