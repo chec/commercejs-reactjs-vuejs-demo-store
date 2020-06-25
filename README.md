@@ -3,7 +3,7 @@
 This demo-store uses [Commerce.js](https://github.com/chec/commerce.js), an eCommerce client-side 
 JavaScript SDK. [View the live demo](https://chec.github.io/example.checkout.v2/#/).
 
-[![](https://github.com/chec/example.checkout.v2/blob/react.js/public/Screen%20Shot%202020-06-25%20at%209.40.03%20AM.png)](https://chec.github.io/example.checkout.v2/#/
+[![](https://github.com/chec/example.checkout.v2/blob/react.js/public/Screen%20Shot%202020-06-25%20at%209.40.03%20AM.png)](https://chec.github.io/example.checkout.v2/#/)
 
 # Spin up a local demo
 Follow the instructions below to [install the Chec CLI](https://github.com/chec/cli#usage).
