@@ -27,7 +27,7 @@ Once you have the proper `.env` keys run `yarn install` then `yarn seed`—and w
 
 ## Other Branches
   - `Vue.js`
-    - Contains an abstracted version of the Master branch using Vue.js CSS/SASS, templating syntax.
+    - Contains an abstracted version of the Master branch using Vue.js CSS/SASS, templating syntax. [View here](https://github.com/chec/commercejs-reactjs-vuejs-demo-store/tree/vue.js)
   - `Master` (not ready)
     - Contains a plain HTML/CSS/SASS/Vanilla JS implemenation.
     
