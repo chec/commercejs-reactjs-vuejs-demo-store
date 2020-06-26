@@ -3,10 +3,10 @@
 This demo-store uses [Commerce.js](https://github.com/chec/commerce.js), an eCommerce client-side 
 JavaScript SDK.
 
-[![](https://github.com/chec/commercejs-reactjs-vuejs-demo-store/blob/react.js/public/socsreact.png)](https://chec.github.io/commercejs-reactjs-vuejs-demo-store/)
+[![](https://github.com/chec/commercejs-reactjs-vuejs-demo-store/blob/react.js/public/socsreact.png)](https://chec.github.io/commercejs-reactjs-vuejs-demo-store/#/)
 
 
-[![Demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn_gray.svg)](https://chec.github.io/commercejs-reactjs-vuejs-demo-store/)
+[![Demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn_gray.svg)](https://chec.github.io/commercejs-reactjs-vuejs-demo-store/#/)
 
 # Spin up a local demo
 Follow the instructions below to [install the Chec CLI](https://github.com/chec/cli#usage).
