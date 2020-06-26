@@ -1,7 +1,12 @@
-# Store using Commerce.js & React
+# Demo store using Commerce.js & React
 
 This demo-store uses [Commerce.js](https://github.com/chec/commerce.js), an eCommerce client-side 
-JavaScript SDK. [View the live demo](https://chec.github.io/example.checkout.v2/#/).
+JavaScript SDK.
+
+[![](https://github.com/chec/example.checkout.v2/blob/react.js/public/Screen%20Shot%202020-06-25%20at%209.40.03%20AM.png)](https://chec.github.io/example.checkout.v2/#/)
+
+
+[![Demo button](https://cdn.chec.io/email/assets/marketing/chec-demo-btn_gray.svg)](https://chec.github.io/example.checkout.v2/#/)
 
 # Spin up a local demo
 Follow the instructions below to [install the Chec CLI](https://github.com/chec/cli#usage).
@@ -22,7 +27,7 @@ Once you have the proper `.env` keys run `yarn install` then `yarn seed`—and w
 
 ## Other Branches
   - `Vue.js`
-    - Contains an abstracted version of the Master branch using Vue.js CSS/SASS, templating syntax.
+    - Contains an abstracted version of the Master branch using Vue.js CSS/SASS, templating syntax. [View here](https://github.com/chec/commercejs-reactjs-vuejs-demo-store/tree/vue.js)
   - `Master` (not ready)
     - Contains a plain HTML/CSS/SASS/Vanilla JS implemenation.
     
