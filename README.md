@@ -5,6 +5,8 @@ JavaScript SDK.
 
 Read the full integration tutorial on the [Commerce.js blog](https://commercejs.com/blog/create-an-ecommerce-store-with-vuejs/).
 
+![](https://github.com/chec/commercejs-reactjs-vuejs-demo-store/blob/react.js/public/socjvue.png)
+
 ## Spin up a local demo
 
 Here are some instructions for how to spin up a local demo with seeded products in your own
