@@ -37,7 +37,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://chec.github.io/example.checkout.v2/",
+  "homepage": "https://chec.github.io/commercejs-reactjs-vuejs-demo-store/",
   "devDependencies": {
     "@chec/seeder": "^1.0.0-beta1"
   }
