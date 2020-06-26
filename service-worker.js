@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/commercejs-reactjs-vuejs-demo-store/precache-manifest.8d7230ddb109249faf93118945b3d943.js"
+  "/commercejs-reactjs-vuejs-demo-store/precache-manifest.693133195da20ed40ca059b6fbb0aafa.js"
 );
 
 self.addEventListener('message', (event) => {

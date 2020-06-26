@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "059521dca3dbf886fb238513a6758bec",
+    "revision": "08ab2fe4e88252bcd63350350dccfb47",
     "url": "/commercejs-reactjs-vuejs-demo-store/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/commercejs-reactjs-vuejs-demo-store/static/css/2.2d5861c9.chunk.css"
   },
   {
-    "revision": "c9a44426b1551809036e",
+    "revision": "ddac5d72c03ddd119329",
     "url": "/commercejs-reactjs-vuejs-demo-store/static/css/main.6e570fd4.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/commercejs-reactjs-vuejs-demo-store/static/js/2.b4ed0937.chunk.js"
   },
   {
-    "revision": "c9a44426b1551809036e",
-    "url": "/commercejs-reactjs-vuejs-demo-store/static/js/main.b431a7fc.chunk.js"
+    "revision": "ddac5d72c03ddd119329",
+    "url": "/commercejs-reactjs-vuejs-demo-store/static/js/main.d5e783a0.chunk.js"
   },
   {
     "revision": "71a50c2b8362dc700f82",
