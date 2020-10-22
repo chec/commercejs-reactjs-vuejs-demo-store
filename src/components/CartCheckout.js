@@ -435,7 +435,7 @@ class CartCheckout extends Component {
         </div>
         <div className="cf mw9 center w-100 ph3 mt5">
             <div className="fl w-100 w-40-l ph2 ph4-l mb4">
-                <div className="relative z-1 br3 bg-dark-gray w-100 shadow-3 pv4 overflow-scroll">
+                <div className="relative z-1 br3 bg-dark-gray w-100 shadow-3 pv4">
                   {allLineItems}
                 </div>
                 <div className="pt4 pb3 nt3 br3 ph4 bg-cherry">
